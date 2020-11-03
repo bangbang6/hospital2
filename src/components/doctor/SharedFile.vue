@@ -1,7 +1,6 @@
 <template>
     <div style="width: 100%;margin: auto;background-color: #f0f2f5;height: 800px;padding-top: 50px">
         <div  class="el-table el-table--fit el-table--fluid-height el-table--enable-row-hover el-table--enable-row-transition" style="width: 100%;margin: auto;padding: 20px 20px">
-            <el-button type="primary">点击溯源</el-button>
             <el-button icon="el-icon-view" type="primary">预览</el-button>
             <el-button icon="el-icon-download" type="primary">下载</el-button>
             <el-form :inline="true" :model="formInline" class="demo-form-inline" style="display: inline-block;float: right">
@@ -45,12 +44,9 @@
                         prop="action"
                         label="..."
                         style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
-                        width="150px" >
+                        width="100px" >
                     <template slot-scope="scope">
                         <div  class="action">
-                            <el-tooltip class="item" effect="light" content="溯源" placement="bottom-start" style="margin-right: 5px">
-                                <el-link icon="el-icon-attract" style="font-size: 18px;color: #409EFF" @click="getOriginal(scope.$index)"></el-link>
-                            </el-tooltip>
                             <el-tooltip class="item" effect="light" content="预览" placement="bottom-start" style="margin-right: 5px">
                                 <el-link icon="el-icon-view" style="font-size: 18px;color: #409EFF" @click="seeFile(scope.$index)"></el-link>
                             </el-tooltip>
@@ -67,19 +63,13 @@
                         width="100px">
                 </el-table-column>
                 <el-table-column
-                        prop="upload_data"
-                        label="上传日期"
+                        prop="auth_data"
+                        label="被授权日期"
                         sortable
                         style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
                         width="150px">
                 </el-table-column>
-                <el-table-column
-                        prop="modifiedData"
-                        label="更改日期"
-                        sortable
-                        style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
-                        width="150px">
-                </el-table-column>
+
             </el-table>
             <el-pagination class="fy"
                            layout="prev, pager, next"
@@ -97,12 +87,11 @@
         return {
             value:`文件名${index}.doc`,//这里要添加一个字段
             fileName: `文件名${index}.doc`,
-            fileSize: '300M',
             doctorName:'王大力',
-            upload_data: '2020-10-23',
-            modifiedData: '2020-10-24'
+            fileSize: '300M',
+            auth_data: '2020-10-24'
         }
-    });
+    })
     export default {
         data() {
             return {
@@ -120,12 +109,8 @@
                 files: []
             }
         },
+
         methods: {
-            getOriginal(index) {
-                this.$alert('这是第' + index + '行文件溯源结果', '文件溯源', {
-                    confirmButtonText: '确定'
-                })
-            },
             downloadFile(index) {
                 this.$alert('这是第' + index + '行文件的下载结果', '文件下载', {
                     confirmButtonText: '确定'
@@ -136,7 +121,7 @@
                     confirmButtonText: '确定'
                 })
             },
-            current_change: function (currentPage) {
+            current_change:function(currentPage){
                 this.currentPage = currentPage;
             },
             handleSelectionChange(val) {
@@ -166,8 +151,8 @@
             },
             onSubmit() {
                 let queryString = this.input;
-                let files = this.files;
                 let Type = this.select;
+                let files = this.files;
                 this.tableData =  files.filter(this.createFilterAndType(queryString,Type));
             }
         },
@@ -187,12 +172,10 @@
         top: 88%;
         left: calc(50% - 200px);
     }
-    .el-table--enable-row-hover .el-table__body tr td:nth-child(4) div div{
+    .el-table--enable-row-hover .el-table__body tr td:nth-child(4) div div {
         visibility: hidden;
     }
-    .el-select .el-input {
-        width: 120px;
-    }
+
     .el-table th>.cell{
         padding-left: 14px;
     }
