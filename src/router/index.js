@@ -52,7 +52,7 @@ export default new Router({
         path: '/admin',
         name: 'AdminIndex',
         component: AdminIndex,
-        redirect: '/admin/fileList',
+        redirect: '/admin/index',
   
         children: [
   
@@ -62,7 +62,7 @@ export default new Router({
             component: AdminFile
           },
           {
-            path: '/admin/dashboard',
+            path: '/admin/index',
             nameL: 'Dashboard',
             component: Dashboard
           }
