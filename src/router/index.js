@@ -3,7 +3,8 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 import Upload from '../components/doctor/Upload.vue'
-import FileList from '../components/doctor/FileList.vue'
+import MyFile from '../components/doctor/MyFile'
+import SharedFile from '../components/doctor/SharedFile'
 import DoctorIndex from '../components/doctor/DoctorIndex.vue'
 import AdminIndex from '../components/admin/AdminIndex.vue'
 import AdminFile from '../components/admin/FileList.vue'
@@ -47,10 +48,15 @@ export default new Router({
             component: Upload
           },
           {
-            path: '/doctor/fileList',
-            name: 'fileList',
-            component: FileList
-          }
+            path: '/doctor/myFile',
+            nameL: 'myFile',
+            component: MyFile
+          },
+            {
+                path: '/doctor/sharedFile',
+                nameL: 'sharedFile',
+                component: SharedFile
+            }
         ]
       },
       {
