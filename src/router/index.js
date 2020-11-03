@@ -10,6 +10,7 @@ import AdminFile from '../components/admin/FileList.vue'
 import Dashboard from '../components/admin/dashboard/index.vue'
 import Login from '../components/login/Login.vue'
 import Register from '../components/login/Register.vue'
+import DoctorMain from '../components/doctor/DoctorMain.vue'
 
 const originalPush = Router.prototype.push
 Router.prototype.push = function push(location) {
@@ -33,9 +34,13 @@ export default new Router({
         path: '/doctor',
         name: 'DoctorIndex',
         component: DoctorIndex,
-        redirect: '/doctor/fileList',
+        redirect: '/doctor/index',
         children: [
-  
+          {
+            path:"/doctor/index",
+            name: 'DoctorMain',
+            component:DoctorMain
+          },
           {
             path: '/doctor/upload',
             name: 'upload',
@@ -43,7 +48,7 @@ export default new Router({
           },
           {
             path: '/doctor/fileList',
-            nameL: 'fileList',
+            name: 'fileList',
             component: FileList
           }
         ]
@@ -55,15 +60,15 @@ export default new Router({
         redirect: '/admin/index',
   
         children: [
-  
+         
           {
             path: '/admin/fileList',
-            nameL: 'AdminFile',
+            name: 'AdminFile',
             component: AdminFile
           },
           {
             path: '/admin/index',
-            nameL: 'Dashboard',
+            name: 'Dashboard',
             component: Dashboard
           }
         ]
