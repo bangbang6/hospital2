@@ -50,12 +50,27 @@ export default {
     return {
       activeIndex: '1',
       activeIndex2: '1',
-      inputValue: ''
+      inputValue: '',
+      paths: ['/doctor/index', '/doctor/myFile', '/doctor/sharedFile', 'upload']
     };
   },
   methods: {
-    handleSelect (key, keyPath) {
-      console.log(key, keyPath);
+    handleSelect (key) {
+      switch (key) {
+        case '1':
+          this.$router.push(this.paths[0]);
+          break;
+        case '2-1':
+          this.$router.push(this.paths[1]);
+          break;
+
+        case '3':
+          this.$router.push(this.paths[3]);
+          break;
+        case '2-2':
+          this.$router.push(this.paths[2]);
+          break;
+      }
     }
   }
 }

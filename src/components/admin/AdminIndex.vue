@@ -12,9 +12,9 @@
             mode="horizontal"
             @select="handleSelect"
           >
-            <el-menu-item index="1">首页</el-menu-item>
+            <el-menu-item index="0">首页</el-menu-item>
 
-            <el-menu-item index="2">文件列表</el-menu-item>
+            <el-menu-item index="1">文件列表</el-menu-item>
           </el-menu>
         </div>
         <div class="search">
@@ -38,14 +38,16 @@
 export default {
   data () {
     return {
-      activeIndex: '1',
-      activeIndex2: '1',
-      inputValue: ''
+      activeIndex: '0',
+      inputValue: '',
+      paths: ['/admin/index', '/admin/fileList']
+
     };
   },
   methods: {
-    handleSelect (key, keyPath) {
-      console.log(key, keyPath);
+    handleSelect (key) {
+      let num = parseInt(key)
+      this.$router.push(this.paths[num])
     }
   }
 }
