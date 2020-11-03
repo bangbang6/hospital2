@@ -32,7 +32,14 @@
         </div>
         <div class="user">
           <div class="avaturl">
-            <img src="../../assets/avaturl.jpg" class="imgAvaturl" />
+              <el-dropdown trigger="click" @command="handleCommand">
+                  <img src="../../assets/avaturl.jpg" class="imgAvaturl" />
+                  <el-dropdown-menu slot="dropdown">
+                      <el-dropdown-item icon="el-icon-user">个人中心</el-dropdown-item>
+                      <el-dropdown-item icon="el-icon-setting">修改密码</el-dropdown-item>
+                      <el-dropdown-item icon="el-icon-turn-off" command="loginout">退出登录</el-dropdown-item>
+                  </el-dropdown-menu>
+              </el-dropdown>
           </div>
         </div>
       </div>
@@ -71,7 +78,12 @@ export default {
           this.$router.push(this.paths[2]);
           break;
       }
-    }
+    },
+      handleCommand(command) {
+          if(command==='loginout'){
+              this.$router.push('/')
+          }
+      }
   }
 }
 </script>

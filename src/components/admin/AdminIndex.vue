@@ -21,9 +21,16 @@
           <el-input placeholder="请输入搜索内容" suffix-icon="el-icon-search" v-model="inputValue"></el-input>
         </div>
         <div class="user">
-          <div class="avaturl">
-            <img src="../../assets/avaturl.jpg" class="imgAvaturl" />
-          </div>
+            <div class="avaturl">
+                <el-dropdown trigger="click" @command="handleCommand">
+                    <img src="../../assets/avaturl.jpg" class="imgAvaturl" />
+                    <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item icon="el-icon-user" >个人中心</el-dropdown-item>
+                        <el-dropdown-item icon="el-icon-setting">修改密码</el-dropdown-item>
+                        <el-dropdown-item icon="el-icon-turn-off" command="loginout">退出登录</el-dropdown-item>
+                    </el-dropdown-menu>
+                </el-dropdown>
+            </div>
         </div>
       </div>
     </div>
@@ -41,14 +48,18 @@ export default {
       activeIndex: '0',
       inputValue: '',
       paths: ['/admin/index', '/admin/fileList']
-
     };
   },
   methods: {
     handleSelect (key) {
       let num = parseInt(key)
       this.$router.push(this.paths[num])
-    }
+    },
+      handleCommand(command) {
+        if(command==='loginout'){
+            this.$router.push('/')
+        }
+      }
   }
 }
 </script>
