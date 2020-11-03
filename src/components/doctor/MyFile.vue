@@ -1,5 +1,5 @@
 <template>
-    <div style="width: 100%;margin: auto;background-color: #f0f2f5;height: 800px;padding-top:50px">
+    <div style="width: 100%;margin: auto;background-color: #f0f2f5;padding-top:50px">
         <div  class="el-table el-table--fit el-table--fluid-height el-table--enable-row-hover el-table--enable-row-transition" style="width: 100%;margin: auto;padding: 20px 20px">
 
             <el-button type="primary">点击溯源</el-button>
