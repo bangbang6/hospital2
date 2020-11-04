@@ -91,7 +91,7 @@ export default {
 
 <style>
 body {
-  background-size: cover;
+  background-size: 100% 100%;
   background: url(../../assets/backgroud.jpg) no-repeat fixed center center;
 }
 .loginWrapper {
