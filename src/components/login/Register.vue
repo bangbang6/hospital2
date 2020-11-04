@@ -61,35 +61,34 @@ export default {
       dialogVisible2: false
     }
   },
-  methods: {
 
-    toLogin (formName) {
-      // 为表单绑定验证功能
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          if (this.form.password === this.form.repassword) {
-            // 调用elementUI的加载层
-            const loading = this.$loading({
-              lock: true,
-              text: '注册成功! 即将进入系统',
-              spinner: 'el-icon-loading',
-              background: 'rgba(0, 0, 0, 0.7)'
-            })
-            setTimeout(() => {
-              this.$router.push('/doctor') // 强制切换当前路由 path
+  toLogin (formName) {
+    // 为表单绑定验证功能
+    this.$refs[formName].validate((valid) => {
+      if (valid) {
+        if (this.form.password === this.form.repassword) {
+          // 调用elementUI的加载层
+          const loading = this.$loading({
+            lock: true,
+            text: '注册成功! 即将进入系统',
+            spinner: 'el-icon-loading',
+            background: 'rgba(0, 0, 0, 0.7)'
+          })
+          setTimeout(() => {
+            this.$router.push('/doctor') // 强制切换当前路由 path
 
-              loading.close()
-            }, 1000)
-          } else {
-            this.dialogVisible2 = true
-            return false
-          }
+            loading.close()
+          }, 1000)
         } else {
-          this.dialogVisible1 = true
+          this.dialogVisible2 = true
           return false
         }
-      })
-    }
+      } else {
+        this.dialogVisible1 = true
+        return false
+      }
+    })
+
   }
 }
 </script>

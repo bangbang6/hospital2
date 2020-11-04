@@ -53,7 +53,6 @@ export default {
     }
   },
   methods: {
-
     onSubmit (formName) {
       // 为表单绑定验证功能
       this.$refs[formName].validate((valid) => {
@@ -108,4 +107,3 @@ export default {
   color: #303133;
 }
 </style>
-
