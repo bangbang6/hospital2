@@ -94,7 +94,12 @@ export default {
 </script>
 
 <style>
+    body{
+        background-size:cover;
+        background: url(../../assets/backgroud.jpg) no-repeat fixed center center;
+    }
 .login-box {
+  background-color: #ffffff4d;
   border: 1px solid #dcdfe6;
   width: 350px;
   margin: 180px auto;
