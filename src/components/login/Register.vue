@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="registerWrapper">
     <el-form ref="registerForm" :model="form" :rules="rules" label-width="80px" class="login-box">
       <h3 class="login-title">欢迎注册</h3>
       <el-form-item label="用户名" prop="username">
@@ -16,13 +16,13 @@
       </el-form-item>
     </el-form>
 
-    <el-dialog title="温馨提示" :visible.sync="dialogVisible1" width="30%" :before-close="handleClose">
+    <el-dialog title="温馨提示" :visible.sync="dialogVisible1" width="30%">
       <span>请填写完整</span>
       <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="dialogVisible1 = false">确 定</el-button>
       </span>
     </el-dialog>
-    <el-dialog title="温馨提示" :visible.sync="dialogVisible2" width="30%" :before-close="handleClose">
+    <el-dialog title="温馨提示" :visible.sync="dialogVisible2" width="30%">
       <span>两次输入的密码不一致，请重新输入</span>
       <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="dialogVisible2 = false">确 定</el-button>
@@ -61,48 +61,56 @@ export default {
       dialogVisible2: false
     }
   },
+  methods: {
+    toLogin (formName) {
+      console.log('xxx');
+      // 为表单绑定验证功能
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          if (this.form.password === this.form.repassword) {
+            // 调用elementUI的加载层
+            const loading = this.$loading({
+              lock: true,
+              text: '注册成功! 即将进入系统',
+              spinner: 'el-icon-loading',
+              background: 'rgba(0, 0, 0, 0.7)'
+            })
+            setTimeout(() => {
+              this.$router.push('/doctor') // 强制切换当前路由 path
 
-  toLogin (formName) {
-    // 为表单绑定验证功能
-    this.$refs[formName].validate((valid) => {
-      if (valid) {
-        if (this.form.password === this.form.repassword) {
-          // 调用elementUI的加载层
-          const loading = this.$loading({
-            lock: true,
-            text: '注册成功! 即将进入系统',
-            spinner: 'el-icon-loading',
-            background: 'rgba(0, 0, 0, 0.7)'
-          })
-          setTimeout(() => {
-            this.$router.push('/doctor') // 强制切换当前路由 path
-
-            loading.close()
-          }, 1000)
+              loading.close()
+            }, 1000)
+          } else {
+            this.dialogVisible2 = true
+            return false
+          }
         } else {
-          this.dialogVisible2 = true
+          this.dialogVisible1 = true
           return false
         }
-      } else {
-        this.dialogVisible1 = true
-        return false
-      }
-    })
+      })
 
+    }
   }
+
 }
 </script>
 
 <style>
-    body{
-        background-size:cover;
-        background: url(../../assets/backgroud.jpg) no-repeat fixed center center;
-    }
+body {
+  background-size: cover;
+  background: url(../../assets/backgroud.jpg) no-repeat fixed center center;
+}
+.registerWrapper {
+  position: relative;
+  top: 50%;
+  margin-top: -200px;
+}
 .login-box {
   background-color: #ffffff4d;
   border: 1px solid #dcdfe6;
   width: 350px;
-  margin: 180px auto;
+  margin: 0 auto;
   padding: 35px 35px 15px 35px;
   border-radius: 5px;
   -webkit-border-radius: 5px;

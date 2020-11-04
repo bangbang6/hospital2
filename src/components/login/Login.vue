@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="loginWrapper">
     <el-form ref="loginForm" :model="form" :rules="rules" label-width="80px" class="login-box">
       <h3 class="login-title">欢迎登录</h3>
       <el-form-item label="用户名" prop="username">
-        <el-input v-model="form.username" type="text"  placeholder="请输入账号" />
+        <el-input v-model="form.username" type="text" placeholder="请输入账号" />
       </el-form-item>
       <el-form-item label="密码" prop="password" style="margin-bottom: 18px;">
         <el-input v-model="form.password" type="password" placeholder="请输入密码" />
@@ -90,15 +90,20 @@ export default {
 </script>
 
 <style>
-body{
-    background-size:cover;
-    background: url(../../assets/backgroud.jpg) no-repeat fixed center center;
+body {
+  background-size: cover;
+  background: url(../../assets/backgroud.jpg) no-repeat fixed center center;
+}
+.loginWrapper {
+  position: relative;
+  top: 50%;
+  margin-top: -200px;
 }
 .login-box {
   background-color: #ffffff4d;
   border: 1px solid #dcdfe6;
   width: 350px;
-  margin: 180px auto;
+  margin: 0 auto;
   padding: 35px 35px 15px 35px;
   border-radius: 5px;
   -webkit-border-radius: 5px;
