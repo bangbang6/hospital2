@@ -16,13 +16,17 @@
             <el-submenu index="2">
               <template slot="title">文件列表</template>
               <el-menu-item index="2-1">
-                <i class="el-icon-upload"></i>
+                <i class="el-icon-files"></i>
                 <span class="subContent">我的文件</span>
               </el-menu-item>
               <el-menu-item index="2-2">
-                <i class="el-icon-folder-opened"></i>
-                <span class="subContent">授权文件</span>
+                <i class="el-icon-thumb"></i>
+                <span class="subContent">已授权文件</span>
               </el-menu-item>
+                <el-menu-item index="2-3">
+                    <i class="el-icon-document-add"></i>
+                    <span class="subContent">被授权文件</span>
+                </el-menu-item>
             </el-submenu>
             <el-menu-item index="3">上传文件</el-menu-item>
           </el-menu>
@@ -58,7 +62,7 @@ export default {
       activeIndex: '1',
       activeIndex2: '1',
       inputValue: '',
-      paths: ['/doctor/index', '/doctor/myFile', '/doctor/sharedFile', 'upload']
+      paths: ['/doctor/index', '/doctor/myFile', '/doctor/sharedFile', '/doctor/beSharedFile', 'upload']
     };
   },
   methods: {
@@ -71,12 +75,15 @@ export default {
           this.$router.push(this.paths[1]);
           break;
 
-        case '3':
-          this.$router.push(this.paths[3]);
-          break;
         case '2-2':
           this.$router.push(this.paths[2]);
           break;
+         case '2-3':
+              this.$router.push(this.paths[3]);
+              break;
+          case '3':
+              this.$router.push(this.paths[4]);
+              break;
       }
     },
       handleCommand(command) {

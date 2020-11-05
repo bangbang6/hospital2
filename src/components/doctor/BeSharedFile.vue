@@ -3,7 +3,6 @@
         <div  class="el-table el-table--fit el-table--fluid-height el-table--enable-row-hover el-table--enable-row-transition" style="width: 100%;margin: auto;padding: 20px 20px">
             <el-button icon="el-icon-view" type="primary">预览</el-button>
             <el-button icon="el-icon-download" type="primary">下载</el-button>
-            <el-button icon="el-icon-document-delete" type="warning">撤回授权</el-button>
             <el-form :inline="true" :model="formInline" class="demo-form-inline" style="display: inline-block;float: right">
                 <el-date-picker
                         v-model="selectTime"
@@ -34,7 +33,8 @@
                     :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
                     tooltip-effect="dark"
                     style="height: 450px;"
-                    @selection-change="handleSelectionChange">
+                    @selection-change="handleSelectionChange"
+                   >
                 <el-table-column
                         type="selection"
                 >
@@ -47,7 +47,7 @@
                 </el-table-column>
                 <el-table-column
                         prop="doctorName"
-                        label="授权医师"
+                        label="所属医师"
                         style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
                 >
                 </el-table-column>
@@ -64,22 +64,19 @@
                             <el-tooltip class="item" effect="light" content="下载" placement="bottom-start" style="margin-right: 5px">
                                 <el-link icon="el-icon-download" style="font-size: 18px;color: #409EFF" @click="downloadFile(scope.$index)"></el-link>
                             </el-tooltip>
-                            <el-tooltip class="item" effect="light" content="收回授权" placement="bottom-start" style="margin-right: 5px">
-                                <el-link icon="el-icon-download" style="font-size: 18px;color: #409EFF" @click="downloadFile(scope.$index)"></el-link>
-                            </el-tooltip>
                         </div>
                     </template>
                 </el-table-column>
                 <el-table-column
                         prop="fileSize"
                         label="文件大小"
-                        style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
                         :sortable="true" :sort-method="sortBySize"
+                        style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
                         width="100px">
                 </el-table-column>
                 <el-table-column
                         prop="auth_data"
-                        label="授权日期"
+                        label="被授权日期"
                         :sortable="true" :sort-method="sortByDate"
                         style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
                         width="150px">
@@ -99,12 +96,11 @@
 
 <script>
     let units=new Array("b","K","M","G")
-    // const units = ["b","K","M","G"];
     const totalData = new Array(100).fill('').map((item,index)=>{
         return {
             value:`文件名${index}.doc`,//这里要添加一个字段
             fileName: `文件名${index}.doc`,
-            doctorName:'陈龙',
+            doctorName:'王大力',
             fileSize: Math.ceil(Math.random()*1024)+""+units[Math.ceil(Math.random()*4)-1],
             auth_data: '2020-'+Math.ceil(Math.random()*12)+'-'+Math.ceil(Math.random()*30)
         }
@@ -240,7 +236,7 @@
         },
         mounted() {
             this.files = this.loadAll();
-        }
+        },
     }
 </script>
 <style>
@@ -258,5 +254,7 @@
         visibility: hidden;
     }
 
-
+    .el-table th>.cell{
+        padding-left: 14px;
+    }
 </style>

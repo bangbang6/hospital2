@@ -5,6 +5,16 @@
             <el-button icon="el-icon-view" type="primary">预览</el-button>
             <el-button icon="el-icon-download" type="primary">下载</el-button>
             <el-form :inline="true" :model="formInline" class="demo-form-inline" style="display: inline-block;float: right">
+                <el-date-picker
+                        v-model="selectTime"
+                        type="daterange"
+                        align="right"
+                        unlink-panels
+                        range-separator="至"
+                        start-placeholder="开始日期"
+                        end-placeholder="结束日期"
+                        :picker-options="pickerOptions">
+                </el-date-picker>
                 <el-autocomplete
                         class="input-with-select"
                         v-model="input"
@@ -64,19 +74,20 @@
                         prop="fileSize"
                         label="文件大小"
                         style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
+                        :sortable="true" :sort-method="sortBySize"
                         width="100px">
                 </el-table-column>
                 <el-table-column
                         prop="upload_data"
                         label="上传日期"
-                        sortable
+                        :sortable="true" :sort-method="sortByUploadDate"
                         style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
                         width="150px">
                 </el-table-column>
                 <el-table-column
                         prop="modifiedData"
                         label="更改日期"
-                        sortable
+                        :sortable="true" :sort-method="sortByModDate"
                         style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
                         width="150px">
                 </el-table-column>
@@ -93,14 +104,15 @@
 </template>
 
 <script>
+    let units=new Array("b","K","M","G")
     const totalData = new Array(100).fill('').map((item,index)=>{
         return {
             value:`文件名${index}.doc`,//这里要添加一个字段
             fileName: `文件名${index}.doc`,
-            fileSize: '300M',
+            fileSize: Math.ceil(Math.random()*1024)+""+units[Math.ceil(Math.random()*4)-1],
             doctorName:'王大力',
-            upload_data: '2020-10-23',
-            modifiedData: '2020-10-24'
+            upload_data: '2020-'+Math.ceil(Math.random()*12)+'-'+Math.ceil(Math.random()*30),
+            modifiedData: '2020-'+Math.ceil(Math.random()*12)+'-'+Math.ceil(Math.random()*30)
         }
     });
     export default {
@@ -117,7 +129,35 @@
                 },
                 tableData: totalData,
                 multipleSelection: [],
-                files: []
+                files: [],
+                pickerOptions: {
+                    shortcuts: [{
+                        text: '最近一周',
+                        onClick(picker) {
+                            const end = new Date();
+                            const start = new Date();
+                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+                            picker.$emit('pick', [start, end]);
+                        }
+                    }, {
+                        text: '最近一个月',
+                        onClick(picker) {
+                            const end = new Date();
+                            const start = new Date();
+                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+                            picker.$emit('pick', [start, end]);
+                        }
+                    }, {
+                        text: '最近三个月',
+                        onClick(picker) {
+                            const end = new Date();
+                            const start = new Date();
+                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+                            picker.$emit('pick', [start, end]);
+                        }
+                    }]
+                },
+                selectTime: ''
             }
         },
         methods: {
@@ -169,6 +209,60 @@
                 let files = this.files;
                 let Type = this.select;
                 this.tableData =  files.filter(this.createFilterAndType(queryString,Type));
+            },
+            trans(obj){//做文件大小转换
+                obj = String(obj);
+                let num = 0;
+                if(obj.substr(obj.length-1,1)==='G'){
+                    num = obj.substring(0,obj.length-1)*1*1024*1024*1024
+                }else if(obj.substr(obj.length-1,1)==='M'){
+                    num = obj.substring(0,obj.length-1)*1*1024*1024
+                }else if(obj.substr(obj.length-1,1)==='K'){
+                    num = obj.substring(0,obj.length-1)*1*1024
+                }else{
+                    num = obj.substring(0,obj.length-1)*1
+                }
+                return num;
+            },
+            //根据文件大小排序
+            sortBySize(obj1, obj2) {//统一换算为b
+                let num1 = this.trans(obj1.fileSize);
+                let num2 = this.trans(obj2.fileSize);
+                return num1-num2;
+            },
+            //根据更新时间排序
+            sortByUploadDate(obj1, obj2) {
+                let date1 = obj1.upload_data.split("-");
+                let date2 = obj2.upload_data.split("-");
+                if(parseInt(date1[1])>parseInt(date2[1])){//先按照月份比较
+                    return 1;
+                }else if(parseInt(date1[1])<parseInt(date2[1])){
+                    return -1;
+                }else{
+                    if(parseInt(date1[2])>parseInt(date2[2])){//再按照日期比较
+                        return 1;
+                    }else if(parseInt(date1[2])<parseInt(date2[2])){
+                        return -1;
+                    }
+                }
+                return 0;
+            },
+            //根据更改时间排序
+            sortByModDate(obj1, obj2) {
+                let date1 = obj1.modifiedData.split("-");
+                let date2 = obj2.modifiedData.split("-");
+                if(parseInt(date1[1])>parseInt(date2[1])){//先按照月份比较
+                    return 1;
+                }else if(parseInt(date1[1])<parseInt(date2[1])){
+                    return -1;
+                }else{
+                    if(parseInt(date1[2])>parseInt(date2[2])){//再按照日期比较
+                        return 1;
+                    }else if(parseInt(date1[2])<parseInt(date2[2])){
+                        return -1;
+                    }
+                }
+                return 0;
             }
         },
         mounted() {

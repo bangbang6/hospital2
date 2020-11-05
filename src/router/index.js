@@ -5,6 +5,7 @@ Vue.use(Router)
 import Upload from '../components/doctor/Upload.vue'
 import MyFile from '../components/doctor/MyFile'
 import SharedFile from '../components/doctor/SharedFile'
+import BeSharedFile from '../components/doctor/BeSharedFile'
 import DoctorIndex from '../components/doctor/DoctorIndex.vue'
 import AdminIndex from '../components/admin/AdminIndex.vue'
 import AdminFile from '../components/admin/FileList.vue'
@@ -56,7 +57,12 @@ export default new Router({
                 path: '/doctor/sharedFile',
                 nameL: 'sharedFile',
                 component: SharedFile
-            }
+            },
+            {
+                path: '/doctor/beSharedFile',
+                nameL: 'beSharedFile',
+                component: BeSharedFile
+            },
         ]
       },
       {
