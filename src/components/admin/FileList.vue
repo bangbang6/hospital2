@@ -193,9 +193,15 @@
                     return (file.fileName.toLowerCase().indexOf(queryString.toLowerCase()) != -1);
                 };
             },
-            createFilterAndType(queryString,Type) {
+            createFilterAndTypeAndDate(queryString,Type,DateArr) {
                 return (file) => {
-                    return (file.fileName.toLowerCase().indexOf(queryString.toLowerCase()) != -1&&file.fileName.toLowerCase().indexOf(Type.toLowerCase()) != -1);
+                    if(!DateArr){
+                        return (file.fileName.toLowerCase().indexOf(queryString.toLowerCase()) != -1&&file.fileName.toLowerCase().indexOf(Type.toLowerCase()) != -1);
+                    }
+                    let date = file.modifiedData.replace(/-/g,'/')
+                    //console.log(date)
+                    let dd = new Date(date).getTime();
+                    return (file.fileName.toLowerCase().indexOf(queryString.toLowerCase()) != -1&&file.fileName.toLowerCase().indexOf(Type.toLowerCase()) != -1&&dd>=DateArr[0].getTime()&&dd<=DateArr[1].getTime());
                 };
             },
             loadAll() {
@@ -205,10 +211,12 @@
                 console.log(item);
             },
             onSubmit() {
+                this.currentPage = 1;
                 let queryString = this.input;
                 let files = this.files;
                 let Type = this.select;
-                this.tableData =  files.filter(this.createFilterAndType(queryString,Type));
+                let DateArr =this.selectTime
+                this.tableData =  files.filter(this.createFilterAndTypeAndDate(queryString,Type,DateArr));
             },
             trans(obj){//做文件大小转换
                 obj = String(obj);

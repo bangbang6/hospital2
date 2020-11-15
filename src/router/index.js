@@ -3,9 +3,9 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 import Upload from '../components/doctor/Upload.vue'
-import MyFile from '../components/doctor/MyFile'
-import SharedFile from '../components/doctor/SharedFile'
-import BeSharedFile from '../components/doctor/BeSharedFile'
+import MyFile from '../components/doctor/fileListPackage/MyFile'
+import SharedFile from '../components/doctor/fileListPackage/SharedFile'
+import BeSharedFile from '../components/doctor/fileListPackage/BeSharedFile'
 import DoctorIndex from '../components/doctor/DoctorIndex.vue'
 import AdminIndex from '../components/admin/AdminIndex.vue'
 import AdminFile from '../components/admin/FileList.vue'

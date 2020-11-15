@@ -1,9 +1,9 @@
 <template>
-    <div style="width: 100%;margin: auto;background-color: #f0f2f5;padding-top: 50px">
+    <div style="width: 100%;margin: auto;background-color: #f0f2f5;padding-top:50px">
         <div  class="el-table el-table--fit el-table--fluid-height el-table--enable-row-hover el-table--enable-row-transition" style="width: 100%;margin: auto;padding: 20px 20px">
-            <el-button icon="el-icon-view" type="primary">预览</el-button>
             <el-button icon="el-icon-download" type="primary">下载</el-button>
-            <el-button icon="el-icon-document-delete" type="warning">撤回授权</el-button>
+            <el-button icon="el-icon-share" type="primary">分享</el-button>
+            <el-button icon="el-icon-circle-close" type="danger">删除</el-button>
             <el-form :inline="true" :model="formInline" class="demo-form-inline" style="display: inline-block;float: right">
                 <el-date-picker
                         v-model="selectTime"
@@ -26,7 +26,8 @@
                         <el-option label="jpg文件" value=".jpg"></el-option>
                         <el-option label="doc文件" value=".doc"></el-option>
                     </el-select>
-                    <el-button slot="append" icon="el-icon-search" @click="onSubmit"></el-button>
+
+                    <el-button slot="append" icon="el-icon-search" @click="onSubmit()"></el-button>
                 </el-autocomplete>
             </el-form>
             <el-table
@@ -42,30 +43,30 @@
                 <el-table-column
                         prop="fileName"
                         label="文件名"
-                        style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
-                        width="150px">
-                </el-table-column>
-                <el-table-column
-                        prop="doctorName"
-                        label="授权医师"
-                        style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
-                >
+                        style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;">
+
                 </el-table-column>
                 <el-table-column
                         prop="action"
                         label="..."
                         style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
-                        width="100px" >
+                        width="200px" >
                     <template slot-scope="scope">
-                        <div  class="action">
+                        <div class="action">
+                            <el-tooltip class="item" effect="light" content="溯源" placement="bottom-start" style="margin-right: 5px">
+                                <el-link icon="el-icon-attract" style="font-size: 18px;color: #409EFF"  @click="getOriginal(scope.$index)"></el-link>
+                            </el-tooltip>
                             <el-tooltip class="item" effect="light" content="预览" placement="bottom-start" style="margin-right: 5px">
                                 <el-link icon="el-icon-view" style="font-size: 18px;color: #409EFF" @click="seeFile(scope.$index)"></el-link>
                             </el-tooltip>
                             <el-tooltip class="item" effect="light" content="下载" placement="bottom-start" style="margin-right: 5px">
                                 <el-link icon="el-icon-download" style="font-size: 18px;color: #409EFF" @click="downloadFile(scope.$index)"></el-link>
                             </el-tooltip>
-                            <el-tooltip class="item" effect="light" content="收回授权" placement="bottom-start" style="margin-right: 5px">
-                                <el-link icon="el-icon-download" style="font-size: 18px;color: #409EFF" @click="downloadFile(scope.$index)"></el-link>
+                            <el-tooltip class="item" effect="light" content="分享" placement="bottom-start" style="margin-right: 5px">
+                                <el-link icon="el-icon-share" style="font-size: 18px;color: #409EFF" @click="shareFile(scope.$index)"></el-link>
+                            </el-tooltip>
+                            <el-tooltip class="item" effect="light" content="删除" placement="bottom-start" style="margin-right: 5px">
+                                <el-link icon="el-icon-circle-close" style="font-size: 18px;color: #409EFF" @click="deleteRow(scope.$index)"></el-link>
                             </el-tooltip>
                         </div>
                     </template>
@@ -78,13 +79,19 @@
                         width="100px">
                 </el-table-column>
                 <el-table-column
-                        prop="auth_data"
-                        label="授权日期"
-                        :sortable="true" :sort-method="sortByDate"
+                        prop="upload_data"
+                        label="上传日期"
+                        :sortable="true" :sort-method="sortByUploadDate"
                         style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
                         width="150px">
                 </el-table-column>
-
+                <el-table-column
+                        prop="modifiedData"
+                        label="更改日期"
+                        :sortable="true" :sort-method="sortByModDate"
+                        style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
+                        width="150px">
+                </el-table-column>
             </el-table>
             <el-pagination class="fy"
                            layout="prev, pager, next"
@@ -99,14 +106,13 @@
 
 <script>
     let units=new Array("b","K","M","G")
-    // const units = ["b","K","M","G"];
     const totalData = new Array(100).fill('').map((item,index)=>{
         return {
             value:`文件名${index}.doc`,//这里要添加一个字段
             fileName: `文件名${index}.doc`,
-            doctorName:'陈龙',
             fileSize: Math.ceil(Math.random()*1024)+""+units[Math.ceil(Math.random()*4)-1],
-            auth_data: '2020-'+Math.ceil(Math.random()*12)+'-'+Math.ceil(Math.random()*30)
+            upload_data: '2020-'+Math.ceil(Math.random()*12)+'-'+Math.ceil(Math.random()*30),
+            modifiedData: '2020-'+Math.ceil(Math.random()*12)+'-'+Math.ceil(Math.random()*30)
         }
     })
     export default {
@@ -124,6 +130,7 @@
                 tableData: totalData,
                 multipleSelection: [],
                 files: [],
+                results:[],
                 pickerOptions: {
                     shortcuts: [{
                         text: '最近一周',
@@ -156,13 +163,28 @@
         },
 
         methods: {
+            getOriginal(index) {
+                this.$alert('这是第' + index + '行文件溯源结果', '文件溯源', {
+                    confirmButtonText: '确定'
+                })
+            },
             downloadFile(index) {
                 this.$alert('这是第' + index + '行文件的下载结果', '文件下载', {
                     confirmButtonText: '确定'
                 })
             },
+            shareFile(index) {
+                this.$alert('这是第' + index + '行文件的分享结果', '文件分享', {
+                    confirmButtonText: '确定'
+                })
+            },
             seeFile(index) {
                 this.$alert('这是第' + index + '行文件的预览结果', '文件预览', {
+                    confirmButtonText: '确定'
+                })
+            },
+            deleteRow(index) {
+                this.$alert('这是第' + index + '行文件的删除结果', '文件删除', {
                     confirmButtonText: '确定'
                 })
             },
@@ -176,6 +198,7 @@
                 let files = this.files;
                 let results = queryString ? files.filter(this.createFilter(queryString)) : files;
                 // 调用 callback 返回建议列表的数据
+                this.results = results;
                 cb(results);
             },
             createFilter(queryString) {
@@ -183,9 +206,15 @@
                     return (file.fileName.toLowerCase().indexOf(queryString.toLowerCase()) != -1);
                 };
             },
-            createFilterAndType(queryString,Type) {
+            createFilterAndTypeAndDate(queryString,Type,DateArr) {
                 return (file) => {
-                    return (file.fileName.toLowerCase().indexOf(queryString.toLowerCase()) != -1&&file.fileName.toLowerCase().indexOf(Type.toLowerCase()) != -1);
+                    if(!DateArr){
+                        return (file.fileName.toLowerCase().indexOf(queryString.toLowerCase()) != -1&&file.fileName.toLowerCase().indexOf(Type.toLowerCase()) != -1);
+                    }
+                    let date = file.modifiedData.replace(/-/g,'/')
+                    //console.log(date)
+                    let dd = new Date(date).getTime();
+                    return (file.fileName.toLowerCase().indexOf(queryString.toLowerCase()) != -1&&file.fileName.toLowerCase().indexOf(Type.toLowerCase()) != -1&&dd>=DateArr[0].getTime()&&dd<=DateArr[1].getTime());
                 };
             },
             loadAll() {
@@ -195,10 +224,12 @@
                 console.log(item);
             },
             onSubmit() {
+                this.currentPage = 1;
+                let files = this.files;
                 let queryString = this.input;
                 let Type = this.select;
-                let files = this.files;
-                this.tableData =  files.filter(this.createFilterAndType(queryString,Type));
+                let DateArr =this.selectTime
+                this.tableData =  files.filter(this.createFilterAndTypeAndDate(queryString,Type,DateArr));
             },
             trans(obj){//做文件大小转换
                 obj = String(obj);
@@ -220,10 +251,27 @@
                 let num2 = this.trans(obj2.fileSize);
                 return num1-num2;
             },
-            //根据时间排序
-            sortByDate(obj1, obj2) {
-                let date1 = obj1.auth_data.split("-");
-                let date2 = obj2.auth_data.split("-");
+            //根据更新时间排序
+            sortByUploadDate(obj1, obj2) {
+                let date1 = obj1.upload_data.split("-");
+                let date2 = obj2.upload_data.split("-");
+                if(parseInt(date1[1])>parseInt(date2[1])){//先按照月份比较
+                    return 1;
+                }else if(parseInt(date1[1])<parseInt(date2[1])){
+                    return -1;
+                }else{
+                    if(parseInt(date1[2])>parseInt(date2[2])){//再按照日期比较
+                        return 1;
+                    }else if(parseInt(date1[2])<parseInt(date2[2])){
+                        return -1;
+                    }
+                }
+                return 0;
+            },
+            //根据更改时间排序
+            sortByModDate(obj1, obj2) {
+                let date1 = obj1.modifiedData.split("-");
+                let date2 = obj2.modifiedData.split("-");
                 if(parseInt(date1[1])>parseInt(date2[1])){//先按照月份比较
                     return 1;
                 }else if(parseInt(date1[1])<parseInt(date2[1])){
@@ -244,7 +292,7 @@
     }
 </script>
 <style>
-    .el-table--enable-row-hover .el-table__body tr:hover td:nth-child(4) div div {
+    .el-table--enable-row-hover .el-table__body tr:hover td:nth-child(3) div div {
         visibility: visible;
     }
 
@@ -254,9 +302,13 @@
         top: 88%;
         left: calc(50% - 200px);
     }
-    .el-table--enable-row-hover .el-table__body tr td:nth-child(4) div div {
+    .el-table--enable-row-hover .el-table__body tr td:nth-child(3) div div{
         visibility: hidden;
     }
-
-
+    .el-select .el-input {
+        width: 120px;
+    }
+    .el-table th>.cell{
+        padding-left: 14px;
+    }
 </style>
