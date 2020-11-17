@@ -6,7 +6,7 @@ const path = require('path')
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
-
+const BASE_URL = '/'
 // const name = defaultSettings.title || 'vue Element Admin' // page title
 
 // If your port is set to 80,

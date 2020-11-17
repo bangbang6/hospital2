@@ -89,7 +89,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 body {
   background-size: 100% 100%;
   background: url(../../assets/backgroud.jpg) no-repeat fixed center center;

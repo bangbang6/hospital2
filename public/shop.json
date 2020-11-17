@@ -1,0 +1,232 @@
+[
+  {
+    "city": "北京",
+    "rate": "-12%",
+    "shop": [
+      { "shop": "必胜客", "order": 484, "sales": 9447 },
+      { "shop": "肯德基", "order": 718, "sales": 9068 },
+      { "shop": "麦当劳", "order": 332, "sales": 5756 },
+      { "shop": "海底捞", "order": 532, "sales": 5692 }
+    ]
+  },
+  {
+    "city": "上海",
+    "rate": "-22%",
+    "shop": [
+      { "shop": "必胜客", "order": 432, "sales": 4345 },
+      { "shop": "肯德基", "order": 603, "sales": 6807 },
+      { "shop": "麦当劳", "order": 949, "sales": 13409 },
+      { "shop": "海底捞", "order": 270, "sales": 4905 }
+    ]
+  },
+  {
+    "city": "广州",
+    "rate": "+22%",
+    "shop": [
+      { "shop": "必胜客", "order": 836, "sales": 14813 },
+      { "shop": "肯德基", "order": 525, "sales": 6987 },
+      { "shop": "麦当劳", "order": 799, "sales": 13950 },
+      { "shop": "海底捞", "order": 853, "sales": 8657 }
+    ]
+  },
+  {
+    "city": "深圳",
+    "rate": "+1%",
+    "shop": [
+      { "shop": "必胜客", "order": 876, "sales": 17239 },
+      { "shop": "肯德基", "order": 603, "sales": 7808 },
+      { "shop": "麦当劳", "order": 560, "sales": 8859 },
+      { "shop": "海底捞", "order": 86, "sales": 1564 }
+    ]
+  },
+  {
+    "city": "南京",
+    "rate": "+22%",
+    "shop": [
+      { "shop": "必胜客", "order": 810, "sales": 11963 },
+      { "shop": "肯德基", "order": 401, "sales": 4727 },
+      { "shop": "麦当劳", "order": 532, "sales": 8820 },
+      { "shop": "海底捞", "order": 341, "sales": 5606 }
+    ]
+  },
+  {
+    "city": "杭州",
+    "rate": "-23%",
+    "shop": [
+      { "shop": "必胜客", "order": 752, "sales": 9407 },
+      { "shop": "肯德基", "order": 920, "sales": 13413 },
+      { "shop": "麦当劳", "order": 577, "sales": 9959 },
+      { "shop": "海底捞", "order": 353, "sales": 3886 }
+    ]
+  },
+  {
+    "city": "合肥",
+    "rate": "-23%",
+    "shop": [
+      { "shop": "必胜客", "order": 781, "sales": 11964 },
+      { "shop": "肯德基", "order": 573, "sales": 10296 },
+      { "shop": "麦当劳", "order": 86, "sales": 1192 },
+      { "shop": "海底捞", "order": 231, "sales": 3862 }
+    ]
+  },
+  {
+    "city": "济南",
+    "rate": "+22%",
+    "shop": [
+      { "shop": "必胜客", "order": 34, "sales": 479 },
+      { "shop": "肯德基", "order": 781, "sales": 13526 },
+      { "shop": "麦当劳", "order": 519, "sales": 5605 },
+      { "shop": "海底捞", "order": 916, "sales": 15975 }
+    ]
+  },
+  {
+    "city": "太原",
+    "rate": "-6%",
+    "shop": [
+      { "shop": "必胜客", "order": 601, "sales": 11094 },
+      { "shop": "肯德基", "order": 646, "sales": 11621 },
+      { "shop": "麦当劳", "order": 201, "sales": 3083 },
+      { "shop": "海底捞", "order": 45, "sales": 579 }
+    ]
+  },
+  {
+    "city": "成都",
+    "rate": "-4%",
+    "shop": [
+      { "shop": "必胜客", "order": 606, "sales": 12029 },
+      { "shop": "肯德基", "order": 287, "sales": 4322 },
+      { "shop": "麦当劳", "order": 729, "sales": 8835 },
+      { "shop": "海底捞", "order": 225, "sales": 2925 }
+    ]
+  },
+  {
+    "city": "重庆",
+    "rate": "-14%",
+    "shop": [
+      { "shop": "必胜客", "order": 25, "sales": 359 },
+      { "shop": "肯德基", "order": 533, "sales": 6166 },
+      { "shop": "麦当劳", "order": 337, "sales": 6153 },
+      { "shop": "海底捞", "order": 290, "sales": 4622 }
+    ]
+  },
+  {
+    "city": "苏州",
+    "rate": "-19%",
+    "shop": [
+      { "shop": "必胜客", "order": 836, "sales": 9413 },
+      { "shop": "肯德基", "order": 986, "sales": 11486 },
+      { "shop": "麦当劳", "order": 299, "sales": 3695 },
+      { "shop": "海底捞", "order": 147, "sales": 2382 }
+    ]
+  },
+  {
+    "city": "无锡",
+    "rate": "-11%",
+    "shop": [
+      { "shop": "必胜客", "order": 415, "sales": 5469 },
+      { "shop": "肯德基", "order": 658, "sales": 10218 },
+      { "shop": "麦当劳", "order": 339, "sales": 3922 },
+      { "shop": "海底捞", "order": 756, "sales": 8867 }
+    ]
+  },
+  {
+    "city": "常州",
+    "rate": "-17%",
+    "shop": [
+      { "shop": "必胜客", "order": 444, "sales": 7374 },
+      { "shop": "肯德基", "order": 196, "sales": 2528 },
+      { "shop": "麦当劳", "order": 409, "sales": 7967 },
+      { "shop": "海底捞", "order": 376, "sales": 6399 }
+    ]
+  },
+  {
+    "city": "温州",
+    "rate": "+13%",
+    "shop": [
+      { "shop": "必胜客", "order": 612, "sales": 9222 },
+      { "shop": "肯德基", "order": 452, "sales": 5460 },
+      { "shop": "麦当劳", "order": 190, "sales": 2190 },
+      { "shop": "海底捞", "order": 327, "sales": 5928 }
+    ]
+  },
+  {
+    "city": "哈尔滨",
+    "rate": "+10%",
+    "shop": [
+      { "shop": "必胜客", "order": 894, "sales": 14911 },
+      { "shop": "肯德基", "order": 241, "sales": 2610 },
+      { "shop": "麦当劳", "order": 665, "sales": 11717 },
+      { "shop": "海底捞", "order": 182, "sales": 3412 }
+    ]
+  },
+  {
+    "city": "长春",
+    "rate": "+15%",
+    "shop": [
+      { "shop": "必胜客", "order": 619, "sales": 6765 },
+      { "shop": "肯德基", "order": 693, "sales": 7726 },
+      { "shop": "麦当劳", "order": 738, "sales": 7564 },
+      { "shop": "海底捞", "order": 449, "sales": 8953 }
+    ]
+  },
+  {
+    "city": "大连",
+    "rate": "-7%",
+    "shop": [
+      { "shop": "必胜客", "order": 266, "sales": 5136 },
+      { "shop": "肯德基", "order": 287, "sales": 3022 },
+      { "shop": "麦当劳", "order": 476, "sales": 8496 },
+      { "shop": "海底捞", "order": 913, "sales": 10873 }
+    ]
+  },
+  {
+    "city": "沈阳",
+    "rate": "+7%",
+    "shop": [
+      { "shop": "必胜客", "order": 650, "sales": 8150 },
+      { "shop": "肯德基", "order": 948, "sales": 16874 },
+      { "shop": "麦当劳", "order": 693, "sales": 7463 },
+      { "shop": "海底捞", "order": 915, "sales": 14255 }
+    ]
+  },
+  {
+    "city": "拉萨",
+    "rate": "+8%",
+    "shop": [
+      { "shop": "必胜客", "order": 596, "sales": 11079 },
+      { "shop": "肯德基", "order": 640, "sales": 12204 },
+      { "shop": "麦当劳", "order": 374, "sales": 5366 },
+      { "shop": "海底捞", "order": 169, "sales": 2274 }
+    ]
+  },
+  {
+    "city": "呼和浩特",
+    "rate": "-16%",
+    "shop": [
+      { "shop": "必胜客", "order": 971, "sales": 11778 },
+      { "shop": "肯德基", "order": 372, "sales": 6744 },
+      { "shop": "麦当劳", "order": 123, "sales": 1831 },
+      { "shop": "海底捞", "order": 799, "sales": 12040 }
+    ]
+  },
+  {
+    "city": "武汉",
+    "rate": "+13%",
+    "shop": [
+      { "shop": "必胜客", "order": 5, "sales": 53 },
+      { "shop": "肯德基", "order": 408, "sales": 6115 },
+      { "shop": "麦当劳", "order": 557, "sales": 7341 },
+      { "shop": "海底捞", "order": 531, "sales": 7157 }
+    ]
+  },
+  {
+    "city": "南宁",
+    "rate": "+8%",
+    "shop": [
+      { "shop": "必胜客", "order": 133, "sales": 1927 },
+      { "shop": "肯德基", "order": 503, "sales": 7077 },
+      { "shop": "麦当劳", "order": 700, "sales": 10318 },
+      { "shop": "海底捞", "order": 349, "sales": 4882 }
+    ]
+  }
+]

@@ -96,7 +96,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 body {
   /*  background-size: cover; */
   background: url(../../assets/backgroud.jpg) no-repeat fixed center center;

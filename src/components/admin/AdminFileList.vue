@@ -5,7 +5,7 @@
         <!-- <div class="logo">
           <img src="../../assets/logo.jpg" class="imgLogo" />
         </div>
-        <div class="menu">
+         <div class="menu">
           <el-menu
             :default-active="activeIndex"
             class="el-menu"
@@ -38,15 +38,16 @@
     </div>
 
     <div class="main">
-      <dash-board></dash-board>
+      <file-list></file-list>
     </div>
   </div>
 </template>
 
 <script>
 import DashBoard from './DashBoard.vue';
+import FileList from './FileList.vue';
 export default {
-  components: { DashBoard },
+  components: { DashBoard, FileList },
   data () {
     return {
       activeIndex: '0',
@@ -78,13 +79,14 @@ export default {
 <style scoped>
 .admin {
   width: 100%;
-  background-color: rgb(48, 48, 48);
   height: 100%;
+  background-color: rgb(240, 242, 245);
 }
 .header {
   width: 100%;
-  height: 6%;
+  height: 7%;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+  /*  background-color: white; */
 }
 
 .menu,
@@ -117,8 +119,8 @@ export default {
   font-weight: bold;
 }
 .main {
-  width: 100%;
-  /* margin-left: 15%; */
+  width: 70%;
+  margin-left: 15%;
   height: 94%;
 }
 .user {
