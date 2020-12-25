@@ -32,8 +32,11 @@
 </template>
 
 <script>
-
+import { register } from '@/api/user.js'
+import { mapMutations } from 'vuex';
+import { setToken } from '@/utils/cookie';
 export default {
+
   name: 'Login',
   data () {
     return {
@@ -62,24 +65,34 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(['setUserId']),
     toLogin (formName) {
-      console.log('xxx');
       // 为表单绑定验证功能
       this.$refs[formName].validate((valid) => {
         if (valid) {
           if (this.form.password === this.form.repassword) {
-            // 调用elementUI的加载层
-            const loading = this.$loading({
-              lock: true,
-              text: '注册成功! 即将进入系统',
-              spinner: 'el-icon-loading',
-              background: 'rgba(0, 0, 0, 0.7)'
-            })
-            setTimeout(() => {
-              this.$router.push('/doctor') // 强制切换当前路由 path
+            register(this.form.username, this.form.password).then(res => {
+              if (res.data.code === 200) {
+                const userData = res.data.data
+                console.log(userData)
+                setToken('token', userData.token)
 
-              loading.close()
-            }, 1000)
+                const loading = this.$loading({
+                  lock: true,
+                  text: '注册成功! 即将进入系统',
+                  spinner: 'el-icon-loading',
+                  background: 'rgba(0, 0, 0, 0.7)'
+                })
+                setTimeout(() => {
+                  this.$router.push('/doctor') // 强制切换当前路由 path
+
+                  loading.close()
+                }, 1000)
+              } else {
+                alert(res.data.message)
+              }
+            })
+
           } else {
             this.dialogVisible2 = true
             return false
@@ -90,8 +103,10 @@ export default {
         }
       })
 
-    }
-  }
+    },
+
+  },
+
 
 }
 </script>

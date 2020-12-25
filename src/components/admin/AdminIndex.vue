@@ -45,6 +45,7 @@
 
 <script>
 import DashBoard from './DashBoard.vue';
+import { removeToken } from '@/utils/cookie';
 export default {
   components: { DashBoard },
   data () {
@@ -61,6 +62,7 @@ export default {
     },
     handleCommand (command) {
       if (command === 'loginout') {
+        removeToken('token')
         this.$router.push('/')
       }
       if (command === 'jumpToshouye') {

@@ -29,6 +29,7 @@
               </el-menu-item>
             </el-submenu>
             <el-menu-item index="3">上传文件</el-menu-item>
+            <el-menu-item index="4">简单上传文件</el-menu-item>
           </el-menu>
         </div>
         <div class="search">
@@ -56,13 +57,14 @@
 </template>
 
 <script>
+import {removeToken} from '@/utils/cookie'
 export default {
   data () {
     return {
       activeIndex: '1',
       activeIndex2: '1',
       inputValue: '',
-      paths: ['/doctor/index', '/doctor/myFile', '/doctor/sharedFile', '/doctor/beSharedFile', 'upload']
+      paths: ['/doctor/index', '/doctor/myFile', '/doctor/sharedFile', '/doctor/beSharedFile', '/doctor/upload', '/doctor/simpleUpload']
     };
   },
   methods: {
@@ -84,10 +86,13 @@ export default {
         case '3':
           this.$router.push(this.paths[4]);
           break;
+        case '4':
+          this.$router.push(this.paths[5])
       }
     },
     handleCommand (command) {
       if (command === 'loginout') {
+        removeToken('token')
         this.$router.push('/')
       }
     }

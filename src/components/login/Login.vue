@@ -28,6 +28,8 @@
 </template>
 
 <script>
+import { login } from '../../api/user'
+import { setToken } from '@/utils/cookie'
 export default {
   name: 'Login',
   data () {
@@ -54,25 +56,38 @@ export default {
   },
   methods: {
     onSubmit (formName) {
+
       // 为表单绑定验证功能
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          // 调用elementUI的加载层
-          const loading = this.$loading({
-            lock: true,
-            text: '登录成功! 即将进入系统',
-            spinner: 'el-icon-loading',
-            background: 'rgba(0, 0, 0, 0.7)'
-          })
-          setTimeout(() => {
-            // 使用 vue-router 路由到指定页面，该方式称之为编程式导航
-            if (this.radio1 === '1') {
-              this.$router.push('/doctor'); loading.close()
-            } else {
-              this.$router.push('/admin'); loading.close()
+          login(this.form.username, this.form.password).then(res => {
+            console.log(res);
 
+
+            if (res.data.code === 200) {
+              const userData = res.data.data
+              setToken('token', userData.token)
+              // 调用elementUI的加载层
+              const loading = this.$loading({
+                lock: true,
+                text: '登录成功! 即将进入系统',
+                spinner: 'el-icon-loading',
+                background: 'rgba(0, 0, 0, 0.7)'
+              })
+              setTimeout(() => {
+                // 使用 vue-router 路由到指定页面，该方式称之为编程式导航
+                if (this.radio1 === '1') {
+                  this.$router.push('/doctor'); loading.close()
+                } else {
+                  this.$router.push('/admin'); loading.close()
+
+                }
+              }, 1000)
+            } else {
+              alert(res.data.message)
             }
-          }, 1000)
+          })
+
         } else {
           this.dialogVisible = true
           return false

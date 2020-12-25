@@ -45,33 +45,33 @@
 import Echarts from 'echarts'
 const mockData = [
   {
-    "city": "北京",
+    "city": "武汉",
     "rate": "-12%",
     "shop": [
-      { "shop": "协和医院", "order": 484, "sales": 9447 },
+      { "shop": "同济医院", "order": 484, "sales": 9447 },
       { "shop": "同济医院", "order": 718, "sales": 9068 },
-      { "shop": "协和医院", "order": 332, "sales": 5756 },
+      { "shop": "同济医院", "order": 332, "sales": 5756 },
       { "shop": "同济医院", "order": 532, "sales": 5692 }
     ]
   },
   {
-    "city": "上海",
+    "city": "北京",
     "rate": "-22%",
     "shop": [
-      { "shop": "协和医院", "order": 432, "sales": 4345 },
+      { "shop": "同济医院", "order": 432, "sales": 4345 },
       { "shop": "同济医院", "order": 603, "sales": 6807 },
-      { "shop": "协和医院", "order": 949, "sales": 13409 },
-      { "shop": "海底捞", "order": 270, "sales": 4905 }
+      { "shop": "同济医院", "order": 949, "sales": 13409 },
+      { "shop": "同济医院", "order": 270, "sales": 4905 }
     ]
   },
   {
-    "city": "广州",
+    "city": "上海",
     "rate": "+22%",
     "shop": [
       { "shop": "同济医院", "order": 836, "sales": 14813 },
       { "shop": "同济医院", "order": 525, "sales": 6987 },
-      { "shop": "协和医院", "order": 799, "sales": 13950 },
-      { "shop": "海底捞", "order": 853, "sales": 8657 }
+      { "shop": "同济医院", "order": 799, "sales": 13950 },
+      { "shop": "同济医院", "order": 853, "sales": 8657 }
     ]
   },
 ]
@@ -126,7 +126,7 @@ export default {
   .list-wrapper {
     display: flex;
     width: 100%;
-    height: 120px;
+    height: 130px;
     margin-top: 5px;
     box-sizing: border-box;
 

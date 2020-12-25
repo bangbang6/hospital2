@@ -13,54 +13,54 @@
 
 const mockData = [
   {
-    legondname: "呼吸科",
+    legondname: "口腔科",
     value: 67,
     percent: "15.40%",
     itemStyle: {
       color: '#1de9b6'
     },
-    name: "呼吸科 | 15.4%"
+    name: "口腔科 | 15.4%"
   },
   {
-    legondname: "心脏科",
+    legondname: "耳鼻喉科",
     value: 97,
     percent: "22.30%",
     itemStyle: {
       color: '#37a2da'
     },
-    name: "心脏科 | 22.30%",
+    name: "耳鼻喉科 | 22.30%",
 
   },
   {
-    legondname: "内脏科",
+    legondname: "放射科",
     value: 92,
     percent: "21.15%",
     itemStyle: {
       color: 'pink'
     },
-    name: "心脏科 | 21.15%"
+    name: "放射科 | 21.15%"
 
   },
   {
-    legondname: "消化科",
+    legondname: "皮肤科",
     value: 204,
     percent: "41.15%",
     itemStyle: {
       color: 'yellow'
     },
-    name: "消化科 | 41.15%"
+    name: "皮肤科 | 41.15%"
 
   },
 ]
 const mockData2 = [
   {
-    legondname: "北京",
-    value: 67,
-    percent: "15.40%",
+    legondname: "武汉",
+    value: 204,
+    percent: "41.5%",
     itemStyle: {
       color: '#1de9b6'
     },
-    name: "北京 | 15.4%"
+    name: "武汉 | 41.5%"
   },
   {
     legondname: "上海",
@@ -83,13 +83,13 @@ const mockData2 = [
 
   },
   {
-    legondname: "江西",
-    value: 204,
-    percent: "41.15%",
+    legondname: "北京",
+    value: 67,
+    percent: "15.4%",
     itemStyle: {
       color: 'yellow'
     },
-    name: "江西 | 41.15%"
+    name: "北京 | 15.4%"
 
   },
 ]

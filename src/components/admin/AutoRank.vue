@@ -20,49 +20,49 @@ export default {
       rankData: [{
         no: 1,
         name: '赵医生',
-        address: "协和医院",
+        address: "同济医院",
         phone: "157XXXX5790"
       },
       {
         no: 2,
         name: '赵医生',
-        address: "协和医院",
+        address: "同济医院",
         phone: "157XXXX5790"
       },
       {
         no: 3,
         name: '赵医生',
-        address: "协和医院",
+        address: "同济医院",
         phone: "157XXXX5790"
       },
       {
         no: 4,
         name: '赵医生',
-        address: "协和医院",
+        address: "同济医院",
         phone: "157XXXX5790"
       },
       {
         no: 5,
         name: '赵医生',
-        address: "协和医院",
+        address: "同济医院",
         phone: "157XXXX5790"
       },
       {
         no: 6,
         name: '赵医生',
-        address: "协和医院",
+        address: "同济医院",
         phone: "157XXXX5790"
       },
       {
         no: 7,
         name: '赵医生',
-        address: "协和医院",
+        address: "同济医院",
         phone: "157XXXX5790"
       },
       {
         no: 8,
         name: '赵医生',
-        address: "协和医院",
+        address: "同济医院",
         phone: "157XXXX5790"
       }
 
