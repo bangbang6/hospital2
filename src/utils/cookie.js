@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie'
-const  inFifteenMinutes = new Date(new Date().getTime() + 10 * 60 * 1000);
+const  inFifteenMinutes = new Date(new Date().getTime() + 1000 * 60 * 1000);
 
 export function getToken(TokenKey) {
   return Cookies.get(TokenKey)

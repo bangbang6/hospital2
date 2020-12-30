@@ -76,10 +76,10 @@ export default {
 
   },
   async mounted () {
-    let uploadFiles = await axios.get("http://localhost:3000/")
+    //let uploadFiles = await axios.get("http://localhost:3000/")
 
-    this.totalFiles = this.orderByTime(this.parseFiles(uploadFiles.data))
-    this.uploadFiles = this.totalFiles.slice(0, 15)
+    //this.totalFiles = this.orderByTime(this.parseFiles(uploadFiles.data))
+    //this.uploadFiles = this.totalFiles.slice(0, 15)
   },
   methods: {
     handleSelectionChange () {
