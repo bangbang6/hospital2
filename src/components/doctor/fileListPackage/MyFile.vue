@@ -1,5 +1,8 @@
 <template>
-  <div style="width: 100%;margin: auto;background-color: #f0f2f5;padding-top:50px">
+  <div
+    style="width: 100%;margin: auto;background-color: #f0f2f5;padding-top:50px;position:relative"
+    class="content"
+  >
     <div
       class="el-table el-table--fit el-table--fluid-height el-table--enable-row-hover el-table--enable-row-transition"
       style="width: 100%;margin: auto;padding: 20px 20px"
@@ -101,14 +104,14 @@
               <el-tooltip
                 class="item"
                 effect="light"
-                content="分享"
+                content="修改"
                 placement="bottom-start"
                 style="margin-right: 5px"
               >
                 <el-link
-                  icon="el-icon-share"
+                  icon="el-icon-edit"
                   style="font-size: 18px;color: #409EFF"
-                  @click="shareFile(scope.$index)"
+                  @click="changeFile(scope.$index)"
                 ></el-link>
               </el-tooltip>
               <el-tooltip
@@ -160,20 +163,43 @@
         background
       ></el-pagination>
     </div>
+    <div
+      class="result"
+      v-if="res"
+      style="position:absolute;width:100%;height:90%;z-index:999;top:50px;background:white;padding:20px"
+    >
+      <div class="header" style="font-size:22px">{{seeFileName}}</div>
+      <textarea
+        name="result"
+        id="fileMessage"
+        v-model="fileMessage"
+        :readonly="!seeStatus"
+        style="width:100%;height:80%;display:inline-block;border:none;font-size:16px;margin-top:20px;outline: none"
+      ></textarea>
+      <div class="footer" style="display:flex;justify-content:flex-end">
+        <el-button type="primary" plain @click="goBack">返回</el-button>
+        <el-button type="primary" @click="submitChangeFile" v-if="seeStatus">确定</el-button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import { getFileList } from '@/api/file'
-import { deleteFile } from '@/api/file'
+import { deleteFile, getFile, updateFile } from '@/api/file'
 export default {
   data () {
     return {
       input: '',
+      seeStatus: false,
       select: '',
+      fileName: '',
+      res: false,
+      fileMessage: '',
       total: 200,//默认数据总数
       pagesize: 7,//每页的数据条数
       currentPage: 1,//默认开始页面
+      idx: 0,
       formInline: {
         user: '',
         region: ''
@@ -212,8 +238,21 @@ export default {
       selectTime: ''
     }
   },
-
+  computed: {
+    seeFileName () {
+      return (this.files[this.idx].fileName)
+    }
+  },
   methods: {
+    goBack () {
+      this.res = false
+    },
+    submitChangeFile () {
+      updateFile(this.fileMessage, this.files[this.idx].id).then(res => {
+        alert('修改成功')
+        this.res = false
+      })
+    },
     getOriginal (index) {
       this.$alert('这是第' + index + '行文件溯源结果', '文件溯源', {
         confirmButtonText: '确定'
@@ -224,28 +263,35 @@ export default {
         confirmButtonText: '确定'
       })
     },
-    shareFile (index) {
-      this.$alert('这是第' + index + '行文件的分享结果', '文件分享', {
-        confirmButtonText: '确定'
+    changeFile (index) {
+      this.idx = this.pagesize * (this.currentPage - 1) + index
+      getFile(this.files[this.idx].id).then(res => {
+        if (res.data.code === 200) {
+          this.res = true
+          this.seeStatus = true
+          this.fileMessage = res.data.data
+        }
       })
     },
     seeFile (index) {
-      this.$alert('这是第' + index + '行文件的预览结果', '文件预览', {
-        confirmButtonText: '确定'
+      this.idx = this.pagesize * (this.currentPage - 1) + index
+      getFile(this.files[this.idx].id).then(res => {
+        if (res.data.code === 200) {
+          this.res = true
+          this.seeStatus = false
+          this.fileMessage = res.data.data
+        }
       })
     },
     deleteRow (index) {
-      console.log('index', index);
       let idx = this.pagesize * (this.currentPage - 1) + index
       deleteFile(this.files[idx].id).then(res => {
-        console.log('delete', res);
         if (res.data.code === 200) {
           this.$alert(`${this.files[idx].fileName}文件已被删除`, '文件删除', {
             confirmButtonText: '确定',
 
           })
           getFileList().then(res => {
-            console.log('files', res);
             if (res.data.code === 200) {
               this.files = res.data.data.map(file => {
                 return {
@@ -294,7 +340,6 @@ export default {
           return (file.fileName.toLowerCase().indexOf(queryString.toLowerCase()) != -1 && file.fileName.toLowerCase().indexOf(Type.toLowerCase()) != -1);
         }
         let date = file.modifiedData.replace(/-/g, '/')
-        //console.log(date)
         let dd = new Date(date).getTime();
         return (file.fileName.toLowerCase().indexOf(queryString.toLowerCase()) != -1 && file.fileName.toLowerCase().indexOf(Type.toLowerCase()) != -1 && dd >= DateArr[0].getTime() && dd <= DateArr[1].getTime());
       };
@@ -368,7 +413,6 @@ export default {
   },
   mounted () {
     getFileList().then(res => {
-      console.log('files', res);
       if (res.data.code === 200) {
         this.files = res.data.data.map(file => {
           return {
@@ -386,7 +430,7 @@ export default {
   }
 }
 </script>
-<style>
+<style  scoped>
 .el-table--enable-row-hover .el-table__body tr:hover td:nth-child(3) div div {
   visibility: visible;
 }
@@ -406,4 +450,6 @@ export default {
 .el-table th > .cell {
   padding-left: 14px;
 }
+</style>
+<style lang="scss" scoped>
 </style>

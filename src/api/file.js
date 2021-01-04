@@ -38,3 +38,33 @@ export function deleteFile(fileId){
     }
   )
 }
+
+export function getFile(fileId){
+  return request({
+    url:"/getData",
+    method:'POST',
+    headers:{
+      token:getToken('token'),
+
+    },
+    data:{
+      dataId:(+fileId)
+    }
+  })
+}
+
+export function updateFile(message,fileId){
+  return request({
+    url:"/updateData",
+    method:'POST',
+    headers:{
+      token:getToken('token'),
+
+    },
+    data:{
+
+      dataId:(+fileId),
+      dataContent:message
+    }
+  })
+}
