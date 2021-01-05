@@ -1,9 +1,9 @@
 import request from '../utils/request'
 import {getToken} from '../utils/cookie'
-export function upload(formData){
+export function upload(formData,channelId){
   return request(
     {
-      url:'/uploadFile',
+      url:'/data/uploadFile/'+channelId,
       method:'POST',
       data:formData,
       headers:{'Content-Type':'multipart/form-data',token:getToken('token')}
@@ -14,7 +14,7 @@ export function upload(formData){
 export function getFileList(){
   return request(
     {
-      url:'/getDataList',
+      url:'/data/getDataList',
       method:"GET",
       headers:{
         token:getToken('token')
@@ -25,7 +25,7 @@ export function getFileList(){
 export function deleteFile(fileId){
   return request(
     {
-      url:'/deleteDataById',
+      url:'/data/deleteDataById',
       method:"POST",
       headers:{
         token:getToken('token'),
@@ -41,7 +41,7 @@ export function deleteFile(fileId){
 
 export function getFile(fileId){
   return request({
-    url:"/getData",
+    url:"/data/getData",
     method:'POST',
     headers:{
       token:getToken('token'),
@@ -55,7 +55,7 @@ export function getFile(fileId){
 
 export function updateFile(message,fileId){
   return request({
-    url:"/updateData",
+    url:"/data/updateData",
     method:'POST',
     headers:{
       token:getToken('token'),

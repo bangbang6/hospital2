@@ -1,5 +1,16 @@
 <template>
   <div>
+    <div class="channel">
+      <el-radio-group v-model="channel">
+        <el-radio-button
+          class="channel-btn"
+          v-for="item in channels"
+          :key="item.id"
+          :label="item.channelName"
+          size="sm"
+        ></el-radio-button>
+      </el-radio-group>
+    </div>
     <el-upload
       class="upload-demo"
       ref="upload"
@@ -23,11 +34,14 @@
 
 import { upload } from '@/api/file'
 import { mapState } from 'vuex';
+import { checkChannel } from '@/api/channel'
 export default {
   data () {
     return {
       action: '',
-      loading: false
+      loading: false,
+      channels: [],
+      channel: 'channel1'
     }
   },
   computed: {
@@ -35,19 +49,28 @@ export default {
   },
   methods: {
     uploadFile: function (param) {
-
       //let loadingInstance = this.$loading({ target: dom });
+      const channelId = this.channels.filter((item) => {
+        return item.channelName === this.channel
+      })[0].id
+      console.log(channelId);
       let fileObject = param.file;
       let formData = new FormData();
       formData.append("file", fileObject);
       let userId = -1
       this.loading = true
-
+      if (!this.channel) {
+        alert('请先选择通道')
+        return
+      }
       //formData.append("originUserId", userId);
-      upload(formData).then((res) => {
+      upload(formData, channelId).then((res) => {
         console.log('file', res);
-        this.loading = false
-        //loadingInstance.close()
+        if (res.data.code === 200) {
+          this.loading = false
+        } else {
+          alert(res.data.message)
+        }
       })
     },
     handleRemove (file, fileList) {
@@ -57,9 +80,24 @@ export default {
       this.$refs.upload.abort(file);
     },
 
+
+  },
+  mounted () {
+    checkChannel().then(res => {
+      if (res.data.code === 200) {
+        this.channels = res.data.data
+      }
+    })
   }
 }
 </script>
 
-<style>
+<style scoped lang='scss'>
+.channel {
+  width: 100%;
+  margin: 40px 0;
+  .channel-btn {
+    margin-right: 20px;
+  }
+}
 </style>

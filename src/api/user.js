@@ -2,7 +2,7 @@ import request from '../utils/request'
 
 export function register(username,password){
   return request({
-    url:'/register',
+    url:'/user/register',
     data:{
       username:username,
       password:password
@@ -12,7 +12,7 @@ export function register(username,password){
 } 
 export function login(username,password){
   return request({
-    url:"/login",
+    url:"user/login",
     data:{
       username:username,
       password:password

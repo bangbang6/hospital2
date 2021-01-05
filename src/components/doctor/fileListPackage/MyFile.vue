@@ -62,7 +62,7 @@
         >
           <template slot-scope="scope">
             <div class="action">
-              <el-tooltip
+              <!-- <el-tooltip
                 class="item"
                 effect="light"
                 content="溯源"
@@ -91,7 +91,7 @@
               <el-tooltip
                 class="item"
                 effect="light"
-                content="下载"
+                content="追踪"
                 placement="bottom-start"
                 style="margin-right: 5px"
               >
@@ -125,6 +125,21 @@
                   icon="el-icon-circle-close"
                   style="font-size: 18px;color: #409EFF"
                   @click="deleteRow(scope.$index)"
+                ></el-link>
+              </el-tooltip>-->
+              <el-tooltip
+                v-for="item  in scope.row.authoritySet"
+                :key="item.id"
+                class="item"
+                effect="light"
+                placement="bottom-start"
+                style="margin-right: 5px"
+                :content="item.content"
+              >
+                <el-link
+                  :icon="item.icon"
+                  style="font-size: 18px;color: #409EFF"
+                  @click="handleClick(scope.$index,item.id)"
                 ></el-link>
               </el-tooltip>
             </div>
@@ -244,6 +259,24 @@ export default {
     }
   },
   methods: {
+    handleClick (index, authorId) {
+      if (authorId === 1) {
+        this.seeFile(index)
+      } else if (authorId === 2) {
+        this.changeFile(index)
+      } else if (authorId === 3) {
+        this.deleteRow(index)
+      }
+    },
+    parserSet (set) {
+      const contents = ['预览', '修改', '删除', '溯源', '追踪']
+      const icons = ['view', 'edit', 'circle-close', 'attract', 'download']
+      return set.map((item) => ({
+        id: item,
+        content: contents[item - 1],
+        icon: `el-icon-${icons[item - 1]}`
+      }))
+    },
     goBack () {
       this.res = false
     },
@@ -291,21 +324,8 @@ export default {
             confirmButtonText: '确定',
 
           })
-          getFileList().then(res => {
-            if (res.data.code === 200) {
-              this.files = res.data.data.map(file => {
-                return {
-                  fileName: (file.dataName.split('/').slice(-1))[0],
-                  fileSize: `${file.dataSize}k`,
-                  upload_data: file.createdTime.slice(0, 10),
-                  modifiedData: file.modifiedTime.slice(0, 10),
-                  id: file.id
-                }
-              })
-              this.tableData = this.files
-            }
-          })
 
+          this.files.splice(idx, 1)
 
         } else {
           this.$alert(`删除文件失败`, '文件删除', {
@@ -414,16 +434,20 @@ export default {
   mounted () {
     getFileList().then(res => {
       if (res.data.code === 200) {
+        console.log(res.data.data);
         this.files = res.data.data.map(file => {
           return {
-            fileName: (file.dataName.split('/').slice(-1))[0],
-            fileSize: `${file.dataSize}k`,
-            upload_data: file.createdTime.slice(0, 10),
-            modifiedData: file.modifiedTime.slice(0, 10),
-            id: file.id
+            fileName: (file.myFile.dataName.split('/').slice(-1))[0],
+            fileSize: `${file.myFile.dataSize}B`,
+            upload_data: file.myFile.createdTime.slice(0, 10),
+            modifiedData: file.myFile.modifiedTime.slice(0, 10),
+            id: file.myFile.id,
+            authoritySet: this.parserSet(file.authoritySet)
           }
         })
         this.tableData = this.files
+      } else {
+        alert(res.data.message)
       }
     })
 

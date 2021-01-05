@@ -6,9 +6,11 @@ const request = axios.create({
 })
 request.interceptors.response.use(
   response=>{
+    
     if(response.status == 200){
       return response
     }else{
+      
      return Promise.reject(new Error('请求失败'))
     }
   },
