@@ -68,8 +68,10 @@ export default {
         console.log('file', res);
         if (res.data.code === 200) {
           this.loading = false
+          alert(res.data.message)
         } else {
           alert(res.data.message)
+          this.loading = false
         }
       })
     },

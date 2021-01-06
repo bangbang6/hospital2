@@ -14,6 +14,7 @@ import Login from '../components/login/Login.vue'
 import Register from '../components/login/Register.vue'
 import DoctorMain from '../components/doctor/DoctorMain.vue'
 import simpleUpload from '../components/simpleUpload'
+import AdminAuthorize from '../components/admin/Authorize'
 
 
 const originalPush = Router.prototype.push
@@ -76,6 +77,12 @@ export default new Router({
         path: '/admin',
         name: 'AdminIndex',
         component: AdminIndex,
+        
+      },
+      {
+        path: '/admin/authorize',
+        name: 'AdminAuthorize',
+        component: AdminAuthorize,
         
       },
         

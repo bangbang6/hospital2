@@ -17,7 +17,7 @@
               <template slot="title">文件列表</template>
               <el-menu-item index="2-1">
                 <i class="el-icon-files"></i>
-                <span class="subContent">我的文件</span>
+                <span class="subContent">所有文件</span>
               </el-menu-item>
               <el-menu-item index="2-2">
                 <i class="el-icon-thumb"></i>
@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import {removeToken} from '@/utils/cookie'
+import { removeToken } from '@/utils/cookie'
 export default {
   data () {
     return {

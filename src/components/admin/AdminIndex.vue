@@ -28,7 +28,7 @@
                 <el-dropdown-item icon="el-icon-user">个人中心</el-dropdown-item>
                 <el-dropdown-item icon="el-icon-pie-chart" command="jumpToshouye">首页</el-dropdown-item>
                 <el-dropdown-item icon="el-icon-folder-opened" command="jumpToFile">文件列表</el-dropdown-item>
-                <el-dropdown-item icon="el-icon-setting">修改密码</el-dropdown-item>
+                <el-dropdown-item icon="el-icon-setting" command="jumpToAuth">权限设置</el-dropdown-item>
                 <el-dropdown-item icon="el-icon-turn-off" command="loginout">退出登录</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
@@ -70,6 +70,9 @@ export default {
       }
       if (command === 'jumpToFile') {
         this.$router.push('/admin/fileList')
+      }
+      if (command === 'jumpToAuth') {
+        this.$router.push('/admin/authorize')
       }
     },
 

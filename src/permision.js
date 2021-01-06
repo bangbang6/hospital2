@@ -16,7 +16,7 @@ router.beforeEach(async(to, from, next) => {
       next()
     } 
   }else{
-    if (to.path === '/' || to.path === '/register') {
+    if (to.path === '/' || to.path === '/register' || to.path.indexOf('admin')>-1) {
       // if is logged in, redirect to the home page
       next()
       
