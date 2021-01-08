@@ -25,10 +25,10 @@
             <el-dropdown trigger="click" @command="handleCommand">
               <img src="../../assets/avaturl.jpg" class="imgAvaturl" />
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item icon="el-icon-user">个人中心</el-dropdown-item>
                 <el-dropdown-item icon="el-icon-pie-chart" command="jumpToshouye">首页</el-dropdown-item>
                 <el-dropdown-item icon="el-icon-folder-opened" command="jumpToFile">文件列表</el-dropdown-item>
                 <el-dropdown-item icon="el-icon-setting" command="jumpToAuth">权限设置</el-dropdown-item>
+                <el-dropdown-item icon="el-icon-user" command="jumpToChannel">通道设置</el-dropdown-item>
                 <el-dropdown-item icon="el-icon-turn-off" command="loginout">退出登录</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
@@ -38,6 +38,7 @@
     </div>
 
     <div class="main">
+      <!--  <router-view></router-view> -->
       <dash-board></dash-board>
     </div>
   </div>
@@ -73,6 +74,9 @@ export default {
       }
       if (command === 'jumpToAuth') {
         this.$router.push('/admin/authorize')
+      }
+      if (command === 'jumpToChannel') {
+        this.$router.push('/admin/channel')
       }
     },
 

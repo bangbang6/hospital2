@@ -15,6 +15,8 @@ import Register from '../components/login/Register.vue'
 import DoctorMain from '../components/doctor/DoctorMain.vue'
 import simpleUpload from '../components/simpleUpload'
 import AdminAuthorize from '../components/admin/Authorize'
+import Channel from '../components/admin/Channel'
+import DashBoard from '../components/admin/DashBoard'
 
 
 const originalPush = Router.prototype.push
@@ -77,6 +79,7 @@ export default new Router({
         path: '/admin',
         name: 'AdminIndex',
         component: AdminIndex,
+      
         
       },
       {
@@ -91,6 +94,12 @@ export default new Router({
             path: '/admin/fileList',
             name: 'AdminFile',
             component: AdminFileList
+      },
+    
+      {
+            path: '/admin/channel',
+            name: 'Channel',
+            component: Channel
       },
     
          

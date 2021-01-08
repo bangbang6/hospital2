@@ -5,8 +5,8 @@ const request = axios.create({
   timeout:100000
 })
 request.interceptors.response.use(
+  
   response=>{
-    
     if(response.status == 200){
       return response
     }else{
@@ -14,6 +14,7 @@ request.interceptors.response.use(
      return Promise.reject(new Error('请求失败'))
     }
   },
-  err=>Promise.reject(err)
+  err=>{
+    return Promise.reject(err)}
 )
 export default request

@@ -1,8 +1,8 @@
 <template>
   <div class="admin">
-    <div class="header">
-      <div class="content">
-        <!-- <div class="logo">
+    <!-- <div class="header">
+       <div class="content">
+         <div class="logo">
           <img src="../../assets/logo.jpg" class="imgLogo" />
         </div>
          <div class="menu">
@@ -19,8 +19,9 @@
         </div>
         <div class="search">
           <el-input placeholder="请输入搜索内容" suffix-icon="el-icon-search" v-model="inputValue"></el-input>
-        </div>-->
-        <div class="user">
+    </div>-->
+
+    <!--   <div class="user">
           <div class="avaturl">
             <el-dropdown trigger="click" @command="handleCommand">
               <img src="../../assets/avaturl.jpg" class="imgAvaturl" />
@@ -35,8 +36,21 @@
           </div>
         </div>
       </div>
+    </div>-->
+    <div class="user">
+      <div class="avaturl">
+        <el-dropdown trigger="click" @command="handleCommand">
+          <img src="../../assets/avaturl.jpg" class="imgAvaturl" />
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item icon="el-icon-pie-chart" command="jumpToshouye">首页</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-folder-opened" command="jumpToFile">文件列表</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-setting" command="jumpToAuth">权限设置</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-user" command="jumpToChannel">通道设置</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-turn-off" command="loginout">退出登录</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </div>
     </div>
-
     <div class="main">
       <file-list></file-list>
     </div>
@@ -62,7 +76,7 @@ export default {
       let num = parseInt(key)
       this.$router.push(this.paths[num])
     },
-    handleCommand (command) {
+     handleCommand (command) {
       if (command === 'loginout') {
         removeToken('token')
         this.$router.push('/')
@@ -72,6 +86,12 @@ export default {
       }
       if (command === 'jumpToFile') {
         this.$router.push('/admin/fileList')
+      }
+      if (command === 'jumpToAuth') {
+        this.$router.push('/admin/authorize')
+      }
+      if (command === 'jumpToChannel') {
+        this.$router.push('/admin/channel')
       }
     },
 
@@ -131,6 +151,7 @@ export default {
   height: 40px;
   margin-top: 10px;
   float: right;
+  margin-right: 200px;
 }
 
 .imgAvaturl {

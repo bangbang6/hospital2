@@ -17,8 +17,8 @@
     <el-table :data="tableData" border style="width: 100%" class="table" size="mini">
       <el-table-column prop="userName" label="用户名" width="160"></el-table-column>
       <el-table-column prop="channelName" label="通道" width="160"></el-table-column>
-      <el-table-column prop="dataName" label="文件名" width="300"></el-table-column>
-      <el-table-column prop="authorSet" label="权限设置" width="600">
+
+      <el-table-column prop="authorSet" label="权限设置" width="300">
         <template slot-scope="scope">
           <el-checkbox-group
             v-model="checkLists[scope.$index]"
@@ -28,11 +28,11 @@
           }"
             style="width:100%"
           >
-            <el-checkbox label="预览"></el-checkbox>
-            <el-checkbox label="修改"></el-checkbox>
-            <el-checkbox label="删除"></el-checkbox>
-            <el-checkbox label="溯源"></el-checkbox>
-            <el-checkbox label="追踪"></el-checkbox>
+            <el-checkbox label="添加"></el-checkbox>
+            <!-- <el-checkbox label="修改"></el-checkbox>
+          <el-checkbox label="删除"></el-checkbox>
+          <el-checkbox label="溯源"></el-checkbox>
+            <el-checkbox label="追踪"></el-checkbox>-->
           </el-checkbox-group>
         </template>
       </el-table-column>
@@ -41,13 +41,10 @@
 </template>
 
 <script>
-import { getAuthority, addAuthority, deleteAuthority } from '@/api/admin'
+import { checkChannel, getAllUserChannel, addChannel, deleteChannel } from '@/api/channel'
 const dataMap = {
-  "预览": 1,
-  "修改": 2,
-  "删除": 3,
-  "溯源": 4,
-  "追踪": 5,
+  "添加": 1,
+
 }
 export default {
   data () {
@@ -90,8 +87,7 @@ export default {
           handle = mes.filter(item => {
             return this.checkListOld[index].indexOf(item) === -1
           })
-
-          addAuthority(this.tableData[index].userId, this.tableData[index].fileId, dataMap[handle[0]]).then(res => {
+          addChannel(this.tableData[index].userId, this.tableData[index].channelId).then(res => {
             console.log('add', res);
             if (res.data.code === 200) {
               this.checkListOld[index].push(handle[0])
@@ -100,6 +96,9 @@ export default {
               alert(res.data.message)
               this.checkLists = this.checkListOld
             }
+
+          }, reject => {
+            alert(reject.message);
             this.groupDisable = false
           })
         } else {
@@ -107,7 +106,8 @@ export default {
           handle = this.checkListOld[index].filter(item => {
             return mes.indexOf(item) === -1
           })
-          deleteAuthority(this.tableData[index].userId, this.tableData[index].fileId, dataMap[handle[0]]).then(res => {
+          console.log(handle[0]);
+          deleteChannel(this.tableData[index].userId, this.tableData[index].channelId).then(res => {
             console.log('delete', res);
             if (res.data.code === 200) {
               this.checkListOld[index] = this.checkListOld[index].filter(item => item !== handle[0])
@@ -134,7 +134,7 @@ export default {
 
     },
     parseLabel (set) {
-      const contents = ['预览', '修改', '删除', '溯源', '追踪']
+      const contents = ['添加'/*  '修改', '删除', '溯源', '追踪' */]
       return set.map(item => {
         return contents[item - 1]
       })
@@ -142,15 +142,14 @@ export default {
     parser (files) {
 
       return files.map((item, index) => {
-        this.checkLists.push(this.parseLabel(item.dataAuthoritySet))
-        this.checkListOld.push(this.parseLabel(item.dataAuthoritySet))
+        this.checkLists.push(this.parseLabel(item.channelAuthoritySet))
+        this.checkListOld.push(this.parseLabel(item.channelAuthoritySet))
         return {
           userName: item.userName,
           userId: item.userId,
-          fileId: item.dataId,
-          dataName: item.dataName.split('/').slice(-1)[0],
           channelName: item.channelName,
-          dataAuthoritySet: this.parseLabel(item.dataAuthoritySet)
+          channelId: item.channelId,
+          channelAuthoritySet: this.parseLabel(item.channelAuthoritySet)
         }
 
       })
@@ -158,7 +157,7 @@ export default {
 
   },
   mounted () {
-    getAuthority().then(res => {
+    getAllUserChannel().then(res => {
       if (res.data.code === 200) {
         console.log(res.data);
 

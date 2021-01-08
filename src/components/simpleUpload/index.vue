@@ -50,6 +50,11 @@ export default {
   methods: {
     uploadFile: function (param) {
       //let loadingInstance = this.$loading({ target: dom });
+      if (!this.channels.length) {
+        alert('无可用通道,无法上传到服务器')
+        return
+      }
+
       const channelId = this.channels.filter((item) => {
         return item.channelName === this.channel
       })[0].id
@@ -88,6 +93,7 @@ export default {
     checkChannel().then(res => {
       if (res.data.code === 200) {
         this.channels = res.data.data
+
       }
     })
   }

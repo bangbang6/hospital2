@@ -47,6 +47,7 @@
         tooltip-effect="dark"
         style="height: 450px;"
         @selection-change="handleSelectionChange"
+        v-loading="loading1"
       >
         <el-table-column type="selection"></el-table-column>
         <el-table-column
@@ -181,6 +182,7 @@
     <div
       class="result"
       v-if="res"
+      v-loading="loading2"
       style="position:absolute;width:100%;height:90%;z-index:999;top:50px;background:white;padding:20px"
     >
       <div class="header" style="font-size:22px">{{seeFileName}}</div>
@@ -205,6 +207,8 @@ import { deleteFile, getFile, updateFile } from '@/api/file'
 export default {
   data () {
     return {
+      loading2: false,
+      loading1: false,
       input: '',
       seeStatus: false,
       select: '',
@@ -260,6 +264,8 @@ export default {
   },
   methods: {
     handleClick (index, authorId) {
+      this.loading1 = true;
+
       if (authorId === 1) {
         this.seeFile(index)
       } else if (authorId === 2) {
@@ -281,8 +287,16 @@ export default {
       this.res = false
     },
     submitChangeFile () {
+      this.loading2 = true
       updateFile(this.fileMessage, this.files[this.idx].id).then(res => {
-        alert('修改成功')
+        if (res.data.code === 200) {
+          this.loading2 = false
+          alert(res.data.message)
+        } else {
+          this.loading2 = false
+          alert(res.data.message)
+
+        }
         this.res = false
       })
     },
@@ -303,6 +317,11 @@ export default {
           this.res = true
           this.seeStatus = true
           this.fileMessage = res.data.data
+          this.loading1 = false
+        } else {
+          alert(res.data.message)
+          this.loading1 = false
+
         }
       })
     },
@@ -313,6 +332,11 @@ export default {
           this.res = true
           this.seeStatus = false
           this.fileMessage = res.data.data
+          this.loading1 = false
+        } else {
+          alert(res.data.message)
+          this.loading1 = false
+
         }
       })
     },
@@ -326,12 +350,14 @@ export default {
           })
 
           this.files.splice(idx, 1)
+          this.loading1 = false
 
         } else {
           this.$alert(`删除文件失败`, '文件删除', {
             confirmButtonText: '确定',
 
           })
+          this.loading1 = false
         }
       })
 
@@ -437,11 +463,11 @@ export default {
         console.log(res.data.data);
         this.files = res.data.data.map(file => {
           return {
-            fileName: (file.myFile.dataName.split('/').slice(-1))[0],
-            fileSize: `${file.myFile.dataSize}B`,
-            upload_data: file.myFile.createdTime.slice(0, 10),
-            modifiedData: file.myFile.modifiedTime.slice(0, 10),
-            id: file.myFile.id,
+            fileName: (file.dataSample.dataName.split('/').slice(-1))[0],
+            fileSize: `${file.dataSample.dataSize}B`,
+            upload_data: file.dataSample.createdTime.slice(0, 10),
+            modifiedData: file.dataSample.modifiedTime.slice(0, 10),
+            id: file.dataSample.id,
             authoritySet: this.parserSet(file.authoritySet)
           }
         })
