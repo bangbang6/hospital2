@@ -96,9 +96,10 @@ export default {
               alert(res.data.message)
               this.checkLists = this.checkListOld
             }
-
+            this.groupDisable = false
           }, reject => {
             alert(reject.message);
+            this.checkLists = this.checkListOld
             this.groupDisable = false
           })
         } else {

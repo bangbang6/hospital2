@@ -68,3 +68,32 @@ export function updateFile(message,fileId){
     }
   })
 }
+
+
+export function backward(dataId){
+  return request({
+    url:'/trace/traceBackward',
+    data:{
+      dataId:dataId
+    },
+    method:'POST',
+    headers:{
+      token:getToken('token'),
+
+    },
+  })
+}
+export function backwardAgain(dataId,txId){
+  return request({
+    url:'/trace/traceBackwardAgain',
+    data:{
+      dataId:dataId,
+      txId
+    },
+    method:'POST',
+    headers:{
+      token:getToken('token'),
+
+    },
+  })
+}

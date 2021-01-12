@@ -17,6 +17,7 @@ import simpleUpload from '../components/simpleUpload'
 import AdminAuthorize from '../components/admin/Authorize'
 import Channel from '../components/admin/Channel'
 import DashBoard from '../components/admin/DashBoard'
+import BackWard from '../components/doctor/BackWard'
 
 
 const originalPush = Router.prototype.push
@@ -57,6 +58,11 @@ export default new Router({
             path: '/doctor/simpleUpload',
             name: 'simpleUpload',
             component: simpleUpload
+          },
+          {
+            path: '/doctor/backward',
+            name: 'BackWard',
+            component: BackWard
           },
           {
             path: '/doctor/myFile',

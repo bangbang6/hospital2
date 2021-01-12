@@ -203,7 +203,8 @@
 
 <script>
 import { getFileList } from '@/api/file'
-import { deleteFile, getFile, updateFile } from '@/api/file'
+import { deleteFile, getFile, updateFile, backward } from '@/api/file'
+import { mapMutations } from 'vuex'
 export default {
   data () {
     return {
@@ -264,17 +265,23 @@ export default {
   },
   methods: {
     handleClick (index, authorId) {
-      this.loading1 = true;
+
 
       if (authorId === 1) {
+        this.loading1 = true;
         this.seeFile(index)
       } else if (authorId === 2) {
+        this.loading1 = true;
         this.changeFile(index)
       } else if (authorId === 3) {
+        this.loading1 = true;
         this.deleteRow(index)
+      } else if (authorId === 4) {
+        this.backwordFile(index)
       }
     },
     parserSet (set) {
+      set.push(4)
       const contents = ['预览', '修改', '删除', '溯源', '追踪']
       const icons = ['view', 'edit', 'circle-close', 'attract', 'download']
       return set.map((item) => ({
@@ -324,6 +331,19 @@ export default {
 
         }
       })
+    },
+    backwordFile (index) {
+      this.idx = this.pagesize * (this.currentPage - 1) + index
+      this.setDataId(this.files[this.idx].id)
+      localStorage.setItem('dataId', this.files[this.idx].id)
+      /* backward(this.files[this.idx].id).then(res => {
+        if (res.data.code === 200) {
+          console.log(res.data.data);
+        } else {
+          alert(res.data.message)
+        }
+      }) */
+      this.$router.push('/doctor/backward')
     },
     seeFile (index) {
       this.idx = this.pagesize * (this.currentPage - 1) + index
@@ -455,7 +475,8 @@ export default {
         }
       }
       return 0;
-    }
+    },
+    ...mapMutations(['setDataId'])
   },
   mounted () {
     getFileList().then(res => {
