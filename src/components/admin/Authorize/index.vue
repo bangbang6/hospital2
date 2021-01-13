@@ -80,27 +80,35 @@ export default {
     handleChange (mes, index) {
       let handle
       this.groupDisable = true
+
       this.$confirm('确定执行这项操作嘛', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
+        console.log('this.checkListOld[index]', this.checkListOld[index]);
         if (mes.length > this.checkListOld[index].length) {
+
           console.log('增加权限');
           handle = mes.filter(item => {
             return this.checkListOld[index].indexOf(item) === -1
           })
 
+
           addAuthority(this.tableData[index].userId, this.tableData[index].fileId, dataMap[handle[0]]).then(res => {
             console.log('add', res);
             if (res.data.code === 200) {
               this.checkListOld[index].push(handle[0])
-              console.log(this.checkListOld[index]);
+              console.log('200', this.checkListOld[index]);
             } else {
               alert(res.data.message)
-              this.checkLists = this.checkListOld
+
+              this.checkLists = [...this.checkListOld]
+              console.log('400', this.checkListOld[index]);
             }
             this.groupDisable = false
+            console.log('401', this.checkListOld[index]);
+
           })
         } else {
           console.log('删除权限');
@@ -114,7 +122,8 @@ export default {
               console.log(this.checkListOld[index]);
             } else {
               alert(res.data.message)
-              this.checkLists = this.checkListOld
+              this.checkLists = [...this.checkListOld]
+
             }
             this.groupDisable = false
           })
