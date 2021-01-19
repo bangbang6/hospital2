@@ -7,7 +7,7 @@ import MyFile from '../components/doctor/fileListPackage/MyFile'
 import SharedFile from '../components/doctor/fileListPackage/SharedFile'
 import BeSharedFile from '../components/doctor/fileListPackage/BeSharedFile'
 import DoctorIndex from '../components/doctor/DoctorIndex.vue'
-import AdminIndex from '../components/admin/AdminIndex.vue'
+import DashBoard from '../components/admin/DashBoardAdmin.vue'
 import AdminFileList from '../components/admin/AdminFileList.vue'
 
 import Login from '../components/login/Login.vue'
@@ -16,8 +16,10 @@ import DoctorMain from '../components/doctor/DoctorMain.vue'
 import simpleUpload from '../components/simpleUpload'
 import AdminAuthorize from '../components/admin/Authorize'
 import Channel from '../components/admin/Channel'
-import DashBoard from '../components/admin/DashBoard'
-import BackWard from '../components/doctor/BackWard'
+import BackWard from '../components/doctor/NewBackward'
+import UserRequest from '../components/admin/UserRequest'
+import MainAdmin from '../components/admin/MainAdmin'
+import allFile from '../components/doctor/fileListPackage/allFile'
 
 
 const originalPush = Router.prototype.push
@@ -66,8 +68,13 @@ export default new Router({
           },
           {
             path: '/doctor/myFile',
-            nameL: 'myFile',
+            name: 'myFile',
             component: MyFile
+          },
+          {
+            path: '/doctor/allFile',
+            name: 'allFile',
+            component: allFile
           },
             {
                 path: '/doctor/sharedFile',
@@ -82,31 +89,45 @@ export default new Router({
         ]
       },
       {
-        path: '/admin',
-        name: 'AdminIndex',
-        component: AdminIndex,
+        path: '/admin/dashboard',
+        name: 'DashBoard',
+        component: DashBoard,
       
         
       },
       {
-        path: '/admin/authorize',
-        name: 'AdminAuthorize',
-        component: AdminAuthorize,
+        path:'/admin',
+        name:"Admin",
+        component:MainAdmin,
+        children:[
+          {
+            path: '/admin/authorize',
+            name: 'AdminAuthorize',
+            component: AdminAuthorize,
+            
+          },
+          {
+            path: '/admin/userRequest',
+            name: 'UserRequest',
+            component: UserRequest,
+            
+          },
+            
+             
+          {
+                path: '/admin/fileList',
+                name: 'AdminFile',
+                component: AdminFileList
+          },
         
-      },
-        
-         
-      {
-            path: '/admin/fileList',
-            name: 'AdminFile',
-            component: AdminFileList
-      },
-    
-      {
-            path: '/admin/channel',
-            name: 'Channel',
-            component: Channel
-      },
+          {
+                path: '/admin/channel',
+                name: 'Channel',
+                component: Channel
+          },
+        ]
+      }
+      
     
          
         

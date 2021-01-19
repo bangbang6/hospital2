@@ -11,6 +11,16 @@
       <el-form-item label="确认密码" prop="repassword" style="margin-bottom: 18px">
         <el-input v-model="form.repassword" type="password" placeholder="请再次输入密码" />
       </el-form-item>
+      <div class="btns">
+        <el-radio-group v-model="radio" size="mini">
+          <el-radio
+            v-for="item in channels"
+            :key="item.id"
+            v-model="radio"
+            :label="item.id"
+          >{{item.channelName}}</el-radio>
+        </el-radio-group>
+      </div>
       <el-form-item style="margin-top: 25px;">
         <el-button type="warning" @click="toLogin(&quot;registerForm&quot;)">点击注册</el-button>
       </el-form-item>
@@ -33,6 +43,7 @@
 
 <script>
 import { register } from '@/api/user.js'
+import { getAllChannels } from '@/api/channel.js'
 import { mapMutations } from 'vuex';
 import { setToken } from '@/utils/cookie';
 export default {
@@ -41,10 +52,13 @@ export default {
   data () {
     return {
       radio1: '1',
+      channels: [],
+      radio: 1,
       form: {
         username: '',
         password: '',
-        repassword: ''
+        repassword: '',
+
       },
 
       // 表单验证，需要在 el-form-item 元素中增加 prop 属性
@@ -66,17 +80,20 @@ export default {
   },
   methods: {
     ...mapMutations(['setUserId']),
+
+
     toLogin (formName) {
       // 为表单绑定验证功能
       this.$refs[formName].validate((valid) => {
         if (valid) {
           if (this.form.password === this.form.repassword) {
-            register(this.form.username, this.form.password).then(res => {
+            register(this.form.username, this.form.password, this.radio).then(res => {
               if (res.data.code === 200) {
                 const userData = res.data.data
                 console.log(userData)
                 setToken('token', userData.token)
-
+                localStorage.setItem('userChannel', userData.channelName)
+                localStorage.setItem('userName', userData.user.username)
                 const loading = this.$loading({
                   lock: true,
                   text: '注册成功! 即将进入系统',
@@ -106,7 +123,16 @@ export default {
     },
 
   },
-
+  mounted () {
+    getAllChannels().then(res => {
+      console.log('register', res);
+      if (res.data.code === 200) {
+        this.channels = res.data.data
+      } else {
+        alert(res.data.message)
+      }
+    })
+  }
 
 }
 </script>
@@ -138,5 +164,12 @@ body {
   text-align: center;
   margin: 0 auto 40px auto;
   color: #303133;
+}
+</style>
+<style lang="scss" scoped>
+.btns {
+  display: flex;
+  margin-top: 5px;
+  justify-content: center;
 }
 </style>

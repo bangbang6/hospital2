@@ -5,7 +5,7 @@
   >
     <div
       class="el-table el-table--fit el-table--fluid-height el-table--enable-row-hover el-table--enable-row-transition"
-      style="width: 100%;margin: auto;padding: 20px 20px"
+      style="width: 100%;margin: auto;padding: 20px 20px;background-color: #f0f2f5"
     >
       <el-button icon="el-icon-download" type="primary">下载</el-button>
       <el-button icon="el-icon-share" type="primary">分享</el-button>
@@ -41,126 +41,87 @@
           <el-button slot="append" icon="el-icon-search" @click="onSubmit()"></el-button>
         </el-autocomplete>
       </el-form>
-      <el-table
-        ref="multipleTable"
-        :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
-        tooltip-effect="dark"
-        style="height: 450px;"
-        @selection-change="handleSelectionChange"
-        v-loading="loading1"
-      >
-        <el-table-column type="selection"></el-table-column>
-        <el-table-column
-          prop="fileName"
-          label="文件名"
-          style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
-        ></el-table-column>
-        <el-table-column
-          prop="channelName"
-          label="所在通道"
-          style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
-        ></el-table-column>
-        <el-table-column
-          prop="action"
-          label="..."
-          style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
-          width="200px"
-        >
-          <template slot-scope="scope">
-            <div class="action">
-              <el-tooltip
-                v-for="item  in scope.row.authoritySet"
-                :key="item.id"
-                class="item"
-                effect="light"
-                placement="bottom-start"
-                style="margin-right: 5px"
-                :content="item.content"
-              >
-                <el-link
-                  :icon="item.icon"
-                  style="font-size: 18px;color: #409EFF"
-                  @click="handleClick(scope.$index,item.id)"
-                ></el-link>
-              </el-tooltip>
-              <el-tooltip
-                class="item"
-                effect="light"
-                placement="bottom-start"
-                style="margin-right: 5px"
-                content="分享"
-              >
-                <el-popover
-                  placement="right"
-                  width="280"
-                  trigger="manual"
-                  v-model="friendsVisible[scope.$index]"
-                >
-                  <div
-                    class="close"
-                    style="float:right;color:gray;fontSize:14px;margin-right:10px; cursor: pointer;"
-                    @click="close(scope.$index)"
+      <el-tabs type="border-card" @tab-click="handleTabclick">
+        <el-tab-pane v-for="(item,tabIndex) in channels" :key="item.id" :label="item.name">
+          <el-table
+            ref="multipleTable"
+            :data="tableData[tabIndex].slice((currentPage[tabIndex]-1)*pagesize,currentPage[tabIndex]*pagesize)"
+            tooltip-effect="dark"
+            style="height: 450px;"
+            @selection-change="handleSelectionChange"
+            v-loading="loading1"
+          >
+            <el-table-column type="selection"></el-table-column>
+            <el-table-column
+              prop="fileName"
+              label="文件名"
+              style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
+            ></el-table-column>
+            <el-table-column
+              prop="channelName"
+              label="文件所在通道"
+              style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
+            ></el-table-column>
+            <el-table-column
+              prop="action"
+              label="..."
+              style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
+              width="200px"
+            >
+              <template slot-scope="scope">
+                <div class="action">
+                  <el-tooltip
+                    v-for="item  in scope.row.authoritySet"
+                    :key="item.id"
+                    class="item"
+                    effect="light"
+                    placement="bottom-start"
+                    style="margin-right: 5px"
+                    :content="item.content"
                   >
-                    <i class="el-icon-close"></i>
-                  </div>
-                  <el-table :data="friends" size="mini">
-                    <template slot="empty">
-                      <div class="no-friends">所有用户都有权限啦</div>
-                    </template>
-                    <el-table-column width="100" property="userName" label="用户"></el-table-column>
-                    <el-table-column width="100" property="channelName" label="通道"></el-table-column>
-                    <el-table-column property="address" label="操作">
-                      <template slot-scope="scope2">
-                        <el-button
-                          size="mini"
-                          @click="shareFileConfirm(scope2.$index,scope.$index)"
-                        >确定</el-button>
-                      </template>
-                    </el-table-column>
-                  </el-table>
-                  <el-link
-                    icon="el-icon-share"
-                    style="font-size: 18px;color: #409EFF"
-                    @click="handleClick(scope.$index,5)"
-                    slot="reference"
-                  ></el-link>
-                </el-popover>
-              </el-tooltip>
-            </div>
-          </template>
-        </el-table-column>
-        <el-table-column
-          prop="fileSize"
-          label="文件大小"
-          style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
-          :sortable="true"
-          :sort-method="sortBySize"
-          width="120px"
-        ></el-table-column>
-        <el-table-column
-          prop="upload_data"
-          label="上传日期"
-          :sortable="true"
-          :sort-method="sortByUploadDate"
-          style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
-          width="150px"
-        ></el-table-column>
-        <el-table-column
-          prop="modifiedData"
-          label="更改日期"
-          :sortable="true"
-          :sort-method="sortByModDate"
-          style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
-          width="150px"
-        ></el-table-column>
-      </el-table>
-      <el-pagination
-        class="fy"
-        layout="prev, pager, next"
-        @current-change="current_change"
-        :total="total"
-        background
-      ></el-pagination>
+                    <el-link
+                      :icon="item.icon"
+                      style="font-size: 18px;color: #409EFF"
+                      @click="handleClick(tabIndex,scope.$index,item.id)"
+                    ></el-link>
+                  </el-tooltip>
+                </div>
+              </template>
+            </el-table-column>
+            <el-table-column
+              prop="fileSize"
+              label="文件大小"
+              style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
+              :sortable="true"
+              :sort-method="sortBySize"
+              width="120px"
+            ></el-table-column>
+            <el-table-column
+              prop="upload_data"
+              label="上传日期"
+              :sortable="true"
+              :sort-method="sortByUploadDate"
+              style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
+              width="150px"
+            ></el-table-column>
+            <el-table-column
+              prop="modifiedData"
+              label="更改日期"
+              :sortable="true"
+              :sort-method="sortByModDate"
+              style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
+              width="150px"
+            ></el-table-column>
+          </el-table>
+          <el-pagination
+            class="fy"
+            layout="prev, pager, next"
+            @current-change="current_change"
+            :total="total"
+            background
+          ></el-pagination>
+        </el-tab-pane>
+      </el-tabs>
     </div>
     <div
       class="result"
@@ -185,13 +146,14 @@
 </template>
 
 <script>
-import { getMyFileList, shareFile } from '@/api/file'
-import { getUserExceptMe } from '@/api/user'
+import { getFileList } from '@/api/file'
 import { deleteFile, getFile, updateFile, backward } from '@/api/file'
 import { mapMutations } from 'vuex'
 export default {
   data () {
     return {
+      tabIndex: 0,
+      channels: [],
       loading2: false,
       loading1: false,
       input: '',
@@ -202,18 +164,16 @@ export default {
       fileMessage: '',
       total: 200,//默认数据总数
       pagesize: 7,//每页的数据条数
-      currentPage: 1,//默认开始页面
+      currentPage: [1, 1],//默认开始页面
       idx: 0,
       formInline: {
         user: '',
         region: ''
       },
-      friendsVisible: [],
       tableData: [],
       multipleSelection: [],
       files: [],
       results: [],
-      friends: [],
       pickerOptions: {
         shortcuts: [{
           text: '最近一周',
@@ -250,74 +210,30 @@ export default {
     }
   },
   methods: {
-    close (index) {
-      this.friendsVisible.splice(index, 1, false)
+    //切换tab
+    handleTabclick (e) {
+      this.tabIndex = +e.index
     },
-    //index 是好友列表的index
-    //index2 是文件的index
-    shareFileConfirm (index, index2) {
-      shareFile(this.friends[index].userId, this.files[this.idx].id).then(res => {
-        if (res.data.code === 200) {
-          this.friendsVisible.splice(index2, 1, false);
-          alert(res.data.message)
-        } else {
-          alert(res.data.message)
-        }
-
-      }, err => {
-        alert(err.message)
-      })
-    },
-
-    handleClick (index, authorId) {
+    handleClick (tabIndex, index, authorId) {
 
 
       if (authorId === 1) {
         this.loading1 = true;
-        this.seeFile(index)
+        this.seeFile(tabIndex, index)
       } else if (authorId === 2) {
         this.loading1 = true;
-        this.changeFile(index)
+        this.changeFile(tabIndex, index)
       } else if (authorId === 3) {
         this.loading1 = true;
-        this.deleteRow(index)
+        this.deleteRow(tabIndex, index)
       } else if (authorId === 4) {
-        this.backwordFile(index)
-      } else if (authorId === 5) {
-
-
-        this.shareFile(index)
+        this.backwordFile(tabIndex, index)
       }
-    },
-    shareFile (index) {
-
-      //关闭其他propver
-      for (let i = 0; i < this.friendsVisible.length; i++) {
-        if (this.friendsVisible[i] !== undefined && this.friendsVisible[i] === true && i !== index) {
-          this.friendsVisible.splice(i, 1, false)
-        }
-      }
-      this.friendsVisible[index] = true
-      this.idx = this.pagesize * (this.currentPage - 1) + index
-      getUserExceptMe(this.files[this.idx].id).then(res => {
-        if (res.data.code === 200) {
-          this.friends = res.data.data.map(item => {
-            return {
-              channelName: item.channelName,
-              userName: item.user.username,
-              userId: item.user.id
-            }
-          })
-          console.log('this.friends', this.friends);
-        } else {
-          alert(res.data.message)
-        }
-      }, reject => { alert(reject.message) })
     },
     parserSet (set) {
       set.push(4)
-      const contents = ['预览', '修改', '删除', '溯源', '分享', '追踪']
-      const icons = ['view', 'edit', 'circle-close', 'attract', 'share']
+      const contents = ['预览', '修改', '删除', '溯源', '追踪']
+      const icons = ['view', 'edit', 'circle-close', 'attract', 'download']
       return set.map((item) => ({
         id: item,
         content: contents[item - 1],
@@ -329,7 +245,7 @@ export default {
     },
     submitChangeFile () {
       this.loading2 = true
-      updateFile(this.fileMessage, this.files[this.idx].id).then(res => {
+      updateFile(this.fileMessage, this.files[this.tabIndex][this.idx].id).then(res => {
         if (res.data.code === 200) {
           this.loading2 = false
           alert(res.data.message)
@@ -351,9 +267,9 @@ export default {
         confirmButtonText: '确定'
       })
     },
-    changeFile (index) {
-      this.idx = this.pagesize * (this.currentPage - 1) + index
-      getFile(this.files[this.idx].id).then(res => {
+    changeFile (tabIndex, index) {
+      this.idx = this.pagesize * (this.currentPage[this.tabIndex] - 1) + index
+      getFile(this.files[tabIndex][this.idx].id).then(res => {
         if (res.data.code === 200) {
           this.res = true
           this.seeStatus = true
@@ -366,10 +282,10 @@ export default {
         }
       })
     },
-    backwordFile (index) {
-      this.idx = this.pagesize * (this.currentPage - 1) + index
-      this.setDataId(this.files[this.idx].id)
-      localStorage.setItem('dataId', this.files[this.idx].id)
+    backwordFile (tabIndex, index) {
+      this.idx = this.pagesize * (this.currentPage[this.tabIndex] - 1) + index
+      this.setDataId(this.files[tabIndex][this.idx].id)
+      localStorage.setItem('dataId', this.files[tabIndex][this.idx].id)
       /* backward(this.files[this.idx].id).then(res => {
         if (res.data.code === 200) {
           console.log(res.data.data);
@@ -379,9 +295,10 @@ export default {
       }) */
       this.$router.push('/doctor/backward')
     },
-    seeFile (index) {
-      this.idx = this.pagesize * (this.currentPage - 1) + index
-      getFile(this.files[this.idx].id).then(res => {
+    seeFile (tabIndex, index) {
+      this.idx = this.pagesize * (this.currentPage[this.tabIndex] - 1) + index
+
+      getFile(this.files[tabIndex][this.idx].id).then(res => {
         if (res.data.code === 200) {
           this.res = true
           this.seeStatus = false
@@ -392,11 +309,15 @@ export default {
           this.loading1 = false
 
         }
+      }, err => {
+        alert(err.message)
+        this.loading1 = false
+
       })
     },
     deleteRow (index) {
-      let idx = this.pagesize * (this.currentPage - 1) + index
-      deleteFile(this.files[idx].id).then(res => {
+      let idx = this.pagesize * (this.currentPage[this.tabIndex] - 1) + index
+      deleteFile(this.files[tabIndex][idx].id).then(res => {
         if (res.data.code === 200) {
           this.$alert(`${this.files[idx].fileName}文件已被删除`, '文件删除', {
             confirmButtonText: '确定',
@@ -417,7 +338,8 @@ export default {
 
     },
     current_change: function (currentPage) {
-      this.currentPage = currentPage;
+      this.currentPage.splice(this.tabIndex, 1, currentPage)
+      console.log('this.currentPage', this.currentPage);
     },
     handleSelectionChange (val) {
       this.multipleSelection = val;
@@ -449,7 +371,7 @@ export default {
       console.log(item);
     },
     onSubmit () {
-      this.currentPage = 1;
+      this.currentPage[this.tabIndex] = 1;
       let files = this.files;
       let queryString = this.input;
       let Type = this.select;
@@ -513,31 +435,39 @@ export default {
     ...mapMutations(['setDataId'])
   },
   mounted () {
-    getMyFileList().then(res => {
+    getFileList().then(res => {
       if (res.data.code === 200) {
-        console.log(res.data.data);
-        this.files = res.data.data.map(file => {
-          return {
-            fileName: (file.dataSample.dataName.split('/').slice(-1))[0],
-            fileSize: `${file.dataSample.dataSize}B`,
-            upload_data: file.dataSample.createdTime.slice(0, 10),
-            modifiedData: file.dataSample.modifiedTime.slice(0, 10),
-            id: file.dataSample.id,
-            authoritySet: this.parserSet(file.authoritySet),
-            channelName: file.channelName
-          }
-        })
-        this.tableData = this.files
+        console.log('allFile', res.data.data);
+        for (let key in res.data.data) {
+          let id = (key.match(/id=([0-9]){1,2}/))[1]
+          let name = (key.match(/channelName=(\w+)\)/))[1]
+          this.channels.push({ id, name })
+          let fileData = (res.data.data)[key]
+          this.files.push(fileData.map(file => {
+            return {
+              fileName: (file.dataSample.dataName.split('/').slice(-1))[0],
+              fileSize: `${file.dataSample.dataSize}B`,
+              upload_data: file.dataSample.createdTime.slice(0, 10),
+              modifiedData: file.dataSample.modifiedTime.slice(0, 10),
+              id: file.dataSample.id,
+              authoritySet: this.parserSet(file.authoritySet),
+              channelName: file.channelName
+            }
+          }))
+          this.tableData = this.files
+        }
+
       } else {
         alert(res.data.message)
       }
+      console.log(this.channels);
     })
 
   }
 }
 </script>
 <style  scoped>
-.el-table--enable-row-hover .el-table__body tr td:nth-child(4) div div {
+.el-table--enable-row-hover .el-table__body tr:hover td:nth-child(3) div div {
   visibility: visible;
 }
 
@@ -547,14 +477,17 @@ export default {
   top: 88%;
   left: calc(50% - 200px);
 }
-/* .el-table--enable-row-hover .el-table__body tr td:nth-child(3) div div {
+.el-table--enable-row-hover .el-table__body tr td:nth-child(3) div div {
   visibility: hidden;
-} */
+}
 .el-select .el-input {
   width: 120px;
 }
 .el-table th > .cell {
   padding-left: 14px;
+}
+.el-tabs {
+  margin-top: 20px;
 }
 </style>
 <style lang="scss" scoped>

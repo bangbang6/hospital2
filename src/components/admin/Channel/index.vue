@@ -1,24 +1,10 @@
 <template>
   <div>
-    <div class="user">
-      <div class="avaturl">
-        <el-dropdown trigger="click" @command="handleCommand">
-          <img src="../../../assets/avaturl.jpg" class="imgAvaturl" />
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item icon="el-icon-pie-chart" command="jumpToshouye">首页</el-dropdown-item>
-            <el-dropdown-item icon="el-icon-folder-opened" command="jumpToFile">文件列表</el-dropdown-item>
-            <el-dropdown-item icon="el-icon-setting" command="jumpToAuth">权限设置</el-dropdown-item>
-            <el-dropdown-item icon="el-icon-user" command="jumpToChannel">通道设置</el-dropdown-item>
-            <el-dropdown-item icon="el-icon-turn-off" command="loginout">退出登录</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
-      </div>
-    </div>
     <el-table :data="tableData" border style="width: 100%" class="table" size="mini">
       <el-table-column prop="userName" label="用户名" width="160"></el-table-column>
       <el-table-column prop="channelName" label="通道" width="160"></el-table-column>
 
-      <el-table-column prop="authorSet" label="权限设置" width="300">
+      <el-table-column prop="authorSet" label="权限设置">
         <template slot-scope="scope">
           <el-checkbox-group
             v-model="checkLists[scope.$index]"
@@ -42,6 +28,7 @@
 
 <script>
 import { checkChannel, getAllUserChannel, addChannel, deleteChannel } from '@/api/channel'
+import { removeToken } from '@/utils/cookie'
 const dataMap = {
   "添加": 1,
 
@@ -56,24 +43,7 @@ export default {
     }
   },
   methods: {
-    handleCommand (command) {
-      if (command === 'loginout') {
-        removeToken('token')
-        this.$router.push('/')
-      }
-      if (command === 'jumpToshouye') {
-        this.$router.push('/admin')
-      }
-      if (command === 'jumpToFile') {
-        this.$router.push('/admin/fileList')
-      }
-      if (command === 'jumpToAuth') {
-        this.$router.push('/admin/authorize')
-      }
-      if (command === 'jumpToChannel') {
-        this.$router.push('/admin/channel')
-      }
-    },
+
     handleChange (mes, index) {
       let handle
       this.groupDisable = true
@@ -135,6 +105,7 @@ export default {
           type: 'info',
           message: '已取消'
         });
+        this.checkLists = [...this.checkListOld]
         this.groupDisable = false
       });
 

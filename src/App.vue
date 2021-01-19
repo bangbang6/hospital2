@@ -8,7 +8,9 @@
 
 export default {
   name: 'App',
+  watch: {
 
+  }
 }
 </script>
 

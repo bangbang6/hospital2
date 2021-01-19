@@ -1,11 +1,12 @@
 import request from '../utils/request'
-
-export function register(username,password){
+import {getToken} from '../utils/cookie'
+export function register(username,password,channelId){
   return request({
     url:'/user/register',
     data:{
       username:username,
-      password:password
+      password:password,
+      channelId
     },
     method:'post',
 })
@@ -20,4 +21,26 @@ export function login(username,password){
     method:'post'
   }
   )
+}
+/**
+ *分享文件时候获取到所有无权限的用户
+ *
+ * @export
+ * @param {*} shareDataId
+ * @returns
+ */
+export function getUserExceptMe(sharedDataId){
+  return request(
+    {
+      url:'/user/getUserExceptMeOnSharing',
+      method:'POST',
+      data:{
+        sharedDataId:+sharedDataId
+      },
+      headers:{
+        token:getToken('userToken'),
+      },
+    }
+  )
+
 }

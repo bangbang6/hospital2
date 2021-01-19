@@ -6,9 +6,9 @@ import {getToken} from '../utils/cookie'
 export function checkChannel(){
   return request(
     {
-      url:'/channel/getAddAuthorityChannels',
+      url:'/channelAuthority/getAddAuthorityChannels',
       method:'GET',
-      headers:{token:getToken('token')}
+      headers:{token:getToken('userToken')}
     }
   )
 }
@@ -18,9 +18,9 @@ export function checkChannel(){
 export function getAllUserChannel(){
   return request(
     {
-      url:'/channel/getAllAuthorityChannels',
+      url:'/channelAuthority/getAllAuthorityChannels',
       method:'GET',
-
+      headers:{token:getToken('adminToken')}
     }
   )
 }
@@ -33,13 +33,14 @@ export function getAllUserChannel(){
 export function addChannel(userId,channelId,authorityKey = 1){
   return request(
     {
-      url:'/channel/addChannelAuthority',
+      url:'/channelAuthority/addChannelAuthority',
       method:'POST',
       data:{
         userId,
         channelId,
         authorityKey
-      }
+      },
+      headers:{token:getToken('adminToken')}
     }
   )
 }
@@ -55,13 +56,28 @@ export function addChannel(userId,channelId,authorityKey = 1){
 export function deleteChannel(userId,channelId,authorityKey = 1){
   return request(
     {
-      url:'/channel/deleteChannelAuthority',
+      url:'/channelAuthority/deleteChannelAuthority',
       method:'POST',
       data:{
         userId,
         channelId,
         authorityKey
-      }
+      },
+      headers:{token:getToken('adminToken')}
+    }
+  )
+}
+/**
+ *用户注册时候获取所有的channel
+ *
+ * @export
+ */
+export function getAllChannels(){
+  return request(
+    {
+      url:"/channel/getAllChannels",
+      method:'GET',
+      
     }
   )
 }

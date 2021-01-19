@@ -6,7 +6,7 @@ export function upload(formData,channelId){
       url:'/data/uploadFile/'+channelId,
       method:'POST',
       data:formData,
-      headers:{'Content-Type':'multipart/form-data',token:getToken('token')}
+      headers:{'Content-Type':'multipart/form-data',token:getToken('userToken')}
     }
   )
 }
@@ -17,7 +17,7 @@ export function getFileList(){
       url:'/data/getDataList',
       method:"GET",
       headers:{
-        token:getToken('token')
+        token:getToken('userToken')
       }
     }
   )
@@ -28,7 +28,7 @@ export function deleteFile(fileId){
       url:'/data/deleteDataById',
       method:"POST",
       headers:{
-        token:getToken('token'),
+        token:getToken('userToken'),
       },
       data:{
         
@@ -44,7 +44,7 @@ export function getFile(fileId){
     url:"/data/getData",
     method:'POST',
     headers:{
-      token:getToken('token'),
+      token:getToken('userToken'),
 
     },
     data:{
@@ -58,7 +58,7 @@ export function updateFile(message,fileId){
     url:"/data/updateData",
     method:'POST',
     headers:{
-      token:getToken('token'),
+      token:getToken('userToken'),
 
     },
     data:{
@@ -78,7 +78,7 @@ export function backward(dataId){
     },
     method:'POST',
     headers:{
-      token:getToken('token'),
+      token:getToken('userToken'),
 
     },
   })
@@ -92,8 +92,50 @@ export function backwardAgain(dataId,txId){
     },
     method:'POST',
     headers:{
-      token:getToken('token'),
+      token:getToken('userToken'),
 
     },
   })
+}
+/**
+ *
+ *获取用户上传文件
+ * @export
+ * @param {*} userId
+ */
+export function getMyFileList(userId){
+  return request(
+    {
+      url:"/data/getDataListByOriginUserId",
+      method:'GET',
+      headers:{
+        token:getToken('userToken'),
+  
+      },
+    }
+  )
+}
+/**
+ *分享文件给其他用户
+ *
+ * @export
+ * @param {*} sharedUserId
+ * @param {*} sharedDataId
+ * @returns
+ */
+export function shareFile(sharedUserId,sharedDataId){
+  return request(
+    {
+      url:'/dataAuthority/sharedDataAuthorityOnSeeing',
+      method:"POST",
+      headers:{
+        token:getToken('userToken'),
+  
+      },
+      data:{
+        sharedUserId,
+        sharedDataId
+      }
+    }
+  )
 }

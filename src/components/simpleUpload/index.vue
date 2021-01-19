@@ -78,6 +78,9 @@ export default {
           alert(res.data.message)
           this.loading = false
         }
+      }, err => {
+        alert(err.message)
+        this.loading = false
       })
     },
     handleRemove (file, fileList) {

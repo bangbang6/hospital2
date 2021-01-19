@@ -17,16 +17,20 @@
               <template slot="title">文件列表</template>
               <el-menu-item index="2-1">
                 <i class="el-icon-files"></i>
-                <span class="subContent">所有文件</span>
+                <span class="subContent">我的文件</span>
               </el-menu-item>
               <el-menu-item index="2-2">
+                <i class="el-icon-files"></i>
+                <span class="subContent">所有文件</span>
+              </el-menu-item>
+              <!-- <el-menu-item index="2-2">
                 <i class="el-icon-thumb"></i>
                 <span class="subContent">已授权文件</span>
               </el-menu-item>
               <el-menu-item index="2-3">
                 <i class="el-icon-document-add"></i>
                 <span class="subContent">被授权文件</span>
-              </el-menu-item>
+              </el-menu-item>-->
             </el-submenu>
             <el-menu-item index="3">上传文件</el-menu-item>
             <el-menu-item index="4">简单上传文件</el-menu-item>
@@ -35,6 +39,7 @@
         <div class="search">
           <el-input placeholder="请输入搜索内容" suffix-icon="el-icon-search" v-model="inputValue"></el-input>
         </div>
+        <div class="channelName">{{userName}}/{{userChannel}}</div>
         <div class="user">
           <div class="avaturl">
             <el-dropdown trigger="click" @command="handleCommand">
@@ -64,8 +69,16 @@ export default {
       activeIndex: '1',
       activeIndex2: '1',
       inputValue: '',
-      paths: ['/doctor/index', '/doctor/myFile', '/doctor/sharedFile', '/doctor/beSharedFile', '/doctor/upload', '/doctor/simpleUpload']
+      paths: ['/doctor/index', '/doctor/myFile', '/doctor/allFile', '/doctor/sharedFile', '/doctor/beSharedFile', '/doctor/simpleUpload', '/doctor/upload']
     };
+  },
+  computed: {
+    userChannel () {
+      return localStorage.getItem('userChannel') || '无channel'
+    },
+    userName () {
+      return localStorage.getItem('userName') || ''
+    },
   },
   methods: {
     handleSelect (key) {
@@ -92,7 +105,9 @@ export default {
     },
     handleCommand (command) {
       if (command === 'loginout') {
-        removeToken('token')
+        removeToken('userToken')
+        localStorage.removeItem('userChannel')
+        localStorage.removeItem('userName')
         this.$router.push('/')
       }
     }
@@ -122,6 +137,15 @@ export default {
 .content {
   margin-left: 15%;
   width: 70%;
+  height: 100%;
+}
+.channelName {
+  height: 100%;
+  float: left;
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+  color: gray;
 }
 .logo {
   width: 60px;
