@@ -9,7 +9,7 @@
         <el-input v-model="form.password" type="password" placeholder="请输入密码" />
       </el-form-item>
       <div style="margin-left: 80px">
-        <el-radio v-model="radio1" label="1" @change="radioconfirm('1')">医生</el-radio>
+        <el-radio v-model="radio1" label="1" @change="radioconfirm('1')">用户</el-radio>
         <el-radio v-model="radio1" label="2" @change="radioconfirm('2')">管理员</el-radio>
       </div>
       <el-form-item style="margin-top: 18px;">
@@ -83,7 +83,7 @@ export default {
                 })
                 setTimeout(() => {
                   // 使用 vue-router 路由到指定页面，该方式称之为编程式导航
-                  this.$router.push('/doctor'); loading.close()
+                  this.$router.push('/doctor/allFile'); loading.close()
 
                 }, 1000)
               } else {

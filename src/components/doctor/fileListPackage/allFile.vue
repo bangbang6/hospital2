@@ -457,6 +457,7 @@ export default {
           this.tableData = this.files
         }
 
+
       } else {
         alert(res.data.message)
       }

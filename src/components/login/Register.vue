@@ -91,7 +91,7 @@ export default {
               if (res.data.code === 200) {
                 const userData = res.data.data
                 console.log(userData)
-                setToken('token', userData.token)
+                setToken('userToken', userData.token)
                 localStorage.setItem('userChannel', userData.channelName)
                 localStorage.setItem('userName', userData.user.username)
                 const loading = this.$loading({

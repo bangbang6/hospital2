@@ -13,9 +13,10 @@
                 <img src="../../assets/avaturl.jpg" class="imgAvaturl" />
                 <el-dropdown-menu slot="dropdown">
                   <el-dropdown-item icon="el-icon-pie-chart" command="jumpToshouye">首页</el-dropdown-item>
-                  <el-dropdown-item icon="el-icon-folder-opened" command="jumpToRequest">用户请求</el-dropdown-item>
-                  <el-dropdown-item icon="el-icon-setting" command="jumpToAuth">权限设置</el-dropdown-item>
-                  <el-dropdown-item icon="el-icon-user" command="jumpToChannel">通道设置</el-dropdown-item>
+
+                  <el-dropdown-item icon="el-icon-user" command="jumpToYunei">域内设置</el-dropdown-item>
+
+                  <el-dropdown-item icon="el-icon-folder-opened" command="jumpToYujian">域间设置</el-dropdown-item>
                   <el-dropdown-item icon="el-icon-turn-off" command="loginout">退出登录</el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
@@ -66,6 +67,10 @@ export default {
       if (command === 'jumpToAuth') {
         this.$router.push('/admin/authorize')
       }
+      if (command === 'jumpToYunei') {
+        this.$router.push('/admin/yunei')
+      }
+
       if (command === 'jumpToChannel') {
         this.$router.push('/admin/channel')
       }
@@ -74,6 +79,10 @@ export default {
         localStorage.removeItem('adminChannel')
         localStorage.removeItem('adminName')
         this.$router.push('/')
+      }
+      if (command === 'jumpToYujian') {
+
+        this.$router.push('/admin/yujian')
       }
     },
 
@@ -91,6 +100,9 @@ export default {
             break;
           case 'AdminAuthorize':
             this.title = '文件设置页面';
+            break;
+          case 'yujian':
+            this.title = '域间权限设置';
             break;
           default:
             this.title = '';

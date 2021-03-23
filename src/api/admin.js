@@ -72,3 +72,72 @@ export function adminConfirmRequest(shareUserId,sharedUserId,sharedDataId,confir
 
   })
 }
+/**
+ *返回根据chanel分类的user列表
+ *
+ * @export
+ * @returns
+ */
+export function getGroupedUserList(){
+  return request({
+    url:"/user/getGroupedUserList",
+    method:'GET',
+    headers:{token:getToken('adminToken')}
+  })
+}
+/**
+ *返回根据channel分类的file列表
+ *
+ * @export
+ * @returns
+ */
+export function getGroupedDataList(){
+  return request({
+    url:"/data/getGroupedDataList",
+    method:'GET',
+    headers:{token:getToken('adminToken')}
+  })
+}
+
+export function addPullAuthority(channelId,dataId,userId,type=2){
+  return request({
+    url:"/innerChannelAuthority/addPullAuthority",
+    data:{
+      type,
+      channelId,
+      dataId,
+      userId
+    },
+    headers:{token:getToken('adminToken')},
+    method:'POST'
+  })
+}
+export function addPushAuthority(channelId,dataId,userId,type=1){
+  return request({
+    url:"/innerChannelAuthority/addPushAuthority",
+    data:{
+      type,
+      channelId,
+      dataId,
+      userId
+    },
+    headers:{token:getToken('adminToken')},
+    method:'POST'
+  })
+}
+//获取域间pull权限列表
+export function getPullAuthorityList(){
+  return request({
+    url:"/innerChannelAuthority/getPullAuthorityList",
+    method:'GET',
+    headers:{token:getToken('adminToken')}
+  })
+}
+//获取域内pull权限列表
+export function getPushAuthorityList(){
+  return request({
+    url:"/innerChannelAuthority/getPushAuthorityList",
+    method:'GET',
+    headers:{token:getToken('adminToken')}
+  })
+}

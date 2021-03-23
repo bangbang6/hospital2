@@ -139,3 +139,66 @@ export function shareFile(sharedUserId,sharedDataId){
     }
   )
 }
+
+export function getAllBackward(dataId){
+  return request({
+    url:'/trace/traceBackwardForAll',
+    data:{
+      dataId:dataId
+    },
+    method:'POST',
+    headers:{
+      token:getToken('userToken'),
+
+    },
+  })
+}
+
+export function getYujianFiles(){
+  return request({
+    url:'/data/getInterChannelData',
+    method:'get',
+    headers:{
+      token:getToken('userToken'),
+
+    }
+  })
+}
+export function getYuneiFiles(){
+  return request({
+    url:'/data/getCurrentChannelData',
+    method:'get',
+    headers:{
+      token:getToken('userToken'),
+
+    }
+  })
+}
+export function pushData(dataId,channelId){
+  return request({
+    url:'/data/pushData',
+    method:'post',
+    data:{
+      dataId,
+      channelId
+    },
+    headers:{
+      token:getToken('userToken'),
+
+    }
+  })
+}
+export function pullData(dataId,channelId){
+  return request({
+    url:'/data/pullData',
+    method:'post',
+    data:{
+      dataId,
+      channelId
+    },
+    headers:{
+      token:getToken('userToken'),
+
+    }
+  })
+}

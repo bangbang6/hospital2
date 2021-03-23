@@ -26,9 +26,9 @@
               <img src="../../assets/avaturl.jpg" class="imgAvaturl" />
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item icon="el-icon-pie-chart" command="jumpToshouye">首页</el-dropdown-item>
-                <el-dropdown-item icon="el-icon-folder-opened" command="jumpToRequest">用户请求</el-dropdown-item>
-                <el-dropdown-item icon="el-icon-setting" command="jumpToAuth">权限设置</el-dropdown-item>
-                <el-dropdown-item icon="el-icon-user" command="jumpToChannel">通道设置</el-dropdown-item>
+
+                <el-dropdown-item icon="el-icon-user" command="jumpToYunei">域内设置</el-dropdown-item>
+                <el-dropdown-item icon="el-icon-folder-opened" command="jumpToYujian">域间设置</el-dropdown-item>
                 <el-dropdown-item icon="el-icon-turn-off" command="loginout">退出登录</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
@@ -62,7 +62,7 @@ export default {
       this.$router.push(this.paths[num])
     },
     handleCommand (command) {
-      
+
       if (command === 'jumpToshouye') {
         this.$router.push('/admin')
       }
@@ -75,11 +75,18 @@ export default {
       if (command === 'jumpToChannel') {
         this.$router.push('/admin/channel')
       }
-       if (command === 'loginout') {
+      if (command === 'jumpToYunei') {
+        this.$router.push('/admin/yunei')
+      }
+      if (command === 'loginout') {
         removeToken('token')
         localStorage.removeItem('userChannel')
         localStorage.removeItem('userName')
         this.$router.push('/')
+      }
+      if (command === 'jumpToYujian') {
+
+        this.$router.push('/admin/yujian')
       }
     },
 

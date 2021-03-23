@@ -117,6 +117,7 @@ export default {
     },
     parseLabel (set) {
       const contents = ['添加'/*  '修改', '删除', '溯源', '追踪' */]
+      if (!set) return []
       return set.map(item => {
         return contents[item - 1]
       })

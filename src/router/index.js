@@ -8,6 +8,8 @@ import SharedFile from '../components/doctor/fileListPackage/SharedFile'
 import BeSharedFile from '../components/doctor/fileListPackage/BeSharedFile'
 import DoctorIndex from '../components/doctor/DoctorIndex.vue'
 import DashBoard from '../components/admin/DashBoardAdmin.vue'
+import Yujian from '../components/admin/yujian/Yujian.vue'
+import Yunei from '../components/admin/yunei/Yunei.vue'
 import AdminFileList from '../components/admin/AdminFileList.vue'
 
 import Login from '../components/login/Login.vue'
@@ -19,7 +21,7 @@ import Channel from '../components/admin/Channel'
 import BackWard from '../components/doctor/NewBackward'
 import UserRequest from '../components/admin/UserRequest'
 import MainAdmin from '../components/admin/MainAdmin'
-import allFile from '../components/doctor/fileListPackage/allFile'
+import allFile from '../components/doctor/fileListPackage/allFileTab'
 
 
 const originalPush = Router.prototype.push
@@ -46,7 +48,7 @@ export default new Router({
         component: DoctorIndex,
         redirect: '/doctor/index',
         children: [
-          {
+          /* {
             path:"/doctor/index",
             name: 'DoctorMain',
             component:DoctorMain
@@ -55,7 +57,7 @@ export default new Router({
             path: '/doctor/upload',
             name: 'upload',
             component: Upload
-          },
+          }, */
           {
             path: '/doctor/simpleUpload',
             name: 'simpleUpload',
@@ -107,9 +109,21 @@ export default new Router({
             
           },
           {
+            path: '/admin/yunei',
+            name: 'yunei',
+            component: Yunei,
+            
+          },
+          {
             path: '/admin/userRequest',
             name: 'UserRequest',
             component: UserRequest,
+            
+          },
+          {
+            path: '/admin/yujian',
+            name: 'yujian',
+            component: Yujian,
             
           },
             

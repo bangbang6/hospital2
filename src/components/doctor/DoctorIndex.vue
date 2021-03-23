@@ -12,7 +12,7 @@
             mode="horizontal"
             @select="handleSelect"
           >
-            <el-menu-item index="1">首页</el-menu-item>
+            <!-- <el-menu-item index="1">首页</el-menu-item> -->
             <el-submenu index="2">
               <template slot="title">文件列表</template>
               <el-menu-item index="2-1">
@@ -32,8 +32,8 @@
                 <span class="subContent">被授权文件</span>
               </el-menu-item>-->
             </el-submenu>
-            <el-menu-item index="3">上传文件</el-menu-item>
-            <el-menu-item index="4">简单上传文件</el-menu-item>
+            <!-- <el-menu-item index="3">上传文件</el-menu-item> -->
+            <el-menu-item index="4">上传文件</el-menu-item>
           </el-menu>
         </div>
         <div class="search">
@@ -141,7 +141,7 @@ export default {
 }
 .channelName {
   height: 100%;
-  float: left;
+  float: right;
   display: flex;
   align-items: center;
   margin-left: 20px;

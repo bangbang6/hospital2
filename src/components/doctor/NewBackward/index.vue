@@ -17,14 +17,11 @@ import { backward, backwardAgain } from '@/api/file'
 import { mapState } from 'vuex'
 import { Graph } from '@antv/x6';
 import { Shape } from '@antv/x6'
-
 export default {
   data () {
     return {
-
       tableData: [],
       txId: 0,
-
     }
   },
   computed: {
@@ -70,7 +67,6 @@ export default {
           enabled: true,
           className: 'my-scroller'
         },
-
       });
       const { user, dst_chain, src_chain, type_tx, fileName } = this.tableData[0]
       const rect = new Shape.Rect({
@@ -96,7 +92,6 @@ export default {
       //todo 全部溯源
     },
     parser (record) {
-
       return {
         fileName: record.fileName.split('/').slice(-1)[0],
         ...record.record
@@ -126,7 +121,6 @@ export default {
     }
   },
   mounted () {
-
     backward(this.dataId).then(res => {
       if (res.data.code === 200) {
         console.log(res.data.data);
@@ -137,7 +131,6 @@ export default {
         alert(res.data.message)
       }
     })
-
   }
 }
 </script>

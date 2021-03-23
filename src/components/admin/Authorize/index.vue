@@ -122,15 +122,15 @@ export default {
     parser (files) {
 
       return files.map((item, index) => {
-        this.checkLists.push(this.parseLabel(item.dataAuthoritySet))
-        this.checkListOld.push(this.parseLabel(item.dataAuthoritySet))
+        this.checkLists.push(this.parseLabel(item.channelAuthoritySet))
+        this.checkListOld.push(this.parseLabel(item.channelAuthoritySet))
         return {
           userName: item.userName,
           userId: item.userId,
           fileId: item.dataId,
           dataName: item.dataName.split('/').slice(-1)[0],
           channelName: item.channelName,
-          dataAuthoritySet: this.parseLabel(item.dataAuthoritySet)
+          dataAuthoritySet: this.parseLabel(item.channelAuthoritySet)
         }
 
       })
