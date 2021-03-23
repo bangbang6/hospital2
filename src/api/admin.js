@@ -3,7 +3,8 @@ import {getToken} from '../utils/cookie'
 export function getAuthority(){
   return request({
     url:'/dataAuthority/getAllAuthority',
-    method:'GET'
+    method:'GET',
+    headers:{token:getToken('adminToken')}
   })
 }
 
@@ -139,5 +140,36 @@ export function getPushAuthorityList(){
     url:"/innerChannelAuthority/getPushAuthorityList",
     method:'GET',
     headers:{token:getToken('adminToken')}
+  })
+}
+
+//删除pull权限
+export function deletePullAuthority(channelId,dataId,userId,type=2){
+  
+  return request({
+    url:"/innerChannelAuthority/deletePullAuthority",
+    method:"POST",
+    headers:{token:getToken('adminToken')},
+    data:{
+      type,
+      channelId,
+      dataId,
+      userId
+    },
+
+  })
+}
+//删除pull权限
+export function deletePushAuthority(channelId,dataId,userId,type=1){
+  return request({
+    url:"/innerChannelAuthority/deletePushAuthority",
+    method:"POST",
+    headers:{token:getToken('adminToken')},
+    data:{
+      type,
+      channelId,
+      dataId,
+      userId
+    },
   })
 }

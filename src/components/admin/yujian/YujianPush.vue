@@ -80,7 +80,7 @@
 </template>
  
 <script>
-import { getGroupedDataList, getGroupedUserList, addPushAuthority, getPushAuthorityList } from '../../../api/admin'
+import { getGroupedDataList, getGroupedUserList, addPushAuthority, getPushAuthorityList, deletePushAuthority } from '../../../api/admin'
 import { getAllChannels } from '../../../api/channel'
 export default {
   data () {
@@ -131,7 +131,22 @@ export default {
     },
     deleteFile (index) {
       console.log('this.pushs[index]', this.pushs[index]);
-
+      deletePushAuthority(this.pushs[index].channel.id, this.pushs[index].fileName.id, this.pushs[index].userName.id).then(res => {
+        if (res.data.code === 200) {
+          alert('成功')
+          getPushAuthorityList().then(res => {
+            if (res.data.code === 200) {
+              this.parse(res.data.data)
+            } else {
+              alert(res.data.message)
+            }
+          })
+        } else {
+          alert(res.data.message)
+        }
+      }, reject => {
+        alert(reject)
+      })
     },
     clear () {
 

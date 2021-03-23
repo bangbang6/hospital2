@@ -91,12 +91,13 @@
                     placement="bottom-start"
                     style="margin-right: 5px;width:210px"
                     content="push"
+                    v-if="scope.row.pushChannelSet"
                   >
                     <el-popover
                       placement="right"
                       width="280"
                       trigger="manual"
-                      v-model="channelsVisible[scope.$index]"
+                      v-model="channelsVisible[pagesize * (currentPage[0] - 1)+scope.$index]"
                       style="margin-right: 5px;width:210px"
                     >
                       <div
@@ -325,7 +326,7 @@ export default {
   },
   computed: {
     seeFileName () {
-      return (this.files[this.idx].fileName)
+      return (this.yuneiFiles[this.idx].fileName)
     }
   },
   methods: {
@@ -337,6 +338,8 @@ export default {
         } else {
           alert(res.data.message)
         }
+      }, reject => {
+        alert(reject)
       })
     },
     pushFile (index, index2) {
@@ -349,20 +352,26 @@ export default {
         } else {
           alert(res.data.message)
         }
+      }, reject => {
+        alert(reject)
       })
     },
     close () {
+      console.log('this.idx', this.idx);
+      console.log('this.idx', this.channelsVisible);
       this.channelsVisible.splice(this.idx, 1, false)
     },
     pushChannel (index) {
       //关闭其他propver
+
       for (let i = 0; i < this.channelsVisible.length; i++) {
         if (this.channelsVisible[i] !== undefined && this.channelsVisible[i] === true && i !== index) {
           this.channelsVisible.splice(i, 1, false)
         }
       }
-      this.channelsVisible[index] = true
       this.idx = this.pagesize * (this.currentPage[0] - 1) + index
+      this.channelsVisible[this.idx] = true
+
       console.log('this.idx', this.idx);
       console.log('this.yuneiFiles', this.yuneiFiles);
       this.pushChannels = this.yuneiFiles[this.idx].pushChannelSet
@@ -496,10 +505,11 @@ export default {
         }
       })
     },
-    backwordFile (tabIndex, index) {
+    backwordFile (index) {
       this.idx = this.pagesize * (this.currentPage[this.tabIndex] - 1) + index
+
       this.setDataId(this.yuneiFiles[this.idx].id)
-      localStorage.setItem('dataId', this.files[tabIndex][this.idx].id)
+      localStorage.setItem('dataId', this.yuneiFiles[this.idx].id)
       /* backward(this.files[this.idx].id).then(res => {
         if (res.data.code === 200) {
           console.log(res.data.data);
@@ -531,8 +541,8 @@ export default {
       })
     },
     deleteRow (index) {
-      let idx = this.pagesize * (this.currentPage[this.tabIndex] - 1) + index
-      deleteFile(this.yuneiFiles[idx].id).then(res => {
+      this.idx = this.pagesize * (this.currentPage[this.tabIndex] - 1) + index
+      deleteFile(this.yuneiFiles[this.idx].id).then(res => {
         if (res.data.code === 200) {
           this.$alert(`${this.yuneiFiles[idx].fileName}文件已被删除`, '文件删除', {
             confirmButtonText: '确定',

@@ -80,7 +80,7 @@
 </template>
  
 <script>
-import { getGroupedDataList, getGroupedUserList, addPullAuthority, getPullAuthorityList } from '../../../api/admin'
+import { getGroupedDataList, getGroupedUserList, addPullAuthority, getPullAuthorityList, deletePullAuthority } from '../../../api/admin'
 import { getAllChannels } from '../../../api/channel'
 export default {
   data () {
@@ -130,7 +130,23 @@ export default {
 
     },
     deleteFile (index) {
-      console.log('this.pulls[index]', this.pulls[index]);
+
+      deletePullAuthority(this.pulls[index].channel.id, this.pulls[index].fileName.id, this.pulls[index].userName.id).then(res => {
+        if (res.data.code === 200) {
+          alert('成功')
+          getPullAuthorityList().then(res => {
+            if (res.data.code === 200) {
+              this.parse(res.data.data)
+            } else {
+              alert(res.data.message)
+            }
+          })
+        } else {
+          alert(res.data.message)
+        }
+      }, reject => {
+        alert(reject)
+      })
 
     },
     clear () {
