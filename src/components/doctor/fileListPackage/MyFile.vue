@@ -1,21 +1,10 @@
 <template>
-  <div
-    style="width: 100%;margin: auto;background-color: #f0f2f5;padding-top:50px;position:relative"
-    class="content"
-  >
+  <div style="width: 100%;margin: auto;background-color: #f0f2f5;position:relative" class="content">
     <div
       class="el-table el-table--fit el-table--fluid-height el-table--enable-row-hover el-table--enable-row-transition"
-      style="width: 100%;margin: auto;padding: 20px 20px"
+      style="width: 100%;margin: auto;padding: 60px 20px;box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);"
     >
-      <el-button icon="el-icon-download" type="primary">下载</el-button>
-      <el-button icon="el-icon-share" type="primary">分享</el-button>
-      <el-button icon="el-icon-circle-close" type="danger">删除</el-button>
-      <el-form
-        :inline="true"
-        :model="formInline"
-        class="demo-form-inline"
-        style="display: inline-block;float: right"
-      >
+      <div class="form">
         <el-date-picker
           v-model="selectTime"
           type="daterange"
@@ -35,12 +24,12 @@
         >
           <el-select placeholder="文件类型" v-model="select" slot="prepend">
             <el-option label="jpg文件" value=".jpg"></el-option>
-            <el-option label="doc文件" value=".doc"></el-option>
+            <el-option label="txt文件" value=".txt"></el-option>
           </el-select>
 
           <el-button slot="append" icon="el-icon-search" @click="onSubmit()"></el-button>
         </el-autocomplete>
-      </el-form>
+      </div>
       <el-table
         ref="multipleTable"
         :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
@@ -558,4 +547,10 @@ export default {
 }
 </style>
 <style lang="scss" scoped>
+.form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 </style>

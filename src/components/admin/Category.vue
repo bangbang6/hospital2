@@ -13,32 +13,34 @@
 
 const mockData = [
   {
-    legondname: "口腔科",
-    value: 67,
-    percent: "15.40%",
-    itemStyle: {
-      color: '#1de9b6'
-    },
-    name: "口腔科 | 15.4%"
-  },
-  {
     legondname: "耳鼻喉科",
     value: 97,
-    percent: "22.30%",
+    percent: "21.15%",
     itemStyle: {
-      color: '#37a2da'
+      color: '#49a7f8'
     },
-    name: "耳鼻喉科 | 22.30%",
+    name: "耳鼻喉科 | 21.15%",
 
   },
+
+  {
+    legondname: "口腔科",
+    value: 67,
+    percent: "22.30%",
+    itemStyle: {
+      color: '#236fff'
+    },
+    name: "口腔科 | 22.30%"
+  },
+
   {
     legondname: "放射科",
     value: 92,
-    percent: "21.15%",
+    percent: "15.4%",
     itemStyle: {
-      color: 'pink'
+      color: '#9c00ff'
     },
-    name: "放射科 | 21.15%"
+    name: "放射科 | 15.4%"
 
   },
   {
@@ -46,7 +48,7 @@ const mockData = [
     value: 204,
     percent: "41.15%",
     itemStyle: {
-      color: 'yellow'
+      color: '#74fbf5'
     },
     name: "皮肤科 | 41.15%"
 
@@ -58,7 +60,7 @@ const mockData2 = [
     value: 204,
     percent: "41.5%",
     itemStyle: {
-      color: '#1de9b6'
+      color: '#74fbf5'
     },
     name: "武汉 | 41.5%"
   },
@@ -67,7 +69,7 @@ const mockData2 = [
     value: 97,
     percent: "22.30%",
     itemStyle: {
-      color: '#37a2da'
+      color: '#49a7f8'
     },
     name: "上海 | 22.30%",
 
@@ -77,7 +79,7 @@ const mockData2 = [
     value: 92,
     percent: "21.15%",
     itemStyle: {
-      color: 'pink'
+      color: '#9c00ff'
     },
     name: "广东 | 21.15%"
 
@@ -87,7 +89,7 @@ const mockData2 = [
     value: 67,
     percent: "15.4%",
     itemStyle: {
-      color: 'yellow'
+      color: '#236fff'
     },
     name: "北京 | 15.4%"
 

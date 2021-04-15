@@ -1,21 +1,10 @@
 <template>
-  <div
-    style="width: 100%;margin: auto;background-color: #f0f2f5;padding-top:50px;position:relative"
-    class="content"
-  >
+  <div style="width: 100%;margin: auto;background-color: #f0f2f5;position:relative" class="content">
     <div
       class="el-table el-table--fit el-table--fluid-height el-table--enable-row-hover el-table--enable-row-transition"
-      style="width: 100%;margin: auto;padding: 20px 20px;background-color: #f0f2f5"
+      style="width: 100%;margin: auto;padding: 20px 20px;background-color: white"
     >
-      <el-button icon="el-icon-download" type="primary">下载</el-button>
-      <el-button icon="el-icon-share" type="primary">分享</el-button>
-      <el-button icon="el-icon-circle-close" type="danger">删除</el-button>
-      <el-form
-        :inline="true"
-        :model="formInline"
-        class="demo-form-inline"
-        style="display: inline-block;float: right"
-      >
+      <div class="demo-form-inline">
         <el-date-picker
           v-model="selectTime"
           type="daterange"
@@ -35,12 +24,12 @@
         >
           <el-select placeholder="文件类型" v-model="select" slot="prepend">
             <el-option label="jpg文件" value=".jpg"></el-option>
-            <el-option label="doc文件" value=".doc"></el-option>
+            <el-option label="txt文件" value=".txt"></el-option>
           </el-select>
 
           <el-button slot="append" icon="el-icon-search" @click="onSubmit()"></el-button>
         </el-autocomplete>
-      </el-form>
+      </div>
       <el-tabs type="border-card" @tab-click="handleTabclick">
         <el-tab-pane label="域内">
           <el-table
@@ -597,11 +586,20 @@ export default {
     },
     onSubmit () {
       this.currentPage[this.tabIndex] = 1;
-      let files = this.files;
-      let queryString = this.input;
-      let Type = this.select;
-      let DateArr = this.selectTime
-      this.tableData = files.filter(this.createFilterAndTypeAndDate(queryString, Type, DateArr));
+      if (this.tabIndex === 0) {
+        let files = this.yuneiFiles;
+        let queryString = this.input;
+        let Type = this.select;
+        let DateArr = this.selectTime
+        this.yuneiFiles = files.filter(this.createFilterAndTypeAndDate(queryString, Type, DateArr));
+      } else {
+        let files = this.yujianFiles;
+        let queryString = this.input;
+        let Type = this.select;
+        let DateArr = this.selectTime
+        this.yujianFiles = files.filter(this.createFilterAndTypeAndDate(queryString, Type, DateArr));
+      }
+
     },
     trans (obj) {//做文件大小转换
       obj = String(obj);
@@ -695,5 +693,23 @@ export default {
 <style lang="scss" >
 .el-popover {
   width: 210px;
+}
+</style>
+<style  lang='scss' scoped>
+.demo-form-inline {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+</style>
+<style >
+.el-input__icon {
+  line-height: 100% !important;
+}
+.el-range-separator {
+  line-height: 160% !important;
+  height: 100%;
+  display: inline-block;
 }
 </style>

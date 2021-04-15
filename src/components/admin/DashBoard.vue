@@ -8,10 +8,11 @@
       <div class="map">
         <order-map></order-map>
       </div>
-      <div class="list"></div>
+
       <div class="rank">
         <auto-rank></auto-rank>
       </div>
+      <div class="block-list"></div>
     </div>
     <div class="footer">
       <category></category>
@@ -39,22 +40,25 @@ export default {
 .dashboard {
   height: 100%;
   .content {
+    padding-left: 100px;
+    box-sizing: border-box;
     height: 58%;
     display: flex;
     .map {
       height: 100%;
-      width: 60%;
+      width: 40%;
     }
-    .list {
-      height: 100%;
-      width: 10%;
-      background-color: rgb(48, 48, 48);
-    }
+
     .rank {
       height: 100%;
       //width:80%;
-      flex: 1;
+      width: 20%;
       //padding-right: 5%;
+    }
+    .block-list {
+      height: 100%;
+      //width:80%;
+      width: 18%;
     }
   }
   .header {

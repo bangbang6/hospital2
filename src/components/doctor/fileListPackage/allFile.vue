@@ -1,15 +1,9 @@
 <template>
-  <div
-    style="width: 100%;margin: auto;background-color: #f0f2f5;padding-top:50px;position:relative"
-    class="content"
-  >
+  <div style="width: 100%;margin: auto;background-color: #f0f2f5;position:relative" class="content">
     <div
       class="el-table el-table--fit el-table--fluid-height el-table--enable-row-hover el-table--enable-row-transition"
       style="width: 100%;margin: auto;padding: 20px 20px;background-color: #f0f2f5"
     >
-      <el-button icon="el-icon-download" type="primary">下载</el-button>
-      <el-button icon="el-icon-share" type="primary">分享</el-button>
-      <el-button icon="el-icon-circle-close" type="danger">删除</el-button>
       <el-form
         :inline="true"
         :model="formInline"
@@ -490,6 +484,4 @@ export default {
 .el-tabs {
   margin-top: 20px;
 }
-</style>
-<style lang="scss" scoped>
 </style>

@@ -153,7 +153,7 @@ export default {
 
             font-size: 12px;
             &.green {
-              color: rgb(178, 209, 126);
+              color: #74fbf5;
             }
             &.center {
               display: flex;
@@ -233,7 +233,7 @@ export default {
               font-size: 12px;
             }
             .list-item-sales {
-              color: rgb(178, 209, 126);
+              color: #74fbf5;
             }
           }
         }

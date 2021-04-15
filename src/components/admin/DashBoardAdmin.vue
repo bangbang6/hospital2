@@ -36,9 +36,9 @@
         </div>
       </div>
     </div>
-
     <div class="main">
       <!--  <router-view></router-view> -->
+
       <dash-board></dash-board>
     </div>
   </div>

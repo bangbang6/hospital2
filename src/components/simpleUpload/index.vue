@@ -1,32 +1,49 @@
 <template>
-  <div>
-    <div class="channel">
-      <el-radio-group v-model="channel">
-        <el-radio-button
-          class="channel-btn"
-          v-for="item in channels"
-          :key="item.id"
-          :label="item.channelName"
-          size="sm"
-        ></el-radio-button>
-      </el-radio-group>
-    </div>
-    <el-upload
-      class="upload-demo"
-      ref="upload"
-      drag
-      :action="action"
-      multiple
-      :http-request="uploadFile"
-      :on-remove="handleRemove"
-    >
-      <i class="el-icon-upload"></i>
-      <div class="el-upload__text">
-        将文件拖到此处，或
-        <em>点击上传</em>
+  <div class="upload-wrapper">
+    <div class="upload">
+      <div class="channel">
+        <el-radio-group v-model="channel">
+          <el-radio-button class="channel-btn" label="同济医院" size="sm"></el-radio-button>
+        </el-radio-group>
       </div>
-    </el-upload>
-    <div v-loading="loading" style="marginTop:20px"></div>
+      <el-upload
+        class="upload-demo"
+        ref="upload"
+        drag
+        :action="action"
+        multiple
+        :http-request="uploadFile"
+        :on-remove="handleRemove"
+      >
+        <i class="el-icon-upload"></i>
+        <div class="el-upload__text">
+          将文件拖到此处，或
+          <em>点击上传</em>
+        </div>
+      </el-upload>
+      <div v-loading="loading" style="marginTop:20px"></div>
+    </div>
+    <el-card class="message">
+      <div slot="header" class="clearfix">
+        <span :style="{fontWeight:'bold'}">上传文件信息</span>
+      </div>
+      <div class="info">
+        <span class="key">文件名:</span>
+        <span class="value">文件名</span>
+      </div>
+      <div class="info">
+        <span class="key">文件名:</span>
+        <span class="value">文件名</span>
+      </div>
+      <div class="info">
+        <span class="key">文件名:</span>
+        <span class="value">文件名</span>
+      </div>
+      <div class="info">
+        <span class="key">文件名:</span>
+        <span class="value">文件名</span>
+      </div>
+    </el-card>
   </div>
 </template>
 
@@ -41,7 +58,7 @@ export default {
       action: '',
       loading: false,
       channels: [],
-      channel: 'channel1'
+      channel: '同济医院'
     }
   },
   computed: {
@@ -93,22 +110,53 @@ export default {
 
   },
   mounted () {
-    checkChannel().then(res => {
+    /* checkChannel().then(res => {
       if (res.data.code === 200) {
         this.channels = res.data.data
 
       }
-    })
+    }) */
   }
 }
 </script>
 
 <style scoped lang='scss'>
-.channel {
-  width: 100%;
-  margin: 40px 0;
-  .channel-btn {
-    margin-right: 20px;
+.upload-wrapper {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  .upload {
+    width: 40%;
+    height: 100%;
+
+    .channel {
+      width: 100%;
+      margin: 40px 0;
+      .channel-btn {
+        margin-right: 20px;
+      }
+    }
+  }
+  .message {
+    width: 40%;
+    height: 100%;
+    margin-top: 50px;
+    height: 80%;
+    background: white;
+    .info {
+      width: 100%;
+      height: 20px;
+      color: black;
+      font-size: 14px;
+
+      padding: 20px;
+      box-sizing: border-box;
+
+      .key {
+        display: inline-block;
+        width: 60px;
+      }
+    }
   }
 }
 </style>

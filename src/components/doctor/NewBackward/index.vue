@@ -4,7 +4,7 @@
       <el-button type="primary" size="mini" @click="back">返回</el-button>
       <div class="text">{{text}}</div>
       <div class="btns-wrapper">
-        <el-button type="primary" size="mini" @click="backAll">全部溯源</el-button>
+        <!-- <el-button type="primary" size="mini" @click="backAll">全部溯源</el-button> -->
         <el-button type="primary" size="mini" @click="backagain">溯源</el-button>
       </div>
     </div>

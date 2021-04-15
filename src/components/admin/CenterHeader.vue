@@ -25,7 +25,7 @@
 </template>
 
 <script>
-const headerMockData = { "headerData": { "value": [{ "title": "总用户", "subTitle": "The Total User Number", "value": 4010, "icon": "el-icon-user-solid", color: 'blue' }, { "title": "上传总数", "subTitle": "The Upload Files Number", "value": 2570, "icon": "el-icon-upload", color: 'green' }, { "title": "文件总数", "subTitle": "The Total Fils Number", "value": 2722, "icon": "el-icon-folder-opened", color: 'yellow' }, { "title": "医院总数", "subTitle": "The Hospital Number", "value": 1286, "icon": "el-icon-office-building", color: 'pink' }] }, "project": { "value": [{ "title": "转化率", "value": "13.16%", "img": "https://www.youbaobao.xyz/datav-res/success.png" }, { "title": "退单率", "value": "5.73%", "img": "https://www.youbaobao.xyz/datav-res/failed.png" }] } }
+const headerMockData = { "headerData": { "value": [{ "title": "医院总数", "subTitle": "The Hospital Number", "value": 1286, "icon": "el-icon-office-building", color: 'pink' }, { "title": "用户总数", "subTitle": "The Total User Number", "value": 4010, "icon": "el-icon-user-solid", color: "blue" }, { "title": "文件总数", "subTitle": "The Total Files Number", "value": 2722, "icon": "el-icon-folder-opened", color: 'yellow' }, { "title": "区块数", "subTitle": "The Block Number", "value": 56, "icon": "el-icon-coin", color: 'block' }, { "title": "交易数", "subTitle": "The Transaction Number", "value": 186, "icon": "el-icon-sort", color: 'connect' }, { "title": "异常数", "subTitle": "The Number Of Abnormal", "value": 16, "icon": "el-icon-warning-outline", color: 'red' }] }, "project": { "value": [{ "title": "转化率", "value": "13.16%", "img": "https://www.youbaobao.xyz/datav-res/success.png" }, { "title": "退单率", "value": "5.73%", "img": "https://www.youbaobao.xyz/datav-res/failed.png" }] } }
 export default {
   data () {
     return {
@@ -50,27 +50,40 @@ export default {
   .center-header-wrapper {
     display: flex;
     width: 100%;
+    padding-left: 40px;
+    box-sizing: border-box;
     .center-header-item {
-      //flex: 1;
+      flex: 1;
+      width: 16%;
       display: flex;
-      margin-left: 60px;
-      width: 25%;
+      /*  margin-left: 60px; */
+      /* margin-left: 20px; */
+
       .center-header-left {
         margin-top: 7px;
         .icon {
           font-size: 32px;
         }
         .green {
-          color: #1de9b6;
+          color: #49a7f8;
         }
         .blue {
-          color: #37a2da;
-        }
-        .pink {
-          color: pink;
+          color: #74fbf5;
         }
         .yellow {
-          color: yellow;
+          color: #01a684;
+        }
+        .pink {
+          color: #e8950e;
+        }
+        .red {
+          color: #ff3000;
+        }
+        .block {
+          color: #f56c6c;
+        }
+        .connect {
+          color: #e6a23c;
         }
       }
 

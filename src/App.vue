@@ -22,5 +22,9 @@ body,
   padding: 0;
   width: 100%;
   height: 100%;
+  font-family: 'Arial', 'Microsoft YaHei';
+}
+input {
+  font-family: 'Arial', 'Microsoft YaHei';
 }
 </style>
