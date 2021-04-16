@@ -8,17 +8,18 @@
       <div class="map">
         <order-map></order-map>
       </div>
-
+      <div class="error">
+        <error-list></error-list>
+      </div>
       <div class="rank">
         <auto-rank></auto-rank>
       </div>
-      <div class="block-list"></div>
     </div>
     <div class="footer">
       <category></category>
 
       <div class="areaRank">
-        <area-rank></area-rank>
+        <block-number></block-number>
       </div>
     </div>
   </div>
@@ -30,8 +31,10 @@ import OrderMap from './OrderMap.vue'
 import AutoRank from './AutoRank.vue'
 import Category from './Category.vue'
 import AreaRank from './AreaRank.vue'
+import BlockNumber from './BlockNumber.vue'
+import ErrorList from './ErrorList.vue'
 export default {
-  components: { CenterHeader, OrderMap, AutoRank, Category, AreaRank },
+  components: { CenterHeader, OrderMap, AutoRank, Category, AreaRank, BlockNumber, ErrorList },
 
 }
 </script>
@@ -52,25 +55,26 @@ export default {
     .rank {
       height: 100%;
       //width:80%;
-      width: 20%;
+      width: 35%;
+      margin-left: 20px;
       //padding-right: 5%;
     }
-    .block-list {
+    .error {
       height: 100%;
       //width:80%;
-      width: 18%;
+      width: 28%;
     }
   }
   .header {
     height: 15%;
   }
   .footer {
-    height: 25%;
+    height: 23%;
     width: 100%;
     background: rgb(48, 48, 48);
 
     .areaRank {
-      width: 30%;
+      width: 38%;
       height: 100%;
       float: right;
     }

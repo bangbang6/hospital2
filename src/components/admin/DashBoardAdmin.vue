@@ -29,6 +29,7 @@
 
                 <el-dropdown-item icon="el-icon-user" command="jumpToYunei">域内设置</el-dropdown-item>
                 <el-dropdown-item icon="el-icon-folder-opened" command="jumpToYujian">域间设置</el-dropdown-item>
+                <el-dropdown-item icon="el-icon-folder-warning-outline" command="jumpToYujin">异常预警</el-dropdown-item>
                 <el-dropdown-item icon="el-icon-turn-off" command="loginout">退出登录</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
@@ -80,7 +81,8 @@ export default {
       }
       if (command === 'loginout') {
         removeToken('token')
-        localStorage.removeItem('userChannel')
+        localStorage.removeItem('adminHospital')
+
         localStorage.removeItem('userName')
         this.$router.push('/')
       }

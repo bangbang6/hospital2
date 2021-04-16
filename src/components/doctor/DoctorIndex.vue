@@ -61,7 +61,7 @@ export default {
   },
   computed: {
     userChannel () {
-      return localStorage.getItem('userChannel') || '无channel'
+      return localStorage.getItem('userHospital') || '无单位'
     },
     userName () {
       return localStorage.getItem('userName') || ''
@@ -86,7 +86,7 @@ export default {
     handleCommand (command) {
       if (command === 'loginout') {
         removeToken('userToken')
-        localStorage.removeItem('userChannel')
+        localStorage.removeItem('userHospital')
         localStorage.removeItem('userName')
         this.$router.push('/')
       }
@@ -167,10 +167,11 @@ export default {
   height: 92%;
 }
 .user {
-  width: 200px;
+  width: 300px;
   height: 40px;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
 }
 .avaturl {
   margin-left: 10px;

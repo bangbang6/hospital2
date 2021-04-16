@@ -31,7 +31,7 @@
         </el-autocomplete>
       </div>
       <el-tabs type="border-card" @tab-click="handleTabclick">
-        <el-tab-pane label="域内">
+        <el-tab-pane label="所在医院">
           <el-table
             ref="multipleTable"
             :data="yuneiFiles.slice((currentPage[0]-1)*pagesize,currentPage[0]*pagesize)"
@@ -97,7 +97,7 @@
                         <i class="el-icon-close"></i>
                       </div>
                       <el-table :data="pushChannels" size="mini" style="width:200px">
-                        <el-table-column width="120" property="channelName" label="通道"></el-table-column>
+                        <el-table-column width="120" property="hospitalName" label="医院"></el-table-column>
 
                         <el-table-column property="address" label="操作" width="80">
                           <template slot-scope="scope2">
@@ -149,7 +149,7 @@
             background
           ></el-pagination>
         </el-tab-pane>
-        <el-tab-pane label="域间">
+        <el-tab-pane label="其他医院">
           <el-table
             ref="multipleTable"
             :data="yujianFiles.slice((currentPage[1]-1)*pagesize,currentPage[1]*pagesize)"
@@ -165,15 +165,22 @@
               style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
             ></el-table-column>
             <el-table-column
+              prop="hospitalName"
+              label="文件所在医院"
+              style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
+              width="160"
+            ></el-table-column>
+            <el-table-column
               prop="channelName"
               label="文件所在通道"
               style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
+              width="160"
             ></el-table-column>
             <el-table-column
               prop="action"
               label="..."
               style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
-              width="200px"
+              width="100px"
             >
               <template slot-scope="scope">
                 <div class="action">
@@ -403,7 +410,8 @@ export default {
             modifiedData: file.modifiedTime.slice(0, 10),
             id: file.id,
             channelName: file.channelName,
-            channelId: file.channelId
+            channelId: file.channelId,
+            hospitalName: file.hospitalName
 
 
           }))

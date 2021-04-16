@@ -11,6 +11,7 @@ import DashBoard from '../components/admin/DashBoardAdmin.vue'
 import Yujian from '../components/admin/yujian/Yujian.vue'
 import Yunei from '../components/admin/yunei/Yunei.vue'
 import AdminFileList from '../components/admin/AdminFileList.vue'
+import ErrorStatus from '../components/admin/error/ErrorStatus.vue'
 
 import Login from '../components/login/Login.vue'
 import Register from '../components/login/Register.vue'
@@ -106,6 +107,12 @@ export default new Router({
             path: '/admin/authorize',
             name: 'AdminAuthorize',
             component: AdminAuthorize,
+            
+          },
+          {
+            path: '/admin/errorStatus',
+            name: 'errorStatus',
+            component: ErrorStatus,
             
           },
           {

@@ -92,7 +92,8 @@ export default {
                 const userData = res.data.data
                 console.log(userData)
                 setToken('userToken', userData.token)
-                localStorage.setItem('userChannel', userData.channelName)
+                localStorage.setItem('userHospital', userData.hospitalName)
+
                 localStorage.setItem('userName', userData.user.username)
                 const loading = this.$loading({
                   lock: true,

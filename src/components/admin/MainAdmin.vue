@@ -17,6 +17,7 @@
                   <el-dropdown-item icon="el-icon-user" command="jumpToYunei">域内设置</el-dropdown-item>
 
                   <el-dropdown-item icon="el-icon-folder-opened" command="jumpToYujian">域间设置</el-dropdown-item>
+                  <el-dropdown-item icon="el-icon-warning-outline" command="jumpToYujin">异常预警</el-dropdown-item>
                   <el-dropdown-item icon="el-icon-turn-off" command="loginout">退出登录</el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
@@ -48,7 +49,7 @@ export default {
   },
   computed: {
     userInfo () {
-      return `${localStorage.getItem('adminName')}/${localStorage.getItem('adminChannel')}`
+      return `${localStorage.getItem('adminName')}/${localStorage.getItem('adminHospital')}`
     }
   },
   methods: {
@@ -76,13 +77,17 @@ export default {
       }
       if (command === 'loginout') {
         removeToken('adminToken')
-        localStorage.removeItem('adminChannel')
+        localStorage.removeItem('adminHospital')
         localStorage.removeItem('adminName')
         this.$router.push('/')
       }
       if (command === 'jumpToYujian') {
 
         this.$router.push('/admin/yujian')
+      }
+      if (command === 'jumpToYujin') {
+
+        this.$router.push('/admin/errStatus')
       }
     },
 

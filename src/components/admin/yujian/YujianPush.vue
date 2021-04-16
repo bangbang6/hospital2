@@ -37,24 +37,28 @@
             </el-select>
           </template>
         </el-table-column>
-        <el-table-column label="通道" prop="channel">
+        <el-table-column label="目标医院" prop="hospital">
           <template slot-scope="scope">
-            <div
-              v-if="scope.row[scope.column.property].status|| scope.row.isList"
-            >{{scope.row.channel.label}}</div>
+            <div v-if="scope.row.hospital.status|| scope.row.isList">{{scope.row.hospital.label}}</div>
             <el-select
               v-model="scope.row.channel.id"
               placeholder="请选择"
               v-else
-              @change="e=>change(scope,channels,e)"
+              @change="e=>change(scope,hospitals,e)"
             >
               <el-option
-                v-for="item in channels"
+                v-for="item in hospitals"
                 :key="item.id"
-                :label="item.channelName"
+                :label="item.label"
                 :value="item.id"
               ></el-option>
             </el-select>
+          </template>
+        </el-table-column>
+        <el-table-column label="目标通道" prop="channel">
+          <template slot-scope="scope">
+            <span v-if=" scope.row.isList">{{scope.row.channel.label}}</span>
+            <span v-else>{{hospitalToChannel(scope.row.hospital.label)}}</span>
           </template>
         </el-table-column>
         <el-table-column label="操作" prop="...">
@@ -89,10 +93,22 @@ export default {
       users: [],
       channels: [],
       files: [],
-      options: []
+      options: [],
+      hospitals: []
     }
   },
   methods: {
+    hospitalToChannel (hospital) {
+      let name = ''
+      this.channelMap.forEach((item) => {
+        console.log('item', item);
+        console.log('hospital', hospital);
+        if (item.hospitalName == hospital) {
+          name = item.channelName
+        }
+      })
+      return name
+    },
     change (scope, obj, e) {
       console.log('e', e);
       console.log('obj', obj);
@@ -174,17 +190,21 @@ export default {
     },
     add () {
 
-      this.pushs.push({ userName: { label: "", status: true, id: "" }, fileName: { label: "", status: true, id: "" }, channel: { label: "", status: true, id: "" }, isList: false })
+      this.pushs.push({ userName: { label: "", status: true, id: "" }, fileName: { label: "", status: true, id: "" }, channel: { label: "", status: true, id: "" }, hospital: { label: "", status: true, id: "" }, isList: false })
     },
     parseObject (obj, note) {
       let res = []
       for (let key in obj) {
         /* let id = (key.match(/id=([0-9]){1,2}/))[1] */
-        let name = (key.match(/channelName=(\w+)\)/))[1]
+        let channelname = (key.match(/channelName=(\w+),/))[1]
+        let hospitalName = this.channelMap.filter(item => {
+          return item.channelName === channelname
+
+        })[0].hospitalName
         res.push(...(obj[key].map(item => ({
           ...item,
-          channelName: name,
-          label: name + '/' + item[note],
+          channelName: channelname,
+          label: hospitalName + '/' + item[note],
           value: item.id
         }))))
 
@@ -193,11 +213,11 @@ export default {
     },
     parse (obj) {
       if (!obj) {
-        this.pushs = { userName: { label: "", status: true, id: "" }, fileName: { label: "", status: true, id: "" }, channel: { label: "", status: true, id: "" }, isList: false }
+        this.pushs = { userName: { label: "", status: true, id: "" }, fileName: { label: "", status: true, id: "" }, channel: { label: "", status: true, id: "" }, hospital: { label: "", status: true, id: "" }, isList: false }
         return
       }
       this.pushs = obj.map(item => ({
-        userName: { label: item.username, status: true, id: item.userId }, fileName: { label: item.dataName, status: true, id: item.dataId }, channel: { label: item.channelName, status: true, id: item.channelId }, isList: true
+        userName: { label: item.userHospitalName + "/" + item.username, status: true, id: item.userId }, fileName: { label: item.dataHospitalName + "/" + item.dataName, status: true, id: item.dataId }, channel: { label: item.channelName, status: true, id: item.channelId }, hospital: { label: item.hospitalName, status: true, id: item.channelId }, isList: true
       }
       ))
     }
@@ -212,10 +232,13 @@ export default {
       }
     })
 
-    Promise.all([getGroupedDataList(), getGroupedUserList(), getAllChannels()]).then(res => {
+    Promise.all([getAllChannels(), getGroupedDataList(), getGroupedUserList()]).then(res => {
       console.log('res', res);
-      this.files = this.parseObject(res[0].data.data, 'dataName')
-      this.users = this.parseObject(res[1].data.data, 'username')
+      this.channelMap = res[0].data.data
+      this.channels = this.channelMap.map(item => ({ label: item.channelName, id: item.id }))
+      this.hospitals = this.channelMap.map(item => ({ label: item.hospitalName, id: item.id }))
+      this.files = this.parseObject(res[1].data.data, 'dataName')
+      this.users = this.parseObject(res[2].data.data, 'username')
       this.channels = res[2].data.data
       console.log('this.files', this.files);
       console.log('this.users', this.users);

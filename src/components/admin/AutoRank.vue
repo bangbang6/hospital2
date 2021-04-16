@@ -7,6 +7,7 @@
         <div :class="['list-item-no',+item.no <=3 ? 'top-no': '']">{{item.no}}</div>
         <div class="list-item-name">{{item.name}}</div>
         <div class="list-item-phone">{{item.phone}}</div>
+        <!-- <div class="list-item-number">{{item.fileNumber}}</div> -->
         <div class="list-item-address">{{item.address}}</div>
       </div>
     </div>
@@ -21,49 +22,57 @@ export default {
         no: 1,
         name: '赵医生',
         address: "同济医院",
-        phone: "157XXXX5790"
+        phone: "157XXXX5790",
+        fileNumber: 140
       },
       {
         no: 2,
         name: '赵医生',
         address: "同济医院",
-        phone: "157XXXX5790"
+        phone: "157XXXX5790",
+        fileNumber: 112
       },
       {
         no: 3,
         name: '赵医生',
         address: "同济医院",
-        phone: "157XXXX5790"
+        phone: "157XXXX5790",
+        fileNumber: 104
       },
       {
         no: 4,
         name: '赵医生',
         address: "同济医院",
-        phone: "157XXXX5790"
+        phone: "157XXXX5790",
+        fileNumber: 94
       },
       {
         no: 5,
         name: '赵医生',
         address: "同济医院",
-        phone: "157XXXX5790"
+        phone: "157XXXX5790",
+        fileNumber: 86
       },
       {
         no: 6,
         name: '赵医生',
         address: "同济医院",
-        phone: "157XXXX5790"
+        phone: "157XXXX5790",
+        fileNumber: 82
       },
       {
         no: 7,
         name: '赵医生',
         address: "同济医院",
-        phone: "157XXXX5790"
+        phone: "157XXXX5790",
+        fileNumber: 76
       },
       {
         no: 8,
         name: '赵医生',
         address: "同济医院",
-        phone: "157XXXX5790"
+        phone: "157XXXX5790",
+        fileNumber: 65
       }
 
       ]
@@ -112,6 +121,7 @@ export default {
         justify-content: center;
         width: 20px;
         height: 20px;
+        box-sizing: border-box;
 
         &.top-no {
           background: #000;
@@ -124,11 +134,18 @@ export default {
       .list-item-name {
         margin-left: 10px;
         color: gray;
+        width: 40px;
       }
       .list-item-phone {
         margin-left: 40px;
         color: gray;
+        width: 100px;
       }
+      /* .list-item-number {
+        margin-left: 80px;
+        color: gray;
+        width: 40px;
+      } */
       .list-item-address {
         flex: 1;
         text-align: right;

@@ -28,20 +28,30 @@
         <span :style="{fontWeight:'bold'}">上传文件信息</span>
       </div>
       <div class="info">
-        <span class="key">文件名:</span>
-        <span class="value">文件名</span>
+        <span class="key">上传文件一次上链:</span>
+        <span class="value">
+          {{firstUpChainTx}}
+          <i class="el-icon-circle-check" :style="{color:'#67c23a'}"></i>
+        </span>
       </div>
       <div class="info">
-        <span class="key">文件名:</span>
-        <span class="value">文件名</span>
+        <span class="key">二次上链:</span>
+        <span class="value">
+          {{secondUpChainTx}}
+          <i class="el-icon-circle-check" :style="{color:'#67c23a'}"></i>
+        </span>
       </div>
       <div class="info">
-        <span class="key">文件名:</span>
-        <span class="value">文件名</span>
+        <span class="key">授权用户文件读取权限:</span>
+        <span class="value">
+          <el-tag type="success">{{grantReadRes === 'true'?'success':'fail'}}</el-tag>
+        </span>
       </div>
       <div class="info">
-        <span class="key">文件名:</span>
-        <span class="value">文件名</span>
+        <span class="key">授权用户文件修改权限:</span>
+        <span class="value">
+          <el-tag type="success">{{grantModifyRes === 'true'?'success':'fail'}}</el-tag>
+        </span>
       </div>
     </el-card>
   </div>
@@ -58,7 +68,11 @@ export default {
       action: '',
       loading: false,
       channels: [],
-      channel: '同济医院'
+      channel: '同济医院',
+      grantReadRes: 'true',
+      grantModifyRes: 'true',
+      firstUpChainTx: 'a1d1asd12a3s',
+      secondUpChainTx: 'a1d1asd12a3s',
     }
   },
   computed: {
@@ -154,7 +168,9 @@ export default {
 
       .key {
         display: inline-block;
-        width: 60px;
+        width: 160px;
+        text-align: right;
+        margin-right: 10px;
       }
     }
   }

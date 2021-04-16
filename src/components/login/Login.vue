@@ -71,7 +71,7 @@ export default {
                 const userData = res.data.data
                 console.log('userData', userData);
                 setToken('userToken', userData.token)
-                localStorage.setItem('userChannel', userData.channelName)
+                localStorage.setItem('userHospital', userData.hospitalName)
                 localStorage.setItem('userName', userData.user.username)
 
                 // 调用elementUI的加载层
@@ -99,7 +99,7 @@ export default {
                 const userData = res.data.data
                 console.log('userData', userData);
                 setToken('adminToken', userData.token)
-                localStorage.setItem('adminChannel', userData.channelName)
+                localStorage.setItem('adminHospital', userData.hospitalName)
                 localStorage.setItem('adminName', userData.user.username)
 
                 // 调用elementUI的加载层
