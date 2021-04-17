@@ -9,81 +9,91 @@
             <span class="value"></span>
           </div>
           <div class="line">
-            <span class="key">作者</span>
-            <span class="value">{{author}}</span>
-          </div>
-          <div class="line">
-            <span class="key">发表类型</span>
-            <span class="value">{{publicTypeName}}</span>
-          </div>
-          <div class="line">
-            <span class="key">期刊名称</span>
-            <span class="value">{{name}}</span>
-          </div>
-          <div class="line">
-            <span class="key">发表时间</span>
-            <span class="value">{{formatDate(date)}}</span>
-          </div>
-          <div class="line">
-            <span class="key">项目号</span>
-            <span class="value">{{projectNum}}</span>
-          </div>
-          <div class="line">
-            <span class="key">项目基金</span>
-            <span class="value">{{projectFund}}</span>
-          </div>
-          <div class="line">
-            <span class="key">上传者</span>
+            <span class="key">发起者</span>
             <span class="value">{{uploader}}</span>
           </div>
           <div class="line">
-            <span class="key">上传单位</span>
-            <span class="value">{{organization}}</span>
+            <span class="key">发起者所在医院</span>
+            <span class="value">{{hospital}}</span>
           </div>
           <div class="line">
-            <span class="key">上链时间</span>
-            <span class="value">{{formatDate(chainDate)}}</span>
+            <span class="key">发起者所在通道</span>
+            <span class="value">{{uploaderChannel}}</span>
+          </div>
+          <div class="line">
+            <span class="key">文件id</span>
+            <span class="value">{{fileId}}</span>
+          </div>
+
+          <div class="line">
+            <span class="key">文件所在通道</span>
+            <span class="value">{{fileChannel}}</span>
+          </div>
+          <div class="line">
+            <span class="key">操作</span>
+            <span class="value">{{action}}</span>
+          </div>
+          <div class="line">
+            <span class="key">时间</span>
+            <span class="value">{{formatDate(date)}}</span>
+          </div>
+
+          <div class="line">
+            <span class="key">状态</span>
+            <span class="value" :style="{color:'#F56C6C'}">{{status}}</span>
           </div>
         </div>
       </div>
-      <div class="operation">
-        <div class="op">
-          <span class="bold">操作信息</span>
-        </div>
-        <div class="op-detail">
-          <div class="col-line">
-            <div class="con" v-for="(item,index) in histroys" :key="index">
-              <i :class="`dot dot${index}`" :style="{top:(index*68)+'px'}"></i>
-              <div
-                :class="`bar bar${index}`"
-                :style="{top:(index*68)+8+'px'}"
-                v-if="index !== histroys.length-1"
-              ></div>
-            </div>
-            <div class="time">
-              <div class="con" v-for="(item,index) in histroys" :key="index">
-                <span
-                  :class="`time-item`"
-                  :style="{top:(-3+index*68)+'px'}"
-                >{{formatDate(item.date)}}</span>
-              </div>
-            </div>
+    </div>
+    <div class="status-wrapper">
+      <div class="status-detail">
+        <div class="message" v-if="type === 'danger'">
+          <div class="line">
+            <span class="key bold">状态详情</span>
+            <span class="value"></span>
           </div>
-
-          <div class="tags">
-            <div class="tag" v-for="(item,index) in histroys" :key="index">
-              <el-tag
-                type="info"
-                :class="`tag-item`"
-                :style="{top:(-1+(index*68))+'px'}"
-                size="mini"
-              >{{item.user}}</el-tag>
-              <el-tag
-                type="info"
-                :class="`tag-item2`"
-                :style="{top:(-1+(index*68))+'px'}"
-                size="mini"
-              >{{item.operation}}</el-tag>
+          <div class="line">
+            <span class="key">peer</span>
+            <span class="value">{{peer}}</span>
+          </div>
+          <div class="line">
+            <span class="key">操作</span>
+            <span class="value">{{action}}</span>
+          </div>
+          <div class="line">
+            <span class="key">目标channel</span>
+            <span class="value">{{destChannel}}</span>
+          </div>
+        </div>
+        <div class="message" v-else-if="type === 'warning'">
+          <div class="line">
+            <span class="key bold">状态详情</span>
+            <span class="value"></span>
+          </div>
+          <div class="line">
+            <span class="key">原始数据</span>
+            <span class="value">{{originData}}</span>
+          </div>
+          <div class="line">
+            <span class="key">上链数据</span>
+            <span class="value">{{chainData}}</span>
+          </div>
+        </div>
+        <div class="message" v-else>
+          <div class="line">
+            <span class="key bold">状态详情</span>
+            <span class="value"></span>
+          </div>
+          <div class="list">
+            <div class="list-item gray">
+              <div class="updater">修改者</div>
+              <div class="txId">交易号</div>
+              <div class="updateDate">修改时间</div>
+            </div>
+            <div class="list-item" v-for="(updateItem,index) in updateHistorys" :key="index">
+              <div class="updater">{{updateItem.updater}}</div>
+              <div class="txId">{{updateItem.txId}}</div>
+              <div class="updateDate">{{formatDate(updateItem.updateDate)}}</div>
             </div>
           </div>
         </div>
@@ -100,32 +110,38 @@ export default {
   data () {
     return {
       title: '',
-      author: '',
-      publicTypeName: '',
-      projectNum: '',
-      projectFund: '',
       uploader: '',
-      organization: '',
-      chainDate: new Date(),
+      hospital: '',
+      uploaderChannel: '',
+      fileId: '',
+      fileChannel: '',
+      action: '',
       date: new Date(),
-      name: '',
-      histroys: [
-        {
-          operation: "修改论文",
-          user: '代老师',
-          date: new Date()
-        },
-        {
-          operation: "修改论文",
-          user: '学生',
-          date: new Date()
-        },
-        {
-          operation: "上传论文",
-          user: '代老师',
-          date: new Date()
-        },
-      ]
+      status: '',
+      peer: "",
+      type: '',
+      destChannel: '',
+      originData: '',
+      chainData: "",
+      updateHistorys: []
+
+      /*   histroys: [
+          {
+            operation: "修改论文",
+            user: '代老师',
+            date: new Date()
+          },
+          {
+            operation: "修改论文",
+            user: '学生',
+            date: new Date()
+          },
+          {
+            operation: "上传论文",
+            user: '代老师',
+            date: new Date()
+          },
+        ] */
     }
   },
   methods: {
@@ -151,15 +167,36 @@ export default {
       handler: function (newV) {
         console.log('newV', newV);
         this.title = newV.title
-        this.author = newV.author
-        this.publicTypeName = newV.publicTypeName
-        this.name = 'Journal of Parallel and Distributed Computing'
-        this.date = new Date()
-        this.projectNum = '0x0023104123'
-        this.projectFund = '国家xx项目xx基金'
         this.uploader = newV.uploader
-        this.organization = '华中科技大学计算机学院cgcl实验室'
-        this.chainDate = newV.chainDate
+        this.hospital = newV.hospital
+        this.uploaderChannel = 'channel1'
+        this.date = newV.date
+        this.fileId = '0x0023104123'
+        this.status = newV.status
+        this.action = newV.action
+        this.type = newV.type
+        this.fileChannel = 'channel2'
+        this.peer = 'peer0.org4.example.com'
+        this.destChannel = 'channel1'
+        this.originData = '0xfsahoandassca'
+        this.chainData = '0xopasmsndassca'
+        this.updateHistorys = [
+          {
+            updater: 'bang',
+            txId: 'DBsapodk265623sadaxcasa',
+            updateDate: new Date()
+          },
+          {
+            updater: 'zhaowenhao',
+            txId: 'Msaofhoasnas4612asdasad',
+            updateDate: new Date()
+          },
+          {
+            updater: 'bang',
+            txId: 'IDsakfpowe456s51asdw854s',
+            updateDate: new Date()
+          },
+        ]
       }
 
     }
@@ -172,12 +209,14 @@ export default {
   overflow-y: auto;
   width: 100%;
   height: 100%;
-  .detail-wrapper {
+  .detail-wrapper,
+  .status-wrapper {
     padding: 5px 10px;
     padding-top: 20px;
 
     box-sizing: border-box;
-    .detail {
+    .detail,
+    .status-detail {
       .title {
         font-weight: bold;
         width: 70%;
@@ -198,6 +237,45 @@ export default {
             &.bold {
               font-weight: bold;
               font-size: 12px;
+            }
+          }
+        }
+        .list {
+          color: gray;
+          margin-top: 10px;
+          .list-item {
+            display: flex;
+            border-bottom: 1px solid #bcd0f9;
+            /* border-bottom: 1px solid gray; */
+            height: 20px;
+            padding: 6px 20px 6px 0;
+            align-items: center;
+            .updater,
+            .txId,
+            .updateDate {
+              height: 20px;
+              /* padding: 5px 0; */
+              text-align: center;
+              font-size: 12px;
+            }
+            .updater {
+              width: 80px;
+            }
+            .updateDate {
+              width: 80px;
+            }
+            .txId {
+              flex: 1;
+            }
+
+            /* &:nth-child(odd) {
+        background: #f2f2f2;
+      }
+      &:nth-child(even) {
+        background: white;
+      } */
+            &.gray {
+              color: gray;
             }
           }
         }

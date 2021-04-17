@@ -4,10 +4,10 @@
     <div class="list">
       <div class="list-item gray">
         <div class="status">状态</div>
-        <div class="paper-title">文件名</div>
-        <div class="author">上传者</div>
-        <div class="type">所在医院</div>
-        <div class="date">上链时间</div>
+        <div class="paper-title">发起者</div>
+        <div class="author">医院</div>
+        <div class="type">文件</div>
+        <div class="date">时间</div>
       </div>
       <div
         class="list-item"
@@ -16,12 +16,17 @@
         @click="handleClick(index)"
       >
         <div class="paper-title">
-          <el-tag :type="paper.type" size="mini" effect="dark">{{paper.status}}</el-tag>
+          <el-tag
+            :type="paper.type"
+            size="mini"
+            effect="dark"
+            :style="{width:'80px'}"
+          >{{paper.status}}</el-tag>
         </div>
-        <div class="paper-title">{{paper.title}}</div>
-        <div class="author">{{paper.uploader}}</div>
-        <div class="type">{{paper.hospital}}</div>
-        <div class="date">{{formatDate(paper.chainDate)}}</div>
+        <div class="paper-title">{{paper.uploader}}</div>
+        <div class="author">{{paper.hospital}}</div>
+        <div class="type">{{paper.title}}</div>
+        <div class="date">{{formatDate(paper.date)}}</div>
       </div>
     </div>
   </div>
@@ -55,26 +60,16 @@ export default {
         title: "Foridar",
         uploader: 'bang',
         hospital: '同济医院',
-        chainDate: new Date(),
-        status: '名字重复',
+        date: new Date(),
+        status: '权限不足',
         type: 'danger',
       },
       {
         title: "Foridar",
         uploader: 'bang',
         hospital: '同济医院',
-        chainDate: new Date(),
-        status: '名字重复',
-        type: 'danger',
-
-
-      },
-      {
-        title: "Foridar",
-        uploader: 'bang',
-        hospital: '同济医院',
-        chainDate: new Date(),
-        status: '多次修改',
+        date: new Date(),
+        status: '数据不一致',
         type: 'warning',
 
 
@@ -83,8 +78,18 @@ export default {
         title: "Foridar",
         uploader: 'bang',
         hospital: '同济医院',
-        chainDate: new Date(),
+        date: new Date(),
         status: '多次修改',
+        type: 'info',
+
+
+      },
+      {
+        title: "Foridar",
+        uploader: 'bang',
+        hospital: '同济医院',
+        date: new Date(),
+        status: '数据不一致',
         type: 'warning',
 
 
@@ -93,8 +98,8 @@ export default {
         title: "Foridar",
         uploader: 'bang',
         hospital: '同济医院',
-        chainDate: new Date(),
-        status: '名字重复',
+        date: new Date(),
+        status: '权限不足',
         type: 'danger',
 
 
@@ -103,8 +108,8 @@ export default {
         title: "Foridar",
         uploader: 'bang',
         hospital: '同济医院',
-        chainDate: new Date(),
-        status: '名字重复',
+        date: new Date(),
+        status: '权限不足',
         type: 'danger',
 
 
@@ -114,8 +119,8 @@ export default {
         title: "Foridar",
         uploader: 'bang',
         hospital: '同济医院',
-        chainDate: new Date(),
-        status: '多次修改',
+        date: new Date(),
+        status: '数据不一致',
         type: 'warning',
 
 
@@ -125,9 +130,9 @@ export default {
         title: "Foridar",
         uploader: 'bang',
         hospital: '同济医院',
-        chainDate: new Date(),
+        date: new Date(),
         status: '多次修改',
-        type: 'warning',
+        type: 'info',
 
 
       }

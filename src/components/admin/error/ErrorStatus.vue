@@ -5,7 +5,7 @@
         <div class="selects">
           <div class="input-wrapper">
             <el-input size="mini" v-model="title" placeholder="文件名" clearable></el-input>
-            <el-input size="mini" v-model="author" placeholder="上传者" clearable></el-input>
+            <el-input size="mini" v-model="uploader" placeholder="发起者" clearable></el-input>
           </div>
 
           <el-button size="mini" type="primary" icon="el-icon-search" @click="search">搜索</el-button>
@@ -17,23 +17,30 @@
           size="mini"
           @row-click="handleRowClick"
         >
-          <el-table-column prop="title" label="名称" width="100">
+          <el-table-column prop="title" label="文件" width="100">
             <template slot-scope="scope">
               <span class="over">{{scope.row.title}}</span>
             </template>
           </el-table-column>
-          <el-table-column prop="uploader" label="上传者" width="100"></el-table-column>
-          <el-table-column prop="hospital" label="所在医院" width="80"></el-table-column>
+          <el-table-column prop="uploader" label="发起者" width="60"></el-table-column>
+          <el-table-column prop="hospital" label="医院" width="80"></el-table-column>
+          <el-table-column prop="channel" label="通道" width="80"></el-table-column>
+          <el-table-column prop="action" label="操作" width="60"></el-table-column>
 
-          <el-table-column prop="chainDate" label="上链时间">
+          <el-table-column prop="date" label="时间">
             <template slot-scope="scope">
-              <span>{{formatDate(scope.row.chainDate)}}</span>
+              <span>{{formatDate(scope.row.date)}}</span>
             </template>
           </el-table-column>
 
           <el-table-column prop="status" label="状态">
             <template slot-scope="scope">
-              <el-tag :type="scope.row.type" size="mini" effect="dark">{{scope.row.status}}</el-tag>
+              <el-tag
+                :type="scope.row.type"
+                size="mini"
+                effect="dark"
+                :style="{width:'70px',textAlign:'center'}"
+              >{{scope.row.status}}</el-tag>
             </template>
           </el-table-column>
         </el-table>
@@ -53,49 +60,54 @@ export default {
   data () {
     return {
       title: '',
-      author: '',
+      uploader: '',
       files: [
         {
           title: 'Trustzone-based secure lightweight wallet for hyperlerdger fabric',
           hospital: '同济医院',
           uploader: '代老师',
           id: 1,
-          chainDate: new Date(),
-          status: '题目重复',
+          date: new Date(),
+          channel: 'channel1',
+          action: 'pull',
+          status: '权限不足',
           type: 'danger'
         },
         {
           title: 'Trustzone-based secure lightweight wallet for hyperlerdger fabric',
           hospital: '同济医院',
 
-
+          channel: 'channel1',
+          action: 'pull',
+          status: '权限不足',
           uploader: 'bang',
           id: 2,
-          status: '题目重复',
           type: 'danger',
 
-          chainDate: new Date()
+          date: new Date()
         },
         {
           title: 'Foridar',
           hospital: '同济医院',
 
-
+          action: 'pull',
+          status: '数据不一致',
+          channel: 'channel1',
           uploader: 'user1',
           id: 3,
-          status: '权限出错',
           type: 'warning',
-          chainDate: new Date()
+          date: new Date()
         },
         {
           title: 'Foridar',
-          hospital: '同济医院',
-
+          hospital: '市三医院',
+          action: 'pull',
+          status: '多次修改',
+          channel: 'channel2',
           uploader: 'chen',
           id: 4,
-          status: '权限出错',
-          type: 'warning',
-          chainDate: new Date()
+          type: 'info',
+          date: new Date()
         },
       ],
       tableData: [],
@@ -119,7 +131,7 @@ export default {
         this.tableData = this.tableData.filter(file => file.title.indexOf(this.title) > -1)
       }
       if (this.author) {
-        this.tableData = this.tableData.filter(file => file.authors.indexOf(this.author) > -1)
+        this.tableData = this.tableData.filter(file => file.uploader.indexOf(this.author) > -1)
       }
 
     }
