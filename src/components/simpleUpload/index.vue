@@ -29,27 +29,27 @@
       </div>
       <div class="info">
         <span class="key">上传文件一次上链:</span>
-        <span class="value">
+        <span class="value" v-if="firstUpChainTx">
           {{firstUpChainTx}}
           <i class="el-icon-circle-check" :style="{color:'#67c23a'}"></i>
         </span>
       </div>
       <div class="info">
         <span class="key">二次上链:</span>
-        <span class="value">
+        <span class="value" v-if="secondUpChainTx">
           {{secondUpChainTx}}
           <i class="el-icon-circle-check" :style="{color:'#67c23a'}"></i>
         </span>
       </div>
       <div class="info">
         <span class="key">授权用户文件读取权限:</span>
-        <span class="value">
+        <span class="value" v-if="grantReadRes">
           <el-tag type="success">{{grantReadRes === 'true'?'success':'fail'}}</el-tag>
         </span>
       </div>
       <div class="info">
         <span class="key">授权用户文件修改权限:</span>
-        <span class="value">
+        <span class="value" v-if="grantModifyRes">
           <el-tag type="success">{{grantModifyRes === 'true'?'success':'fail'}}</el-tag>
         </span>
       </div>
@@ -69,10 +69,10 @@ export default {
       loading: false,
       channels: [],
       channel: '同济医院',
-      grantReadRes: 'true',
-      grantModifyRes: 'true',
-      firstUpChainTx: 'a1d1asd12a3s',
-      secondUpChainTx: 'a1d1asd12a3s',
+      grantReadRes: '',
+      grantModifyRes: '',
+      firstUpChainTx: '',
+      secondUpChainTx: '',
     }
   },
   computed: {
@@ -105,6 +105,11 @@ export default {
         if (res.data.code === 200) {
           this.loading = false
           alert(res.data.message)
+          this.grantReadRes = res.data.data.grantReadRes
+          this.grantModifyRes = res.data.grantModifyRes
+          this.firstUpChainTx = res.data.firstUpChainTx
+          this.secondUpChainTx = res.data.secondUpChainTx
+
         } else {
           alert(res.data.message)
           this.loading = false

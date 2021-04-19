@@ -165,6 +165,7 @@ export default {
   watch: {
     paper: {
       handler: function (newV) {
+        if (!newV) return
         console.log('newV', newV);
         this.title = newV.title
         this.uploader = newV.uploader

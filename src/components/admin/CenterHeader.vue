@@ -1,7 +1,12 @@
 <template>
   <div class="center-header">
     <div class="center-header-wrapper">
-      <div class="center-header-item" v-for="(item, index) in headerData" :key="index">
+      <div
+        class="center-header-item"
+        v-for="(item, index) in headerData"
+        :key="index"
+        @click="jump(index)"
+      >
         <div class="center-header-left">
           <i :class="[item.icon,item.color]" class="icon"></i>
         </div>
@@ -30,6 +35,13 @@ export default {
   data () {
     return {
       headerData: headerMockData.headerData.value
+    }
+  },
+  methods: {
+    jump (index) {
+      if (index === 5) {
+        this.$router.push('/admin/errorStatus')
+      }
     }
   }
 }

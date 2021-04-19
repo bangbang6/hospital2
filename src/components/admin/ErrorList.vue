@@ -3,7 +3,7 @@
     <div class="title">异常文件</div>
     <div class="list">
       <div class="list-item gray">
-        <div class="status">状态</div>
+        <div class="status" :style="{padding: '0 3px'}">状态</div>
         <div class="paper-title">发起者</div>
         <div class="author">医院</div>
         <div class="type">文件</div>
@@ -24,7 +24,7 @@
           >{{paper.status}}</el-tag>
         </div>
         <div class="paper-title">{{paper.uploader}}</div>
-        <div class="author">{{paper.hospital}}</div>
+        <div class="author" :style="{width:'240px'}">{{paper.hospital}}</div>
         <div class="type">{{paper.title}}</div>
         <div class="date">{{formatDate(paper.date)}}</div>
       </div>
@@ -59,7 +59,7 @@ export default {
       {
         title: "病例0X2132",
         uploader: '李医生',
-        hospital: '广东省人民医院',
+        hospital: '广东人民医院',
         date: new Date(),
         status: '权限不足',
         type: 'danger',

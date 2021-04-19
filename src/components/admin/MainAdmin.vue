@@ -87,7 +87,7 @@ export default {
       }
       if (command === 'jumpToYujin') {
 
-        this.$router.push('/admin/errStatus')
+        this.$router.push('/admin/errorStatus')
       }
     },
 
