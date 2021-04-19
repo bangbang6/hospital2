@@ -57,57 +57,49 @@ export default {
     this.papers = [
 
       {
-        title: "Foridar",
-        uploader: 'bang',
-        hospital: '同济医院',
+        title: "病例0X2132",
+        uploader: '李医生',
+        hospital: '广东省人民医院',
         date: new Date(),
         status: '权限不足',
         type: 'danger',
       },
       {
-        title: "Foridar",
-        uploader: 'bang',
-        hospital: '同济医院',
+        title: "病例0X8219",
+        uploader: '王医生',
+        hospital: '南京鼓楼医院',
         date: new Date(),
         status: '数据不一致',
         type: 'warning',
-
-
       },
       {
-        title: "Foridar",
-        uploader: 'bang',
-        hospital: '同济医院',
+        title: "病例0X0123",
+        uploader: '张医生',
+        hospital: '华西口腔医院',
         date: new Date(),
         status: '多次修改',
         type: 'info',
-
-
       },
       {
-        title: "Foridar",
-        uploader: 'bang',
-        hospital: '同济医院',
+        title: "病例0X7632",
+        uploader: '陈医生',
+        hospital: '吉大第一医院',
         date: new Date(),
         status: '数据不一致',
         type: 'warning',
-
-
       },
       {
-        title: "Foridar",
-        uploader: 'bang',
+        title: "病例0X2521",
+        uploader: '刘医生',
         hospital: '同济医院',
         date: new Date(),
         status: '权限不足',
         type: 'danger',
-
-
       },
       {
-        title: "Foridar",
-        uploader: 'bang',
-        hospital: '同济医院',
+        title: "病例0X6321",
+        uploader: '杨医生',
+        hospital: '齐鲁医院',
         date: new Date(),
         status: '权限不足',
         type: 'danger',
@@ -116,9 +108,9 @@ export default {
       },
 
       {
-        title: "Foridar",
-        uploader: 'bang',
-        hospital: '同济医院',
+        title: "病例0X6312",
+        uploader: '黄医生',
+        hospital: '上海第六医院',
         date: new Date(),
         status: '数据不一致',
         type: 'warning',
@@ -127,9 +119,9 @@ export default {
 
       },
       {
-        title: "Foridar",
-        uploader: 'bang',
-        hospital: '同济医院',
+        title: "病例0X5213",
+        uploader: '胡医生',
+        hospital: '武汉第一医院',
         date: new Date(),
         status: '多次修改',
         type: 'info',
