@@ -23,10 +23,10 @@
             :style="{width:'80px'}"
           >{{paper.status}}</el-tag>
         </div>
-        <div class="paper-title">{{paper.uploader}}</div>
-        <div class="author" :style="{width:'240px'}">{{paper.hospital}}</div>
-        <div class="type">{{paper.title}}</div>
-        <div class="date">{{formatDate(paper.date)}}</div>
+        <div class="paper-title overflow">{{paper.uploader}}</div>
+        <div class="author overflow" :style="{width:'240px'}">{{paper.hospital}}</div>
+        <div class="type overflow">{{paper.title}}</div>
+        <div class="date overflow">{{formatDate(paper.date)}}</div>
       </div>
     </div>
   </div>
@@ -166,9 +166,14 @@ export default {
       .status {
         flex: 1;
         height: 20px;
-        /* padding: 5px 0; */
+        /* padding: 0 5px; */
         text-align: center;
         font-size: 12px;
+      }
+      .overflow {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       /* &:nth-child(odd) {
