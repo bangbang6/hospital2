@@ -34,7 +34,7 @@
         ref="multipleTable"
         :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
         tooltip-effect="dark"
-        style="height: 450px;"
+        style="height: 500px;"
         @selection-change="handleSelectionChange"
         v-loading="loading1"
       >
@@ -533,7 +533,7 @@ export default {
 .fy {
   width: 400px;
   position: absolute;
-  top: 88%;
+  top: 85%;
   left: calc(50% - 200px);
 }
 /* .el-table--enable-row-hover .el-table__body tr td:nth-child(3) div div {
