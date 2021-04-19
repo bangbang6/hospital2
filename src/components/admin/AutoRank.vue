@@ -6,8 +6,8 @@
       <div class="list-item" v-for="item in rankData" :key="item.no">
         <div :class="['list-item-no',+item.no <=3 ? 'top-no': '']">{{item.no}}</div>
         <div class="list-item-name">{{item.name}}</div>
-        <div class="list-item-phone">{{item.phone}}</div>
-        <!-- <div class="list-item-number">{{item.fileNumber}}</div> -->
+        <!-- <div class="list-item-phone">{{item.phone}}</div> -->
+        <div class="list-item-number">{{item.fileNumber}}</div>
         <div class="list-item-address">{{item.address}}</div>
       </div>
     </div>
@@ -20,36 +20,36 @@ export default {
     return {
       rankData: [{
         no: 1,
-        name: '赵医生',
-        address: "同济医院",
-        phone: "157XXXX5790",
+        name: '李医生',
+        address: "武汉同济医院",
+        phone: "156XXXX5790",
         fileNumber: 140
       },
       {
         no: 2,
-        name: '赵医生',
-        address: "同济医院",
+        name: '王医生',
+        address: "武汉协和医院",
         phone: "157XXXX5790",
         fileNumber: 112
       },
       {
         no: 3,
-        name: '赵医生',
-        address: "同济医院",
+        name: '胡医生',
+        address: "武汉大学人民医院",
         phone: "157XXXX5790",
         fileNumber: 104
       },
       {
         no: 4,
-        name: '赵医生',
-        address: "同济医院",
+        name: '付医生',
+        address: "华西医院",
         phone: "157XXXX5790",
         fileNumber: 94
       },
       {
         no: 5,
-        name: '赵医生',
-        address: "同济医院",
+        name: '刘医生',
+        address: "北京大学第一医院",
         phone: "157XXXX5790",
         fileNumber: 86
       },
@@ -63,14 +63,14 @@ export default {
       {
         no: 7,
         name: '赵医生',
-        address: "同济医院",
+        address: "中山医院",
         phone: "157XXXX5790",
         fileNumber: 76
       },
       {
         no: 8,
         name: '赵医生',
-        address: "同济医院",
+        address: "华山医院",
         phone: "157XXXX5790",
         fileNumber: 65
       }
