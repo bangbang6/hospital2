@@ -81,15 +81,9 @@ export default {
   methods: {
     uploadFile: function (param) {
       //let loadingInstance = this.$loading({ target: dom });
-      if (!this.channels.length) {
-        alert('无可用通道,无法上传到服务器')
-        return
-      }
 
-      const channelId = this.channels.filter((item) => {
-        return item.channelName === this.channel
-      })[0].id
-      console.log(channelId);
+
+
       let fileObject = param.file;
       let formData = new FormData();
       formData.append("file", fileObject);
@@ -100,6 +94,14 @@ export default {
         return
       }
       //formData.append("originUserId", userId);
+      let userHospital = localStorage.getItem('userHospital')
+      let channelId = -1
+      if (userHospital === '同济医院') {
+        channelId = 1
+      } else {
+        channelId = 2
+
+      }
       upload(formData, channelId).then((res) => {
         console.log('file', res);
         if (res.data.code === 200) {
