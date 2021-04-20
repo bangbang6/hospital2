@@ -36,14 +36,15 @@ export default {
   methods: {
     renderGraph () {
       const index = this.tableData.length
-      const { user, dst_chain, src_chain, type_tx, fileName } = this.tableData[0]
+      const { user, dst_chain, src_chain, type_tx, fileName, this_tx_id } = this.tableData[0]
+      let loop = Math.floor((index - 1) / 4)
       const rect = new Shape.Rect({
         id: `node${index - 1}`,
-        x: 40 + Math.floor((index - 1) / 4) * 450,
-        y: 40 + (index - 1) % 4 * 100,
+        x: 40 + loop * 450,
+        y: loop % 2 === 0 ? 40 + (index - 1) % 4 * 100 : 40 + (3 - ((index - 1) % 4)) * 100,
         width: 400,
         height: 40,
-        label: `${user}   ${type_tx}   ${fileName}(${src_chain}) `,
+        label: `${user}   ${type_tx}   ${fileName}(${src_chain})    tx(${this_tx_id.slice(-10)}) `,
         zIndex: 2,
         attrs: {
           label: {
@@ -68,14 +69,14 @@ export default {
           className: 'my-scroller'
         },
       });
-      const { user, dst_chain, src_chain, type_tx, fileName } = this.tableData[0]
+      const { user, dst_chain, src_chain, type_tx, fileName, this_tx_id } = this.tableData[0]
       const rect = new Shape.Rect({
         id: `node0`,
         x: 40,
         y: 40,
         width: 400,
         height: 40,
-        label: `${user}   ${type_tx}   ${fileName}(${src_chain}) `,
+        label: `${user}   ${type_tx}   ${fileName}(${src_chain})   tx(${this_tx_id.slice(-10)}) `,
         zIndex: 2,
         attrs: {
           label: {
