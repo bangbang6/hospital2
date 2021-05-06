@@ -30,126 +30,126 @@
           <el-button slot="append" icon="el-icon-search" @click="onSubmit()"></el-button>
         </el-autocomplete>
       </div>
-      <el-tabs type="border-card" @tab-click="handleTabclick">
-        <el-tab-pane label="所在医院">
-          <el-table
-            ref="multipleTable"
-            :data="yuneiFiles.slice((currentPage[0]-1)*pagesize,currentPage[0]*pagesize)"
-            tooltip-effect="dark"
-            style="height: 450px;"
-            @selection-change="handleSelectionChange"
-            v-loading="loading1"
-          >
-            <el-table-column type="selection"></el-table-column>
-            <el-table-column
-              prop="fileName"
-              label="文件名"
-              style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
-            ></el-table-column>
-            <el-table-column
-              prop="channelName"
-              label="文件所在通道"
-              style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
-            ></el-table-column>
-            <el-table-column
-              prop="action"
-              label="..."
-              style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
-              width="200px"
-            >
-              <template slot-scope="scope">
-                <div class="action">
-                  <el-tooltip
-                    v-for="item  in scope.row.authoritySet"
-                    :key="item.id"
-                    class="item"
-                    effect="light"
-                    placement="bottom-start"
-                    style="margin-right: 5px"
-                    :content="item.content"
+      <!-- <el-tabs type="border-card" @tab-click="handleTabclick"> -->
+      <!--  <el-tab-pane label="所在医院"> -->
+      <el-table
+        ref="multipleTable"
+        :data="yuneiFiles.slice((currentPage[0]-1)*pagesize,currentPage[0]*pagesize)"
+        tooltip-effect="dark"
+        style="height: 450px;"
+        @selection-change="handleSelectionChange"
+        v-loading="loading1"
+      >
+        <el-table-column type="selection"></el-table-column>
+        <el-table-column
+          prop="fileName"
+          label="文件名"
+          style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
+        ></el-table-column>
+        <el-table-column
+          prop="channelName"
+          label="文件所在通道"
+          style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
+        ></el-table-column>
+        <el-table-column
+          prop="action"
+          label="..."
+          style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
+          width="200px"
+        >
+          <template slot-scope="scope">
+            <div class="action">
+              <el-tooltip
+                v-for="item  in scope.row.authoritySet"
+                :key="item.id"
+                class="item"
+                effect="light"
+                placement="bottom-start"
+                style="margin-right: 5px"
+                :content="item.content"
+              >
+                <el-link
+                  :icon="item.icon"
+                  style="font-size: 18px;color: #409EFF"
+                  @click="handleClick(scope.$index,item.id)"
+                ></el-link>
+              </el-tooltip>
+              <el-tooltip
+                class="item"
+                effect="light"
+                placement="bottom-start"
+                style="margin-right: 5px;width:210px"
+                content="push"
+                v-if="scope.row.pushChannelSet"
+              >
+                <el-popover
+                  placement="right"
+                  width="280"
+                  trigger="manual"
+                  v-model="channelsVisible[pagesize * (currentPage[0] - 1)+scope.$index]"
+                  style="margin-right: 5px;width:210px"
+                >
+                  <div
+                    class="close"
+                    style="float:right;color:gray;fontSize:14px;margin-right:10px; cursor: pointer;"
+                    @click="close(scope.$index)"
                   >
-                    <el-link
-                      :icon="item.icon"
-                      style="font-size: 18px;color: #409EFF"
-                      @click="handleClick(scope.$index,item.id)"
-                    ></el-link>
-                  </el-tooltip>
-                  <el-tooltip
-                    class="item"
-                    effect="light"
-                    placement="bottom-start"
-                    style="margin-right: 5px;width:210px"
-                    content="push"
-                    v-if="scope.row.pushChannelSet"
-                  >
-                    <el-popover
-                      placement="right"
-                      width="280"
-                      trigger="manual"
-                      v-model="channelsVisible[pagesize * (currentPage[0] - 1)+scope.$index]"
-                      style="margin-right: 5px;width:210px"
-                    >
-                      <div
-                        class="close"
-                        style="float:right;color:gray;fontSize:14px;margin-right:10px; cursor: pointer;"
-                        @click="close(scope.$index)"
-                      >
-                        <i class="el-icon-close"></i>
-                      </div>
-                      <el-table :data="pushChannels" size="mini" style="width:200px">
-                        <el-table-column width="120" property="hospitalName" label="医院"></el-table-column>
+                    <i class="el-icon-close"></i>
+                  </div>
+                  <el-table :data="pushChannels" size="mini" style="width:200px">
+                    <el-table-column width="120" property="userName" label="用户"></el-table-column>
 
-                        <el-table-column property="address" label="操作" width="80">
-                          <template slot-scope="scope2">
-                            <el-button size="mini" @click="pushFile(scope.$index,scope2.$index)">确定</el-button>
-                          </template>
-                        </el-table-column>
-                      </el-table>
-                      <el-link
-                        icon="el-icon-top-right"
-                        style="font-size: 18px;color: #409EFF"
-                        @click="handleClick(scope.$index,5)"
-                        slot="reference"
-                      ></el-link>
-                    </el-popover>
-                  </el-tooltip>
-                </div>
-              </template>
-            </el-table-column>
-            <el-table-column
-              prop="fileSize"
-              label="文件大小"
-              style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
-              :sortable="true"
-              :sort-method="sortBySize"
-              width="120px"
-            ></el-table-column>
-            <el-table-column
-              prop="upload_data"
-              label="上传日期"
-              :sortable="true"
-              :sort-method="sortByUploadDate"
-              style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
-              width="150px"
-            ></el-table-column>
-            <el-table-column
-              prop="modifiedData"
-              label="更改日期"
-              :sortable="true"
-              :sort-method="sortByModDate"
-              style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
-              width="150px"
-            ></el-table-column>
-          </el-table>
-          <el-pagination
-            class="fy"
-            layout="prev, pager, next"
-            @current-change="current_change"
-            :total="total"
-            background
-          ></el-pagination>
-        </el-tab-pane>
-        <el-tab-pane label="其他医院">
+                    <el-table-column property="address" label="操作" width="80">
+                      <template slot-scope="scope2">
+                        <el-button size="mini" @click="pushFile(scope.$index,scope2.$index)">确定</el-button>
+                      </template>
+                    </el-table-column>
+                  </el-table>
+                  <el-link
+                    icon="el-icon-top-right"
+                    style="font-size: 18px;color: #409EFF"
+                    @click="handleClick(scope.$index,5)"
+                    slot="reference"
+                  ></el-link>
+                </el-popover>
+              </el-tooltip>
+            </div>
+          </template>
+        </el-table-column>
+        <el-table-column
+          prop="fileSize"
+          label="文件大小"
+          style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
+          :sortable="true"
+          :sort-method="sortBySize"
+          width="120px"
+        ></el-table-column>
+        <el-table-column
+          prop="upload_data"
+          label="上传日期"
+          :sortable="true"
+          :sort-method="sortByUploadDate"
+          style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
+          width="150px"
+        ></el-table-column>
+        <el-table-column
+          prop="modifiedData"
+          label="更改日期"
+          :sortable="true"
+          :sort-method="sortByModDate"
+          style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
+          width="150px"
+        ></el-table-column>
+      </el-table>
+      <el-pagination
+        class="fy"
+        layout="prev, pager, next"
+        @current-change="current_change"
+        :total="total"
+        background
+      ></el-pagination>
+      <!-- </el-tab-pane> -->
+      <!--  <el-tab-pane label="其他医院">
           <el-table
             ref="multipleTable"
             :data="yujianFiles.slice((currentPage[1]-1)*pagesize,currentPage[1]*pagesize)"
@@ -232,8 +232,8 @@
             :total="total"
             background
           ></el-pagination>
-        </el-tab-pane>
-      </el-tabs>
+      </el-tab-pane>-->
+      <!-- </el-tabs> -->
     </div>
     <div
       class="result"
@@ -260,7 +260,7 @@
 <script>
 import { getYujianFiles, getYuneiFiles, pushData, pullData } from '@/api/file'
 import { deleteFile, getFile, updateFile } from '@/api/file'
-import { mapMutations } from 'vuex'
+import { getUserExceptMe } from '@/api/user'
 export default {
   data () {
     return {
@@ -370,7 +370,23 @@ export default {
 
       console.log('this.idx', this.idx);
       console.log('this.yuneiFiles', this.yuneiFiles);
-      this.pushChannels = this.yuneiFiles[this.idx].pushChannelSet
+      //!push到人
+      getUserExceptMe(this.yuneiFiles[this.idx].id).then(res => {
+        if (res.data.code === 200) {
+          this.pushChannels = res.data.data.map(item => {
+            return {
+              channelName: item.channelName,
+              userName: item.user.username,
+              id: item.user.id
+            }
+          })
+          console.log('this.friends', this.pushChannels);
+        } else {
+          alert(res.data.message)
+        }
+      }, reject => { alert(reject.message) })
+      //!push到别的医院
+      /*  this.pushChannels = this.yuneiFiles[this.idx].pushChannelSet */
     },
 
     getYuneiFiles () {
@@ -663,7 +679,6 @@ export default {
       }
       return 0;
     },
-    ...mapMutations(['setDataId'])
   },
   mounted () {
 

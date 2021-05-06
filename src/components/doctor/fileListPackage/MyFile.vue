@@ -97,7 +97,7 @@
                       <div class="no-friends">所有用户都有权限啦</div>
                     </template>
                     <el-table-column width="100" property="userName" label="用户"></el-table-column>
-                    <el-table-column width="100" property="channelName" label="通道"></el-table-column>
+                    <!-- <el-table-column width="100" property="channelName" label="通道"></el-table-column> -->
                     <el-table-column property="address" label="操作">
                       <template slot-scope="scope2">
                         <el-button

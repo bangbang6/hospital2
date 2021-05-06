@@ -27,7 +27,10 @@
         </div>
 
         <div class="user">
-          <div class="channelName">{{userName}}/{{userChannel}}</div>
+          <div class="channelName">
+            {{userName}}
+            <!-- /{{userChannel}} -->
+          </div>
           <div class="avaturl">
             <el-dropdown trigger="click" @command="handleCommand">
               <img src="../../assets/avaturl.jpg" class="imgAvaturl" />
