@@ -463,13 +463,20 @@ export default {
 
 
         this.pushChannel(index)
+      } else if (authorId === 6) {
+        this.$router.push({
+          path: '/doctor/sgx',
+          query: {
+            id: this.yuneiFiles[this.pagesize * (this.currentPage[0] - 1) + index].id
+          }
+        })
       }
     },
     parserSet (set) {
 
       set.push(4, 6)
-      const contents = ['预览', '修改', '删除', '溯源', '追踪']
-      const icons = ['view', 'edit', 'circle-close', 'attract', 'download']
+      const contents = ['预览', '修改', '删除', '溯源', '追踪', '联邦学习']
+      const icons = ['view', 'edit', 'circle-close', 'attract', 'download', 'monitor']
       return set.map((item) => ({
         id: item,
         content: contents[item - 1],

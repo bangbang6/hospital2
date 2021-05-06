@@ -102,7 +102,7 @@ export default {
         if (newV.name === 'myFile') {
           this.activeIndex = '0'
         }
-        else if (newV.name === 'allFile') {
+        else if (newV.name === 'allFile' || newV.name === 'sgx') {
           this.activeIndex = '1'
         }
         else if (newV.name === 'simpleUpload') {

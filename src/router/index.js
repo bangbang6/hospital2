@@ -20,6 +20,7 @@ import simpleUpload from '../components/simpleUpload'
 import AdminAuthorize from '../components/admin/Authorize'
 import Channel from '../components/admin/Channel'
 import BackWard from '../components/doctor/NewBackward'
+import SgxLearn from '../components/doctor/SgxLearn/index.vue'
 import UserRequest from '../components/admin/UserRequest'
 import MainAdmin from '../components/admin/MainAdmin'
 import allFile from '../components/doctor/fileListPackage/allFileTab'
@@ -81,13 +82,18 @@ export default new Router({
           },
             {
                 path: '/doctor/sharedFile',
-                nameL: 'sharedFile',
+                name: 'sharedFile',
                 component: SharedFile
             },
             {
                 path: '/doctor/beSharedFile',
-                nameL: 'beSharedFile',
+                name: 'beSharedFile',
                 component: BeSharedFile
+            },
+            {
+                path: '/doctor/sgx',
+                name: 'sgx',
+                component: SgxLearn
             },
         ]
       },
