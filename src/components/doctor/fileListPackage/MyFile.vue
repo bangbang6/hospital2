@@ -15,6 +15,17 @@
           end-placeholder="结束日期"
           :picker-options="pickerOptions"
         ></el-date-picker>
+        <el-button
+          type="primary"
+          icon="el-icon-monitor"
+          size="mini"
+          @click="$router.push({
+          path: '/doctor/sgx',
+          query: {
+            id: 2
+          }
+        })"
+        ></el-button>
         <el-autocomplete
           class="input-with-select"
           v-model="input"
@@ -260,7 +271,7 @@ export default {
 
     handleClick (index, authorId) {
 
-
+      console.log('authorId', authorId);
       if (authorId === 1) {
         this.loading1 = true;
         this.seeFile(index)
@@ -276,6 +287,13 @@ export default {
 
 
         this.shareFile(index)
+      } else if (authorId === 6) {
+        this.$router.push({
+          path: '/doctor/sgx',
+          query: {
+            id: this.files[this.pagesize * (this.currentPage - 1) + index].id
+          }
+        })
       }
     },
     shareFile (index) {
@@ -304,9 +322,9 @@ export default {
       }, reject => { alert(reject.message) })
     },
     parserSet (set) {
-      set.push(4)
-      const contents = ['预览', '修改', '删除', '溯源', '分享', '追踪']
-      const icons = ['view', 'edit', 'circle-close', 'attract', 'share']
+      set.push(4, 6)
+      const contents = ['预览', '修改', '删除', '溯源', '分享', '联邦学习',]
+      const icons = ['view', 'edit', 'circle-close', 'attract', 'share', 'monitor']
       return set.map((item) => ({
         id: item,
         content: contents[item - 1],

@@ -20,14 +20,18 @@
         <div class="title">计算信息</div>
         <div class="info">
           <div class="info1">{{time1.toLocaleString()}} 正在重新计算模型参数...</div>
-          <div class="info2" v-if="show2">{{time2.toLocaleString()}} 正在向中心节点聚合...</div>
-          <div class="info3" v-if="show3">{{time3.toLocaleString()}} {{`正在计算文件百分比${percentage}%`}}</div>
-          <div class="info4" v-if="show4">{{time4.toLocaleString()}} {{`文件结果为${result}%`}}</div>
+          <div
+            class="info2"
+            v-if="show2"
+          >{{time2.toLocaleString()}} 模型参数中间结果为gf5xgsd5fcgbsd8gfhdf2g4hd5hdf2gb1r8hrdhff8h</div>
+          <div class="info3" v-if="show3">{{time3.toLocaleString()}} {{`正在上传${percentage}%`}}</div>
+          <!-- <div class="info4" v-if="show4">{{time4.toLocaleString()}} {{`参数反馈更新过程${percentage}%`}}</div> -->
+          <div class="info5" v-if="show4">{{time5.toLocaleString()}} {{`计算结果为${result}`}}</div>
         </div>
       </div>
     </el-card>
-    <el-dialog title="结果" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
-      <span>该文件的计算结果为:{{result}}%</span>
+    <el-dialog title="结果" :visible.sync="dialogVisible" width="30%">
+      <span>该文件的计算结果为:{{result}}</span>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
@@ -37,6 +41,7 @@
 </template>
  
 <script>
+import md5 from 'md5'
 export default {
   data () {
     return {
@@ -64,14 +69,16 @@ export default {
 
       ],
       percentage: 0,
-      result: (((Math.random() * 5 + 85).toFixed(2))),
+      result: md5((((Math.random() * 5 + 85).toFixed(2)))),
       show2: false,
       show3: false,
       show4: false,
+      show5: false,
       time1: new Date(),
       time2: new Date(),
       time3: new Date(),
       time4: new Date(),
+      time5: new Date(),
       dialogVisible: false,
     }
   },

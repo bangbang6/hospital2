@@ -23,6 +23,7 @@ import BackWard from '../components/doctor/NewBackward'
 import SgxLearn from '../components/doctor/SgxLearn/index.vue'
 import UserRequest from '../components/admin/UserRequest'
 import MainAdmin from '../components/admin/MainAdmin'
+import SgxCenter from '../components/admin/SgxCenter'
 import allFile from '../components/doctor/fileListPackage/allFileTab'
 
 
@@ -113,6 +114,12 @@ export default new Router({
             path: '/admin/authorize',
             name: 'AdminAuthorize',
             component: AdminAuthorize,
+            
+          },
+          {
+            path: '/admin/sgxCenter',
+            name: 'sgxCenter',
+            component: SgxCenter,
             
           },
           {

@@ -74,12 +74,12 @@
                   @click="handleClick(scope.$index,item.id)"
                 ></el-link>
               </el-tooltip>
-              <el-tooltip
+              <!-- <el-tooltip
                 class="item"
                 effect="light"
                 placement="bottom-start"
                 style="margin-right: 5px;width:210px"
-                content="push"
+                content="分享"
                 v-if="scope.row.pushChannelSet"
               >
                 <el-popover
@@ -112,7 +112,7 @@
                     slot="reference"
                   ></el-link>
                 </el-popover>
-              </el-tooltip>
+              </el-tooltip> -->
             </div>
           </template>
         </el-table-column>
@@ -474,9 +474,9 @@ export default {
     },
     parserSet (set) {
 
-      set.push(4, 6)
-      const contents = ['预览', '修改', '删除', '溯源', '追踪', '联邦学习']
-      const icons = ['view', 'edit', 'circle-close', 'attract', 'download', 'monitor']
+      set.push(4)
+      const contents = ['预览', '修改', '删除', '溯源', '追踪']
+      const icons = ['view', 'edit', 'circle-close', 'attract', 'download']
       return set.map((item) => ({
         id: item,
         content: contents[item - 1],
