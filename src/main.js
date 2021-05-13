@@ -11,6 +11,7 @@ Vue.use(ElementUI);
 Vue.use(VCharts)
 import store from '@/store/index'
 import './permision'
+
 Vue.config.productionTip = false
 new Vue({
   render: h => h(App),

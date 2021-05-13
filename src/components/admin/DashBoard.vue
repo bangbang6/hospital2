@@ -44,12 +44,13 @@ export default {
   height: 100%;
   .content {
     padding-left: 100px;
+    padding-left: 50px; //!删除的
     box-sizing: border-box;
     height: 58%;
     display: flex;
     .map {
       height: 100%;
-      width: 40%;
+      width: 48%;
     }
 
     .rank {
@@ -57,12 +58,15 @@ export default {
       //width:80%;
       width: 35%;
       margin-left: 20px;
+
       //padding-right: 5%;
     }
     .error {
       height: 100%;
       //width:80%;
       width: 28%;
+      /*  padding-left: -20px; */
+      margin-left: -120px; //!删除的
     }
   }
   .header {

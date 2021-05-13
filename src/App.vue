@@ -27,4 +27,14 @@ body,
 input {
   font-family: 'Arial', 'Microsoft YaHei';
 }
+
+.amap-logo {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+.amap-copyright {
+  display: none !important;
+  visibility: hidden !important;
+}
 </style>

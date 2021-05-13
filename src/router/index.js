@@ -14,6 +14,7 @@ import AdminFileList from '../components/admin/AdminFileList.vue'
 import ErrorStatus from '../components/admin/error/ErrorStatus.vue'
 
 import Login from '../components/login/Login.vue'
+import Test from '../components/admin/Test2.vue'
 import Register from '../components/login/Register.vue'
 import DoctorMain from '../components/doctor/DoctorMain.vue'
 import simpleUpload from '../components/simpleUpload'
@@ -34,6 +35,7 @@ Router.prototype.push = function push(location) {
 export default new Router({
 
     routes: [
+    
       {
         path: '/',
         name: 'login',
@@ -44,7 +46,11 @@ export default new Router({
         name: 'register',
         component: Register
       },
-      
+      {
+        path: '/test',
+        name: 'test',
+        component: Test
+      },
       {
         path: '/doctor',
         name: 'DoctorIndex',
