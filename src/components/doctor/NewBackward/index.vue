@@ -4,8 +4,8 @@
       <el-button type="primary" size="mini" @click="back">返回</el-button>
       <div class="text">{{text}}</div>
       <div class="btns-wrapper">
-        <!-- <el-button type="primary" size="mini" @click="backAll">全部溯源</el-button> -->
-        <el-button type="primary" size="mini" @click="backagain">溯源</el-button>
+        <el-button type="primary" size="mini" @click="backAll">全部溯源</el-button>
+        <el-button type="primary" size="mini" @click="backagain">单次溯源</el-button>
       </div>
     </div>
     <div id="container"></div>
@@ -13,7 +13,7 @@
 </template>
  
 <script>
-import { backward, backwardAgain } from '@/api/file'
+import { backward, backwardAgain, traceBackwardForAll } from '@/api/file'
 import { mapState } from 'vuex'
 import { Graph } from '@antv/x6';
 import { Shape } from '@antv/x6'
@@ -87,9 +87,33 @@ export default {
       this.graph.addNode(rect)
     },
     backAll () {
-      if (this.dataId) {
-        return
-      }
+      traceBackwardForAll(this.dataId).then(res =>{
+        if (res.data.code === 200) {
+          console.log(res.data.data);
+          // this.txId = res.data.data.record.this_tx_id
+          let records = res.data.data
+          console.log(records)
+          this.tableData = []
+          for(var i = 0;i < records.length;i++){
+            this.tableData.unshift(this.parser(records[i]))
+            if(i == 0){
+              this.initGragh()
+            }else{
+              this.renderGraph()
+            }
+          }
+          // records = records.map(record =>{
+          //    this.tableData.unshift(this.parser(record))
+          // })
+          // console.log(records)
+          // this.tableData = records
+          // console.log(this.tableData)
+          // // this.tableData.push(this.parser(res.data.data))
+          // this.initGragh()
+        } else {
+          alert(res.data.message)
+        }
+     })
       //todo 全部溯源
     },
     parser (record) {

@@ -3,7 +3,8 @@
     <div class="btns">
       <el-button type="primary" size="mini" @click="back">返回</el-button>
       <div class="text">{{text}}</div>
-      <el-button type="primary" size="mini" @click="backagain">溯源</el-button>
+      <el-button type="primary" size="mini" @click="backagain">单次溯源</el-button>
+      <!-- <el-button type="primary" size="mini" @click="backagain">全部溯源</el-button> -->
     </div>
     <el-table :data="tableData" style="width: 100%" class="table" size="mini">
       <el-table-column type="index" width="50"></el-table-column>

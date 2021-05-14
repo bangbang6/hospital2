@@ -176,7 +176,7 @@
 <script>
 import { getMyFileList, shareFile } from '@/api/file'
 import { getUserExceptMe } from '@/api/user'
-import { deleteFile, getFile, updateFile, backward } from '@/api/file'
+import { deleteFile, getFile, updateFile, backward ,downloadFile} from '@/api/file'
 import { mapMutations } from 'vuex'
 export default {
   data () {
@@ -270,9 +270,13 @@ export default {
       } else if (authorId === 3) {
         this.loading1 = true;
         this.deleteRow(index)
-      } else if (authorId === 4) {
-        this.backwordFile(index)
+      }else if(authorId === 4){
+        // this.loading1 = true;
+        // 下载
+        this.downloadData(index)
       } else if (authorId === 5) {
+        this.backwordFile(index)
+      } else if (authorId === 6) {
 
 
         this.shareFile(index)
@@ -304,9 +308,9 @@ export default {
       }, reject => { alert(reject.message) })
     },
     parserSet (set) {
-      set.push(4)
-      const contents = ['预览', '修改', '删除', '溯源', '分享', '追踪']
-      const icons = ['view', 'edit', 'circle-close', 'attract', 'share']
+      set.push(5)
+      const contents = ['预览', '修改', '删除', '下载','溯源', '分享', '追踪']
+      const icons = ['view', 'edit', 'circle-close', 'download','attract', 'share']
       return set.map((item) => ({
         id: item,
         content: contents[item - 1],
@@ -335,11 +339,11 @@ export default {
         confirmButtonText: '确定'
       })
     },
-    downloadFile (index) {
-      this.$alert('这是第' + index + '行文件的下载结果', '文件下载', {
-        confirmButtonText: '确定'
-      })
-    },
+    // downloadFile (index) {
+    //   this.$alert('这是第' + index + '行文件的下载结果', '文件下载', {
+    //     confirmButtonText: '确定'
+    //   })
+    // },
     changeFile (index) {
       this.idx = this.pagesize * (this.currentPage - 1) + index
       getFile(this.files[this.idx].id).then(res => {
@@ -382,6 +386,11 @@ export default {
 
         }
       })
+    },
+    downloadData(index){
+      let idx = this.pagesize * (this.currentPage - 1) + index
+      downloadFile(this.files[idx].id)
+
     },
     deleteRow (index) {
       let idx = this.pagesize * (this.currentPage - 1) + index

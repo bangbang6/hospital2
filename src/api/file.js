@@ -1,5 +1,8 @@
 import request from '../utils/request'
 import {getToken} from '../utils/cookie'
+
+const downloadBaseUrl = 'http://211.69.197.138:8070'
+
 export function upload(formData,channelId){
   return request(
     {
@@ -53,6 +56,24 @@ export function getFile(fileId){
   })
 }
 
+export function downloadFile(fileId){
+
+  let a = document.createElement('a')
+  a.href =`${downloadBaseUrl}/data/downloadData?dataId=${fileId}&token=${getToken('userToken')}`
+  a.click();
+  // return request({
+  //   url:"/data/downloadData?dataId="+fileId,
+  //   method:'GET',
+  //   headers:{
+  //     token:getToken('userToken'),
+
+  //   }
+  //   // data:{
+  //   //   dataId:(+fileId)
+  //   // }
+  // })
+}
+
 export function updateFile(message,fileId){
   return request({
     url:"/data/updateData",
@@ -97,6 +118,21 @@ export function backwardAgain(dataId,txId){
     },
   })
 }
+
+export function traceBackwardForAll(dataId){
+  return request({
+    url:'/trace/traceBackwardForAll',
+    data:{
+      dataId:dataId
+    },
+    method:'POST',
+    headers:{
+      token:getToken('userToken'),
+
+    },
+  })
+}
+
 /**
  *
  *获取用户上传文件
