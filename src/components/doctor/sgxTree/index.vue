@@ -200,11 +200,12 @@ export default {
     showLog () {
       let index = 2
       this.show1 = true
+      let ele = this.$refs.info
+
       this.time1 = new Date()
       this.percentage = 0
       this.percentage2 = 0
       let timer = setInterval(() => {
-        let ele = this.$refs.info
         if (index !== 4 && index !== 6) {
           this[`show${index}`] = true
           this[`time${index}`] = new Date()
@@ -212,15 +213,19 @@ export default {
 
 
 
-        ele.scrollTo(0, ele.scrollHeight)
+        ele.scrollTop = ele.scrollHeight
+
         if (index === 3) {
           let timer2 = setInterval(() => {
             this.percentage += 2
             if (this.percentage >= 100) {
               this[`show4`] = true
               this[`time4`] = new Date()
-              /* ele.scrollTop = ele.scrollHeight */
-              ele.scrollTo(0, ele.scrollHeight)
+              this[`show5`] = true
+              this[`time5`] = new Date()
+              index = 5
+              ele.scrollTop = ele.scrollHeight
+              /* ele.scrollTo(0, ele.scrollHeight) */
               clearInterval(timer2)
 
 
@@ -235,8 +240,8 @@ export default {
             if (this.percentage2 >= 100) {
               this[`show6`] = true
               this[`time6`] = new Date()
-              /*  ele.scrollTop = ele.scrollHeight */
-              ele.scrollTo(0, ele.scrollHeight)
+              index = 6
+              ele.scrollTop = ele.scrollHeight
               clearInterval(timer2)
 
 
@@ -246,7 +251,7 @@ export default {
         }
 
         if (index === 7) {
-          /*           ele.scrollTop = ele.scrollHeight */
+          ele.scrollTop = ele.scrollHeight
           clearInterval(timer)
 
 
@@ -254,6 +259,8 @@ export default {
         index++
 
       }, 2500)
+
+
     },
     changeFile (e) {
       console.log('e', e);

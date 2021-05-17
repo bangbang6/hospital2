@@ -191,8 +191,10 @@ rwhbliUBEWQ3UHFNHQO;uhgqo	iNQLEIUH	2`,
 
         }
         if (index === 5) {
+
           let timer2 = setInterval(() => {
             this.percentage2 += 2
+
             if (this.percentage2 === 100) {
 
               /*  ele.scrollTop = ele.scrollHeight */
