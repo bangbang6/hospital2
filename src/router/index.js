@@ -26,6 +26,7 @@ import UserRequest from '../components/admin/UserRequest'
 import MainAdmin from '../components/admin/MainAdmin'
 import SgxCenter from '../components/admin/SgxCenter'
 import allFile from '../components/doctor/fileListPackage/allFileTab'
+import sgxTree from '../components/doctor/sgxTree'
 
 
 const originalPush = Router.prototype.push
@@ -46,11 +47,7 @@ export default new Router({
         name: 'register',
         component: Register
       },
-      {
-        path: '/test',
-        name: 'test',
-        component: Test
-      },
+      
       {
         path: '/doctor',
         name: 'DoctorIndex',
@@ -102,6 +99,11 @@ export default new Router({
                 name: 'sgx',
                 component: SgxLearn
             },
+            {
+                path: '/doctor/center',
+                name: 'center',
+                component: sgxTree
+            },
         ]
       },
       {
@@ -109,6 +111,12 @@ export default new Router({
         name: 'DashBoard',
         component: DashBoard,
       
+        
+      },
+      {
+        path: '/admin/sgxCenter',
+        name: 'sgxCenter',
+        component: SgxCenter,
         
       },
       {
@@ -122,12 +130,7 @@ export default new Router({
             component: AdminAuthorize,
             
           },
-          {
-            path: '/admin/sgxCenter',
-            name: 'sgxCenter',
-            component: SgxCenter,
-            
-          },
+         
           {
             path: '/admin/errorStatus',
             name: 'errorStatus',

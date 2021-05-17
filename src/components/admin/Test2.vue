@@ -1,20 +1,30 @@
 <template>
-  <ve-amap :settings="chartSettings" :tooltip="tooltip" :series="series" height="100%"></ve-amap>
+  <ve-amap
+    :settings="chartSettings"
+    :tooltip="tooltip"
+    :series="series"
+    height="100%"
+    :after-set-option-once="afterSet"
+  ></ve-amap>
 </template>
  
 <script>
 export default {
   data () {
-    this.chartSettings = {
-      key: "723508a3369754233a578f36a4d3cf24",
-      amap: {
-        zoom: 16,
-        center: [114.418071, 30.511844],
-        mapStyle: 'amap://styles/70cca3ae74038446da3e27b05ed7435a'
-      }
-    }
+
+
     return {
 
+      chartSettings: {
+        key: "723508a3369754233a578f36a4d3cf24",
+        amap: {
+          zoom: 10,
+          center: [114.418071, 30.511844],
+          mapStyle: 'amap://styles/70cca3ae74038446da3e27b05ed7435a',
+          animateEnable: true
+        },
+
+      },
       series: [],
       tooltip: {
 
@@ -30,6 +40,10 @@ export default {
       {
         name: '东五楼',
         value: [114.418071, 30.511844, 20300]
+      },
+      {
+        name: '网安基地',
+        value: [114.138177, 30.676737, 12300]
       },
     ]
     this.series = [{
@@ -61,6 +75,27 @@ export default {
         }
       }
     }]
+    /* let map = echarts.init(document.getElementById('map'))
+    map.on('click', (params) => {
+      console.log('params', params);
+    }) */
+  },
+  methods: {
+    afterSet: function (echarts) {
+      var amap = echarts.getModel().getComponent('amap').getAMap()
+      console.log('amap', amap);
+      amap.on('click', e => {
+        console.log('e', e);
+        //  this.chartSettings.amap.center = [e.lnglat.Q, e.lnglat.R]
+        // this.chartSettings.amap = {
+        //   zoom: 16,
+        //   center: [e.lnglat.Q, e.lnglat.R],
+        //   mapStyle: 'amap://styles/70cca3ae74038446da3e27b05ed7435a',
+        // }
+        // console.log('a', amap.getZoom());
+        amap.setZoomAndCenter(14, [e.lnglat.R, e.lnglat.Q])
+      })
+    }
   }
 
 }

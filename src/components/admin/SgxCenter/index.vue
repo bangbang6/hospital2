@@ -1,168 +1,298 @@
 <template>
   <div class="sgx-center">
-    <template>
-      <div class="sgx-learn">
-        <el-card shadow="always">
-          <div class="front">
-            <!--  <el-button type="primary" size="mini" @click="$router.back()">返回</el-button> -->
-          </div>
+    <div class="head">
+      <div :style="{fontWeight:'bold'}">联合计算中心-数据中心节点</div>
+      <el-button type="primary" size="mini" @click="$router.push('/admin/dashboard')">中心节点详情</el-button>
+    </div>
 
-          <div class="join-list">
-            <div class="title">节点列表</div>
-            <div class="list-wrapper">
-              <div
-                class="list-item"
-                v-for="item in list"
-                :key="item.org"
-              >{{`${item.org}共有${item.number}个文件加入联邦学习,时间${item.time.toLocaleString()}`}}</div>
-            </div>
+    <el-card class="tree-list">
+      <div>
+        <div class="title">节点列表</div>
+        <div class="list">
+          <div class="list-item bold">
+            <div class="tree-no">节点编号</div>
+            <div class="update-param">参数上传时间</div>
+            <div class="close">聚合情况</div>
+            <div class="blockNumber">区块链区块号</div>
+            <div class="grade">数据贡献度</div>
           </div>
-
-          <div class="calc-progress">
-            <div class="title">可信中心节点日志</div>
-            <div class="info">
-              <div
-                v-for="(item,index) in list"
-                :class="`info${index+1}`"
-                :key="item.org"
-              >{{time1.toLocaleString()}}{{`节点${item.org}共有${item.number}个文件聚合到中心节点,结果为${item.result}`}}</div>
-
-              <div
-                class="info5"
-                v-if="show5"
-              >{{time3.toLocaleString()}} {{`正在计算文件结果${percentage}%`}}</div>
-              <div class="info6" v-if="show6">{{time4.toLocaleString()}} {{`最终文件结果为${result}`}}</div>
-            </div>
+          <div
+            class="list-item"
+            v-for="(tree,index) in trees"
+            :key="index"
+            @click="handleClick(index)"
+          >
+            <div class="tree-no overflow">{{tree.no}}</div>
+            <div class="update-param overflow">{{formateDate(tree.paramTime)}}</div>
+            <div class="close overflow">{{tree.close}}</div>
+            <div class="blockNumber overflow">{{tree.blockNumber}}</div>
+            <div class="grade overflow">{{tree.grade}}</div>
           </div>
-        </el-card>
-        <el-dialog title="结果" :visible.sync="dialogVisible" width="30%">
-          <span>该文件的计算结果为:{{result}}</span>
-          <span slot="footer" class="dialog-footer">
-            <el-button @click="dialogVisible = false">取 消</el-button>
-            <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-          </span>
-        </el-dialog>
+        </div>
       </div>
-    </template>
+    </el-card>
+    <el-card class="log">
+      <div>
+        <div class="title">本数据节点计算过程</div>
+        <div class="info" ref="info">
+          <div class="info1" v-if="show1">{{time1.toLocaleString()}}数据迭代编号为：DF0809-723</div>
+          <div class="info2" v-if="show2">{{time2.toLocaleString()}}{{`参数接收:${result}`}}</div>
+          <div class="info3" v-if="show3">{{time3.toLocaleString()}} {{`参数聚合中${percentage}%`}}</div>
+
+          <div class="info4" v-if="show4">{{time4.toLocaleString()}} {{`结果为：${result2}`}}</div>
+          <div class="info5" v-if="show5">{{time5.toLocaleString()}} {{`结果反馈中:${percentage2}%`}}</div>
+        </div>
+      </div>
+    </el-card>
   </div>
 </template>
  
 <script>
-import md5 from 'md5'
 export default {
   data () {
     return {
-      list: [
+      trees: [
         {
-          org: "节点1",
-          time: new Date(),
-          number: 24,
-          result: md5((((Math.random() * 5 + 85).toFixed(2)))),
+          no: 'm92c23c',
+          paramTime: new Date(2020, 5, 6),
+          close: '计算中',
+          blockNumber: 'vs9v8w9e8v9w8rvuw89euwe89',
+          grade: '57分'
         },
         {
-          org: "节点2",
-          time: new Date(),
-          number: 8,
-          result: md5((((Math.random() * 5 + 85).toFixed(2)))),
-
+          no: 'cq09wes',
+          paramTime: new Date(2020, 5, 6),
+          close: '等待中',
+          blockNumber: 'cweucw98cw93m4m2iu3huwey4',
+          grade: '179分'
         },
         {
-          org: "节点3",
-          time: new Date(),
-          number: 36,
-          result: md5((((Math.random() * 5 + 85).toFixed(2)))),
-
+          no: 'v34vf4v',
+          paramTime: new Date(2020, 5, 3),
+          close: '参数已更新',
+          blockNumber: 'cewc9qwievc9ewviw9euv82eu',
+          grade: '42分'
         },
-        {
-          org: "节点4",
-          time: new Date(),
-          number: 14,
-          result: md5((((Math.random() * 5 + 85).toFixed(2)))),
-
-        },
-
       ],
-      percentage: 0,
-      result: md5((((Math.random() * 5 + 85).toFixed(2)))),
-      show2: false,
-      show3: false,
-      show4: false,
-      show5: false,
-      show6: false,
       time1: new Date(),
       time2: new Date(),
       time3: new Date(),
       time4: new Date(),
       time5: new Date(),
-      time6: new Date(),
-      dialogVisible: false,
+
+      show2: false,
+      show1: false,
+      show3: false,
+      show4: false,
+      show5: false,
+
+      percentage: 0,
+      percentage2: 0,
+      result2: `wjf89357wf3qwjeioaguhq7934thgj	ewioghq9p84gjowiehgq98p
+4whgoiweahgq984p3ghwu4hqo4wih	3iofnoqi4jgfpoqwfih	
+oi23fjqlkwgh	owijflqkH	OIFNLEQP294FNLKWQNEJGPW
+AJDNP'klwjbkqpqiuwgnLKQENGI834jfliEWHGQOHKGAWUHBOG	;I2N4TGO3QGNweguhqp938rfnakwjrbgp24gnkjearhp3qoignwit2o
+inbguy5qhq938tnl2gh;owihq9qpscsa97cas98cu98cas98c7asu98
+cds98vu98
+	ewioghq9p84gjowiehgq98p
+4whgoiweahgq984p3ghwu4hqo4wih	3iofnoqi4jgfpoqwfih	
+oi23fjqlkwgh	owijflqkH	OIFNLEQP294FNLKWQNEJGPW
+AJDNP'klwjbkqpqiuwgnLKQENGI834jfliEWHGQOHKGAWUHBOG	;I2N4TGO3QGNweguhqp938rfnakwjrbgp24gnkjearhp3qoignwit2o
+inbguy5qhq938tnl2gh;owihq9qpscsa97cas98cu98cas98c7asu98
+cds98vu98
+guf89uhda98fhuse98uas7gtoeiurjgq3598qtjweoigj9p84gjqori
+wjf89357wf3qwjeioaguhq7934thgj	ewioghq9p84gjowiehgq98p
+4whgoiweahgq984p3ghwu4hqo4wihgwi
+4uqhfiwoehg984qhgWIEHGQ9P8FEOGJJ'
+wlgjaojg09wegjiqoijrgiw84gjakerhioergho8w45ghaeiroeqrih
+85sanf	83nf	u4u92fewioghq9p84gjowiehgq98p
+4whgoiweahgq984p3ghwu4hqo4wih	3iofnoqi4jgfpoqwfih	
+oi23fjqlkwgh	owijflqkH	OIFNLEQP294FNLKWQNEJGPW
+AJDNP'klwjbkqpqiuwgnLKQENGI834jfliEWHGQOHKGAWUHBOG	;I2N4TGO3QGNweguhqp938rfnakwjrbgp24gnkjearhp3qoignwit2o
+inbguy5qhq938tnl2gh;owihq9qpscsa97cas98cu98cas98c7asu98
+cds98vu98
+guf89uhda98fhuse98uas7gtoeiurjgq3598qtjweoigj9p84gjqori
+wjf89357wf3qwjeioaguhq7934thgj	ewioghq9p84gjowiehgq98p
+4whgoiweahgq984p3ghwu4hqo4wihgwi
+4uqhfiwoehg984qhgWIEHGQ9P8FEOGJJ'
+wlgjaojg09wegjiqoijrgiw84gjakerhioergho8w45ghaeiroeqrih`,
+      result: `bk25b34j6b3k4j5b23kb5k34hb5l23jb5h4523jkb542j3b5jh245bk
+j23c79sd8798sd7v98sd7v9s8d7v98sd7v98s7v9s8d7v98sd7sd98v
+7sd98v79s87v9as8c98hf94nlQFM	P249JFijq9834jfliEWHGQO
+HKGAWUHBOG	;I2N4TGO3QGNweguhqp938rfnakwjrbgp24gnkj
+earhp3qoignwit2o
+inbguy5qhq938tnl2gh;owihq9qpscsa97cas98cu98cas98c7asu98
+cds98vu98
+guf89uhda98fhuse98uas7gtoeiurjgq3598qtjweoigj9p84gjqori
+wjf89357wf3qwjeioaguhq7934thgj	ewioghq9p84gjowiehgq98p
+4whgoiweahgq984p3ghwu4hqo4wihgwi
+4uqhfiwoehg984qhgWIEHGQ9P8F34FJOWIEHQF9P4HF;GHWEQPW98HG
+W;UIQHGOWI;GHQP98WHFOA;WHGQ[0OJEIGQ[3GJW;OIQU2OI4QHT983
+IJGweiorj2fop3ginqoicm	qfweguhqp938rfnakwjrbgp24gnkjear
+hp3qoignwit2o
+inbguy5qhq938tnl2gh;ow
+guf89uhda98fhuse98uas7gtoeiurjgq3598qtjweoigj9p84gjqori
+wjf89357wf3qwjeioaguhq7934thgj	ewioghq9p84gjowiehgq98p
+4whgoiweahgq984p3ghwu4hqo4wihgwi
+4uqhfiwoehg984qhgWIEHGQ9P8F34FJOWIEHQF9P4HF;GHWEQPW98HG
+W;UIQHGOWI;GHQP98WHFOA;Wihq9qpscsa97cas98cu98cas98c7asu98
+cds98vu98
+guf89uhda98fhuse98uas7gtoeiurjgq3598qtjweoigj9p84gjqori
+wjf89357wf3qwjeioaguhq7934thgj	ewioghq9p84gjowiehgq98p
+4whgoiweahgq984p3ghwu4hqo4wih	3iofnoqi4jgfpoqwfih	
+oi23fjqlkwgh	owijflqkH	OIFNLEQP294FNLKWQNEJGPW
+AJDNP'klwjbkqpqiuwgnLKQENGI834jfliEWHGQOHKGAWUHBOG	;I2N4TGO3QGNweguhqp938rfnakwjrbgp24gnkjearhp3qoignwit2o
+inbguy5qhq938tnl2gh;owihq9qpscsa97cas98cu98cas98c7asu98
+cds98vu98
+guf89uhda98fhuse98uas7gtoeiurjgq3598qtjweoigj9p84gjqori
+wjf89357wf3qwjeioaguhq7934thgj	ewioghq9p84gjowiehgq98p
+4whgoiweahgq984p3ghwu4hqo4wihgwi
+4uqhfiwoehg984qhgWIEHGQ9P8FEOGJJ'
+wlgjaojg09wegjiqoijrgiw84gjakerhioergho8w45ghaeiroeqrih
+85sanf	83nf	u4u92fnqoJ023TJGNWRJNG	2OJFNqkjge42uq.
+LQKJNFE;OWIF;Oqijfaoih28fnQKJEVNIU	2Kjqebvilubcajv
+rwhbliUBEWQ3UHFNHQO;uhgqo	iNQLEIUH	2`,
+
     }
   },
+  methods: {
+    formateDate (date) {
+      let str = new Date(date).toLocaleString()
+      let index = new Date(date).toLocaleString().indexOf('午')
+      return str.slice(0, index - 1)
+    },
+    showLog () {
+      let index = 2
+      this.show1 = true
+      this.time1 = new Date()
+      let timer = setInterval(() => {
+        let ele = this.$refs.info
+        if (index !== 4) {
+          this[`show${index}`] = true
+          this[`time${index}`] = new Date()
+        }
+
+
+
+        ele.scrollTo(0, ele.scrollHeight)
+        if (index === 3) {
+          let timer2 = setInterval(() => {
+            this.percentage += 2
+            if (this.percentage === 100) {
+              this[`show4`] = true
+              this[`time4`] = new Date()
+              /* ele.scrollTop = ele.scrollHeight */
+              ele.scrollTo(0, ele.scrollHeight)
+              clearInterval(timer2)
+
+
+            }
+          }, 40)
+
+        }
+        if (index === 5) {
+          let timer2 = setInterval(() => {
+            this.percentage2 += 2
+            if (this.percentage2 === 100) {
+
+              /*  ele.scrollTop = ele.scrollHeight */
+              ele.scrollTo(0, ele.scrollHeight)
+              clearInterval(timer2)
+
+
+            }
+          }, 40)
+
+        }
+
+        if (index === 5) {
+          /*           ele.scrollTop = ele.scrollHeight */
+          clearInterval(timer)
+
+
+        }
+        index++
+
+      }, 2500)
+    },
+  },
   mounted () {
-    let index = 2
-
-    let timer = setInterval(() => {
-
-      this[`show${index}`] = true
-      this[`time${index}`] = new Date()
-      if (index === 5) {
-        let timer2 = setInterval(() => {
-          this.percentage += 2
-          if (this.percentage === 100) {
-            this[`show6`] = true
-            this[`time6`] = new Date()
-            this.dialogVisible = true
-            clearInterval(timer2)
-          }
-        }, 100)
-      }
-      if (index === 5) {
-        clearInterval(timer)
-      }
-      index++
-
-    }, 100)
+    this.showLog()
   }
 }
 </script>
  
 <style lang="scss" scoped>
-.sgx-learn {
-  margin-top: 20px;
-  padding: 10px;
+.sgx-center {
+  padding-left: 20px;
+  padding-right: 20px;
   box-sizing: border-box;
+  width: 100%;
+  height: 40px;
 
-  .join-list {
-    margin-top: 20px;
+  .head {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding-top: 10px;
+    box-sizing: border-box;
+    height: 40px;
+    padding-left: 10px;
+    padding-right: 10px;
+    justify-content: space-between;
+  }
+  .tree-list {
+    margin-top: 10px;
+    height: 400px;
 
-    overflow: auto;
     .title {
-      font-size: 16px;
       font-weight: bold;
     }
-    .list-wrapper {
-      height: 220px;
-      overflow: auto;
+    .list {
+      margin-top: 20px;
       .list-item {
-        height: 30px;
-        margin-top: 10px;
-        font-size: 14px;
-        padding-top: 5px;
-        padding-bottom: 5px;
-        box-sizing: border-box;
+        display: flex;
+        border-bottom: 1px solid #eee;
+        .tree-no,
+        .update-param,
+        .close,
+        .blockNumber,
+        .grade {
+          flex: 1;
+          width: 20%;
+          height: 20px;
+          padding: 5px 5px;
+          text-align: center;
+          font-size: 12px;
+        }
+        .overflow {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          display: inline-block;
+        }
+
+        /* &:nth-child(odd) {
+              background: #f2f2f2;
+            }
+            &:nth-child(even) {
+              background: white;
+            } */
+        &.bold {
+          font-weight: bold;
+        }
       }
     }
   }
-  .calc-progress {
+  .log {
     margin-top: 20px;
     .title {
-      font-size: 16px;
       font-weight: bold;
     }
     .info {
       margin-top: 10px;
       background: black;
-      height: 220px;
+      height: 200px;
       overflow: auto;
       color: white;
       /*  padding: 10px;
@@ -172,4 +302,3 @@ export default {
   }
 }
 </style>
- 

@@ -17,18 +17,18 @@
             <el-menu-item index="1">文件列表</el-menu-item>
           </el-menu>-
         </div>
+        
         <div class="search">
           <el-input placeholder="请输入搜索内容" suffix-icon="el-icon-search" v-model="inputValue"></el-input>
         </div>-->
         <div class="user">
+          <!-- <el-button type='primary' size='mini'>中心节点详情</el-button> -->
           <div class="avaturl">
             <el-dropdown trigger="click" @command="handleCommand">
               <img src="../../assets/avaturl.jpg" class="imgAvaturl" />
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item icon="el-icon-pie-chart" command="jumpToshouye">首页</el-dropdown-item>
 
-                <!--  <el-dropdown-item icon="el-icon-user" command="jumpToYunei">域内设置</el-dropdown-item>
-                <el-dropdown-item icon="el-icon-folder-opened" command="jumpToYujian">域间设置</el-dropdown-item>-->
                 <el-dropdown-item icon="el-icon-folder-opened" command="jumpToSgxCenter">sgx中心节点</el-dropdown-item>
                 <el-dropdown-item icon="el-icon-warning-outline" command="jumpToYujin">异常预警</el-dropdown-item>
                 <el-dropdown-item icon="el-icon-turn-off" command="loginout">退出登录</el-dropdown-item>

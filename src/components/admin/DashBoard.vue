@@ -26,6 +26,7 @@
 </template>
 
 <script>
+//!修改dashboard
 import CenterHeader from './CenterHeader.vue'
 import OrderMap from './OrderMap.vue'
 import AutoRank from './AutoRank.vue'
@@ -65,8 +66,8 @@ export default {
       height: 100%;
       //width:80%;
       width: 28%;
-      /*  padding-left: -20px; */
-      margin-left: -120px; //!删除的
+      margin-left: 60px;
+      /*  margin-left: -120px; //!删除的 */
     }
   }
   .header {

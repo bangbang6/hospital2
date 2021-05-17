@@ -83,7 +83,7 @@ export default {
                 })
                 setTimeout(() => {
                   // 使用 vue-router 路由到指定页面，该方式称之为编程式导航
-                  this.$router.push('/doctor/myFile'); loading.close()
+                  this.$router.push('/doctor/center'); loading.close()
 
                 }, 1000)
               } else {

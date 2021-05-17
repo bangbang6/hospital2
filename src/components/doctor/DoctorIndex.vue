@@ -6,7 +6,7 @@
           <img src="../../assets/logo.jpg" class="imgLogo" />
         </div>-->
         <div class="menu">
-          <el-menu
+          <!-- <el-menu
             :default-active="activeIndex"
             class="el-menu"
             mode="horizontal"
@@ -20,18 +20,21 @@
             </el-menu-item>
 
             <el-menu-item index="2">上传文件</el-menu-item>
-          </el-menu>
+          </el-menu>-->
+          <div :style="{fontWeight:'bold'}">联合计算中心-数据分节点</div>
         </div>
-        <div class="search">
+        <!--  <div class="search">
           <el-input placeholder="请输入搜索内容" suffix-icon="el-icon-search" v-model="inputValue"></el-input>
-        </div>
+        </div>-->
 
         <div class="user">
           <div class="channelName">
-            {{userName}}
+            <el-button type="primary" size="mini">贡献度:4539分</el-button>
+            <el-button type="primary" size="mini">个人中心</el-button>
+
             <!-- /{{userChannel}} -->
           </div>
-          <div class="avaturl">
+          <!-- <div class="avaturl">
             <el-dropdown trigger="click" @command="handleCommand">
               <img src="../../assets/avaturl.jpg" class="imgAvaturl" />
               <el-dropdown-menu slot="dropdown">
@@ -40,7 +43,7 @@
                 <el-dropdown-item icon="el-icon-turn-off" command="loginout">退出登录</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
-          </div>
+          </div>-->
         </div>
       </div>
     </div>
@@ -123,7 +126,7 @@ export default {
 }
 .header {
   width: 100%;
-  height: 60px;
+  height: 40px;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
   background-color: white;
 }
