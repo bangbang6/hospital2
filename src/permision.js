@@ -26,7 +26,7 @@ router.beforeEach(async(to, from, next) => {
       alert('请先登录 ')
     } 
   } */
-  if(to.path !== '/' &&  to.path!=='/register'){
+  if(to.path !== '/' &&  to.path!=='/register' &&to.path!=='/test'){
     if(to.path.indexOf('/admin')!==-1){
       if(hasAdminToken){
         next()
