@@ -70,7 +70,7 @@ export default {
         channel:'channel1',
         action: 'pull',
         date: new Date(),
-        status: '权限不足',
+        status: '越权操作',
         type: 'danger',
         peer:'peer0.org2.example.com',
         destChannel:'channel3'
@@ -137,7 +137,7 @@ export default {
         channel:'channel4',
         action:'push',
         date: new Date(),
-        status: '权限不足',
+        status: '越权操作',
         type: 'danger',
         peer:'peer0.org8.example.com',
         destChannel:'channel7'
@@ -150,7 +150,7 @@ export default {
         channel:'channel7',
         action:'push',
         date: new Date(),
-        status: '权限不足',
+        status: '越权操作',
         type: 'danger',
         peer:'peer0.org14.example.com',
         destChannel:'channel4'

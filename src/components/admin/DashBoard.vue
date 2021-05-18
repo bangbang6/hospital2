@@ -6,7 +6,8 @@
 
     <div class="content">
       <div class="map">
-        <order-map></order-map>
+        <!-- <order-map></order-map> -->
+        <GDMap></GDMap>
       </div>
       <div class="error">
         <error-list></error-list>
@@ -33,8 +34,9 @@ import Category from './Category.vue'
 import AreaRank from './AreaRank.vue'
 import BlockNumber from './BlockNumber.vue'
 import ErrorList from './ErrorList.vue'
+import GDMap from './GDMap.vue'
 export default {
-  components: { CenterHeader, OrderMap, AutoRank, Category, AreaRank, BlockNumber, ErrorList },
+  components: { CenterHeader, OrderMap, AutoRank, Category, AreaRank, BlockNumber, ErrorList, GDMap },
 
 }
 </script>
@@ -44,12 +46,15 @@ export default {
   height: 100%;
   .content {
     padding-left: 100px;
+    padding-left: 50px; //!删除的
     box-sizing: border-box;
     height: 58%;
     display: flex;
     .map {
       height: 100%;
-      width: 40%;
+      width: 48%;
+      box-sizing: border-box;
+      padding-right: 30px;
     }
 
     .rank {

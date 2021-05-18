@@ -61,7 +61,7 @@ export default {
         uploader: '李医生',
         hospital: '广东人民医院',
         date: new Date(),
-        status: '权限不足',
+        status: '越权操作',
         type: 'danger',
       },
       {
@@ -93,7 +93,7 @@ export default {
         uploader: '刘医生',
         hospital: '同济医院',
         date: new Date(),
-        status: '权限不足',
+        status: '越权操作',
         type: 'danger',
       },
       {
@@ -101,7 +101,7 @@ export default {
         uploader: '杨医生',
         hospital: '齐鲁医院',
         date: new Date(),
-        status: '权限不足',
+        status: '越权操作',
         type: 'danger',
 
 
