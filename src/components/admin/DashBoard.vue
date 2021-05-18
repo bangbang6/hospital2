@@ -29,7 +29,7 @@
 <script>
 //!修改dashboard
 import CenterHeader from './CenterHeader.vue'
-import OrderMap from './OrderMap.vue'
+import OrderMap from './Test2.vue'
 import AutoRank from './AutoRank.vue'
 import Category from './Category.vue'
 import AreaRank from './AreaRank.vue'
@@ -37,7 +37,7 @@ import BlockNumber from './BlockNumber.vue'
 import ErrorList from './ErrorList.vue'
 import Test2 from './Test2.vue'
 export default {
-  components: { CenterHeader, OrderMap, AutoRank, Category, AreaRank, BlockNumber, ErrorList , Test2},
+  components: { CenterHeader, OrderMap, AutoRank, Category, AreaRank, BlockNumber, ErrorList, Test2 },
 
 }
 </script>

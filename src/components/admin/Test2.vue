@@ -9,6 +9,25 @@
 </template>
  
 <script>
+import { MiniMap } from '@antv/x6/lib/addon'
+let littleDotData = [
+  {
+    name: '南六楼',
+    value: [114.413633, 30.509502, 10400]
+  },
+  {
+    name: '东五楼',
+    value: [114.418071, 30.511844, 20300]
+  },
+  {
+    name: '网安基地',
+    value: [114.138177, 30.676737, 12300]
+  },
+  {
+    name: '南五楼',
+    value: [114.415714, 30.509052, 14300]
+  },
+]
 export default {
   data () {
 
@@ -85,6 +104,21 @@ export default {
     }) */
   },
   methods: {
+    judgeNear (point) {
+      let minIndex = -1
+      let minDis = Number.MAX_SAFE_INTEGER
+      littleDotData.forEach((dot, index) => {
+        let dis = Math.pow((dot.value[0] - point[0]), 2) + Math.pow((dot.value[0] - point[0]), 2)
+        if (minDis > dis) {
+
+          minDis = dis
+          minIndex = index
+          console.log('minIndex', minIndex);
+        }
+      })
+      return minIndex
+
+    },
     afterSet: function (echarts) {
       var amap = echarts.getModel().getComponent('amap').getAMap()
       console.log('amap', amap);
@@ -97,7 +131,8 @@ export default {
         //   mapStyle: 'amap://styles/70cca3ae74038446da3e27b05ed7435a',
         // }
         // console.log('a', amap.getZoom());
-        amap.setZoomAndCenter(16, [e.lnglat.R, e.lnglat.Q])
+        let minIndex = this.judgeNear([e.lnglat.R, e.lnglat.Q])
+        amap.setZoomAndCenter(16, [(littleDotData[minIndex].value)[0], (littleDotData[minIndex].value)[1]])
       })
     }
   }
