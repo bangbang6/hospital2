@@ -63,52 +63,141 @@ export default {
       uploader: '',
       files: [
         {
-          title: 'Trustzone-based secure lightweight wallet for hyperlerdger fabric',
-          hospital: '同济医院',
-          uploader: '代老师',
-          id: 1,
-          date: new Date(),
-          channel: 'channel1',
-          action: 'pull',
-          status: '权限不足',
-          type: 'danger'
-        },
-        {
-          title: 'Trustzone-based secure lightweight wallet for hyperlerdger fabric',
-          hospital: '同济医院',
+          id:1,
+        title: "病例0X2132",
+        uploader: '李医生',
+        hospital: '广东人民医院',
+        channel:'channel1',
+        action: 'pull',
+        date: new Date(),
+        status: '权限不足',
+        type: 'danger',
+        peer:'peer0.org2.example.com',
+        destChannel:'channel3'
+      },
+      {
+        id:2,
+        title: "病例0X8219",
+        uploader: '王医生',
+        hospital: '南京鼓楼医院',
+        channel:'channel8',
+        action: 'read',
+        date: new Date(),
+        status: '数据不一致',
+        type: 'warning',
+        originData:'0xfsahoandassca',
+        chainData:'0xwiajhumsufdnf'
+      },
+      {
+        id:3,
+        title: "病例0X0123",
+        uploader: '张医生',
+        hospital: '华西口腔医院',
+        channel:'channel2',
+        action:'modify',
+        date: new Date(),
+        status: '多次修改',
+        type: 'info',
+        updateHistorys:[
+          {
+            updater: '张医生',
+            txId: 'DBsapodk265623sadaxcasa',
+            updateDate: new Date()
+          },
+          {
+            updater: '刘医生',
+            txId: 'Msaofhoasnas4612asdasad',
+            updateDate: '2021/2/6'
+          },
+          {
+            updater: '刘医生',
+            txId: 'IDsakfpowe456s51asdw854s',
+            updateDate: '2021/2/5'
+          },
+        ]
+      },
+      {
+        id:4,
+        title: "病例0X7632",
+        uploader: '陈医生',
+        hospital: '吉大第一医院',
+        channel:'channel2',
+        action:'read',
+        date: new Date(),
+        status: '数据不一致',
+        type: 'warning',
+        originData:'0xssawfxwafadw',
+        chainData:'0xdwawefzzsrfds'
+      },
+      {
+        id:5,
+        title: "病例0X2521",
+        uploader: '刘医生',
+        hospital: '同济医院',
+        channel:'channel4',
+        action:'push',
+        date: new Date(),
+        status: '权限不足',
+        type: 'danger',
+        peer:'peer0.org8.example.com',
+        destChannel:'channel7'
+      },
+      {
+        id:6,
+        title: "病例0X6321",
+        uploader: '杨医生',
+        hospital: '齐鲁医院',
+        channel:'channel7',
+        action:'push',
+        date: new Date(),
+        status: '权限不足',
+        type: 'danger',
+        peer:'peer0.org14.example.com',
+        destChannel:'channel4'
+      },
 
-          channel: 'channel1',
-          action: 'pull',
-          status: '权限不足',
-          uploader: 'bang',
-          id: 2,
-          type: 'danger',
+      {
+        id:7,
+        title: "病例0X6312",
+        uploader: '黄医生',
+        hospital: '上海第六医院',
+        channel:'channel5',
+        action:'read',
+        date: new Date(),
+        status: '数据不一致',
+        type: 'warning',
+        originData:'0xawrfeaswefee',
+        chainData:'0xpawuwenfrusf'
+      },
+      {
+        id:8,
+        title: "病例0X5213",
+        uploader: '胡医生',
+        hospital: '武汉第一医院',
+        channel:'channel1',
+        action:'action',
+        date: new Date(),
+        status: '多次修改',
+        type: 'info',
+        updateHistorys:[
+          {
+            updater: '胡医生',
+            txId: 'DBsapodk265623sadaxcasa',
+            updateDate: new Date()
+          },
+          {
+            updater: '王医生',
+            txId: 'Msaofhoasnas4612asdasad',
+            updateDate: '2021/4/6'
+          },
+          {
+            updater: '李医生',
+            txId: 'IDsakfpowe456s51asdw854s',
+            updateDate: '2021/1/5'
+          },
+        ]
 
-          date: new Date()
-        },
-        {
-          title: 'Foridar',
-          hospital: '同济医院',
-
-          action: 'pull',
-          status: '数据不一致',
-          channel: 'channel1',
-          uploader: 'user1',
-          id: 3,
-          type: 'warning',
-          date: new Date()
-        },
-        {
-          title: 'Foridar',
-          hospital: '市三医院',
-          action: 'pull',
-          status: '多次修改',
-          channel: 'channel2',
-          uploader: 'chen',
-          id: 4,
-          type: 'info',
-          date: new Date()
-        },
+      }
       ],
       tableData: [],
       paper: {},

@@ -46,7 +46,7 @@
         ></el-table-column>
         <el-table-column
           prop="channelName"
-          label="所在通道"
+          label="所在部门"
           style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
         ></el-table-column>
         <el-table-column
@@ -522,7 +522,8 @@ export default {
             modifiedData: file.dataSample.modifiedTime.slice(0, 10),
             id: file.dataSample.id,
             authoritySet: this.parserSet(file.authoritySet),
-            channelName: file.channelName
+            // channelName: file.channelName
+            channelName: file.channelName === "channel1" ? "部门A" : "部门B"
           }
         })
         this.tableData = this.files

@@ -44,7 +44,7 @@ export default {
         y: loop % 2 === 0 ? 40 + (index - 1) % 4 * 100 : 40 + (3 - ((index - 1) % 4)) * 100,
         width: 400,
         height: 40,
-        label: `${user}   ${type_tx}   ${fileName}(${src_chain})    tx(${this_tx_id.slice(-10)}) `,
+        label: `${user}   ${type_tx}   ${fileName}(${src_chain})    交易号(${this_tx_id.slice(-10)}) `,
         zIndex: 2,
         attrs: {
           label: {
@@ -55,7 +55,7 @@ export default {
       const edge = new Shape.Edge({
         id: `edge${index - 1}`,
         source: `node${index - 2}`,
-        target: `node${index - 1}`,
+        target: `node${index -1}`,
         zIndex: 1,
       })
       this.graph.addNode(rect)
@@ -76,7 +76,7 @@ export default {
         y: 40,
         width: 400,
         height: 40,
-        label: `${user}   ${type_tx}   ${fileName}(${src_chain})   tx(${this_tx_id.slice(-10)}) `,
+        label: `${user}   ${type_tx}   ${fileName}(${src_chain})   交易号(${this_tx_id.slice(-10)}) `,
         zIndex: 2,
         attrs: {
           label: {
@@ -93,14 +93,12 @@ export default {
           // this.txId = res.data.data.record.this_tx_id
           let records = res.data.data
           console.log(records)
-          this.tableData = []
-          for(var i = 0;i < records.length;i++){
+          
+          for(var i = this.tableData.length;i < records.length;i++){
             this.tableData.unshift(this.parser(records[i]))
-            if(i == 0){
-              this.initGragh()
-            }else{
+            
               this.renderGraph()
-            }
+            
           }
           // records = records.map(record =>{
           //    this.tableData.unshift(this.parser(record))
@@ -117,9 +115,27 @@ export default {
       //todo 全部溯源
     },
     parser (record) {
+      // return {
+      //   fileName: record.fileName.split('/').slice(-1)[0],
+      //   ...record.record
+      // }
+      let userMap = new Map();
+      userMap.set("org2_user", "李医生")
+      userMap.set("org3_user", "王医生")
+      userMap.set("org4_user", "张医生")
+      userMap.set("org5_user", "陈医生")
+      let opMap = new Map();
+      opMap.set("add", "添加")
+      opMap.set("read", "查看")
+      opMap.set("modify", "修改")
+      opMap.set("download", "下载")
       return {
         fileName: record.fileName.split('/').slice(-1)[0],
-        ...record.record
+        user: userMap.get(record.record.user),
+        type_tx: opMap.get(record.record.type_tx),
+        src_chain: record.record.src_chain === "channel1" ? "部门A" : "部门B",
+        this_tx_id: record.record.this_tx_id
+        // ...record.record
       }
     },
     back () {
@@ -176,6 +192,11 @@ export default {
     width: 100%;
     height: 90%;
     background: white;
+    
   }
+  
 }
+</style>
+<style >
+
 </style>

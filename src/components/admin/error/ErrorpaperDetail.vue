@@ -176,28 +176,12 @@ export default {
         this.status = newV.status
         this.action = newV.action
         this.type = newV.type
-        this.fileChannel = 'channel2'
-        this.peer = 'peer0.org4.example.com'
-        this.destChannel = 'channel1'
-        this.originData = '0xfsahoandassca'
-        this.chainData = '0xopasmsndassca'
-        this.updateHistorys = [
-          {
-            updater: 'bang',
-            txId: 'DBsapodk265623sadaxcasa',
-            updateDate: new Date()
-          },
-          {
-            updater: 'zhaowenhao',
-            txId: 'Msaofhoasnas4612asdasad',
-            updateDate: new Date()
-          },
-          {
-            updater: 'bang',
-            txId: 'IDsakfpowe456s51asdw854s',
-            updateDate: new Date()
-          },
-        ]
+        this.fileChannel = newV.channel,
+        this.peer = newV.peer,
+        this.destChannel = newV.destChannel !== null ?newV.destChannel : 'channel1'
+        this.originData = newV.originData
+        this.chainData = newV.chainData
+        this.updateHistorys = newV.updateHistorys
       }
 
     }
