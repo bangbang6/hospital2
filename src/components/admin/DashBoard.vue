@@ -7,6 +7,7 @@
     <div class="content">
       <div class="map">
         <order-map></order-map>
+        <!-- <test-2></test-2> -->
       </div>
       <div class="error">
         <error-list></error-list>
@@ -34,8 +35,9 @@ import Category from './Category.vue'
 import AreaRank from './AreaRank.vue'
 import BlockNumber from './BlockNumber.vue'
 import ErrorList from './ErrorList.vue'
+import Test2 from './Test2.vue'
 export default {
-  components: { CenterHeader, OrderMap, AutoRank, Category, AreaRank, BlockNumber, ErrorList },
+  components: { CenterHeader, OrderMap, AutoRank, Category, AreaRank, BlockNumber, ErrorList , Test2},
 
 }
 </script>

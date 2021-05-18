@@ -18,8 +18,8 @@ export default {
       chartSettings: {
         key: "723508a3369754233a578f36a4d3cf24",
         amap: {
-          zoom: 10,
-          center: [114.418071, 30.511844],
+          zoom: 11,
+          center: [114.317402, 30.553286],
           mapStyle: 'amap://styles/70cca3ae74038446da3e27b05ed7435a',
           animateEnable: true
         },
@@ -44,6 +44,10 @@ export default {
       {
         name: '网安基地',
         value: [114.138177, 30.676737, 12300]
+      },
+      {
+        name: '南五楼',
+        value: [114.415714, 30.509052, 14300]
       },
     ]
     this.series = [{
@@ -93,7 +97,7 @@ export default {
         //   mapStyle: 'amap://styles/70cca3ae74038446da3e27b05ed7435a',
         // }
         // console.log('a', amap.getZoom());
-        amap.setZoomAndCenter(14, [e.lnglat.R, e.lnglat.Q])
+        amap.setZoomAndCenter(16, [e.lnglat.R, e.lnglat.Q])
       })
     }
   }
