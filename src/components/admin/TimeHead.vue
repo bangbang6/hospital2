@@ -1,6 +1,6 @@
 <template>
   <div class="menu-wrapper">
-    <div class="title">区块数</div>
+    <div class="title">数据量</div>
     <div class="menu-right">
       <el-radio-group size="mini" v-model="text">
         <el-radio-button label="今年"></el-radio-button>
