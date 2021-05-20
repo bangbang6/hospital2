@@ -1,7 +1,7 @@
 <template>
   <div class="sales-view-list">
-    <div class="sales-view-title">排行榜</div>
-    <div class="sales-view-subTitle">The Ranking Of Doctors</div>
+    <div class="sales-view-title">数据节点贡献情况</div>
+    <div class="sales-view-subTitle">Data node contribution</div>
     <div class="list-item-wrapper">
       <div class="list-item" v-for="item in rankData" :key="item.no">
         <div :class="['list-item-no',+item.no <=3 ? 'top-no': '']">{{item.no}}</div>
@@ -20,59 +20,59 @@ export default {
     return {
       rankData: [{
         no: 1,
-        name: '李医生',
+        name: '节点本地计算中',
         address: "武汉同济医院",
         phone: "156XXXX5790",
-        fileNumber: 140
+        fileNumber: 8930213
       },
       {
         no: 2,
-        name: '王医生',
+        name: '参数上传中',
         address: "武汉协和医院",
         phone: "157XXXX5790",
-        fileNumber: 112
+        fileNumber: 4812323
       },
       {
         no: 3,
-        name: '胡医生',
+        name: '参数已更新',
         address: "武汉大学人民医院",
         phone: "157XXXX5790",
-        fileNumber: 104
+        fileNumber: 4812369
       },
       {
         no: 4,
-        name: '付医生',
+        name: '参数已更新',
         address: "华西医院",
         phone: "157XXXX5790",
-        fileNumber: 94
+        fileNumber: 4512323
       },
       {
         no: 5,
-        name: '刘医生',
+        name: '参数已更新',
         address: "北京大学第一医院",
         phone: "157XXXX5790",
-        fileNumber: 86
+        fileNumber: 48123541
       },
       {
         no: 6,
-        name: '赵医生',
+        name: '参数已更新',
         address: "同济医院",
         phone: "157XXXX5790",
-        fileNumber: 82
+        fileNumber: 4612323
       },
       {
         no: 7,
-        name: '赵医生',
+        name: '参数已更新',
         address: "中山医院",
         phone: "157XXXX5790",
-        fileNumber: 76
+        fileNumber: 4312321
       },
       {
         no: 8,
-        name: '赵医生',
+        name: '参数已更新',
         address: "华山医院",
         phone: "157XXXX5790",
-        fileNumber: 65
+        fileNumber: 4012350
       }
 
       ]
@@ -134,7 +134,7 @@ export default {
       .list-item-name {
         margin-left: 10px;
         color: gray;
-        width: 40px;
+        width: 100px;
       }
       .list-item-phone {
         margin-left: 40px;

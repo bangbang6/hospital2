@@ -91,9 +91,9 @@ export default {
           name: 'wjeaoif',
           updateTime: new Date(2020, 5, 6),
           size: '342MB',
-          calcStatus: '计算中',
+          calcStatus: '计算结束',
           blockNumber: 'n3k2j5k2nkwnri4r290rjw',
-          paramStatus: "本节点计算中"
+          paramStatus: "参数已回馈更新"
         },
         {
           name: 'mf293jf',
@@ -114,24 +114,24 @@ export default {
       ],
       shareTrees: [
         {
-          no: 'xxxxx',//!修改编号
-          fileNumber: 14,
-          updateTime: new Date(2020, 5, 6)
+          no: 'hf23948r',//!修改编号
+          fileNumber: 478210,
+          updateTime: new Date(2020, 5, 16)
         },
         {
-          no: 'xxxxx',
-          fileNumber: 14,
-          updateTime: new Date(2020, 5, 6)
+          no: 'fvdj3f2f',
+          fileNumber: 3251242,
+          updateTime: new Date(2020, 5, 18)
         },
         {
-          no: 'xxxxx',
-          fileNumber: 14,
-          updateTime: new Date(2020, 5, 6)
+          no: 'hd83j430',
+          fileNumber: 12435134,
+          updateTime: new Date(2020, 5, 15)
         },
         {
-          no: 'xxxxx',
-          fileNumber: 14,
-          updateTime: new Date(2020, 5, 6)
+          no: 'fc743j30',
+          fileNumber: 2341243,
+          updateTime: new Date(2020, 5, 18)
         },
       ],
       time1: new Date(),
@@ -271,7 +271,8 @@ export default {
         updateTime: new Date(),
         size: (file.size / 1024 / 1024).toFixed(2) + 'MB',
         calcStatus: '计算中',
-        blockNumber: 'n3k2j5k2nkwnri4r290rjw',
+        //!增加计时器
+        blockNumber: '24vw3e4f23frd23rd12d1',
         paramStatus: "本节点计算中"
       }))
       this.files.unshift(...newFiles)

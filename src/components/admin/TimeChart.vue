@@ -63,7 +63,7 @@ export default {
           trigger: 'item',
           formatter: function (params) {
 
-            return params.name + '区块数为:' + params.data
+            return params.name + '数据量为:' + params.data + 'GB'
           }
         },
         series: [{
