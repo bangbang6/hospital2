@@ -120,7 +120,7 @@ export default {
         }, */ {
             text: "文件分布",
 
-            x: "34.5%",
+            x: "44.5%",
             y: "42.5%",
             textAlign: 'center',
             textStyle: {
@@ -142,7 +142,7 @@ export default {
               }
             }
           },
-          center: ["35%", "50%"],
+          center: ["45%", "50%"],
           radius: ['45%', '60%'],
           labelLine: {
             normal: {
@@ -156,7 +156,7 @@ export default {
           }, */
           clockwise: true
         }],
-        legend: {
+        /* legend: {
           type: 'scroll',
           orient: "vertical",
           height: 250,
@@ -165,7 +165,7 @@ export default {
           textStyle: {
             color: "white"
           }
-        },
+        }, */
         tooltip: {
           trigger: 'item',
           formatter: function (params) {
@@ -186,7 +186,7 @@ export default {
         }, */ {
             text: "地区排行",
 
-            x: "34.5%",
+            x: "44.5%",
             y: "42.5%",
             textAlign: 'center',
             textStyle: {
@@ -195,6 +195,12 @@ export default {
               fontWeight: 'normal'
             }
           }],
+        /* grid: {
+          left: '10%',
+          right: 0,
+          top: 0,
+          bottom: 0
+        }, */
         series: [{
           name: "area",
           type: 'pie',
@@ -208,7 +214,7 @@ export default {
               }
             }
           },
-          center: ["35%", "50%"],
+          center: ["45%", "50%"],
           radius: ['45%', '60%'],
           labelLine: {
             normal: {
@@ -222,16 +228,16 @@ export default {
           }, */
           clockwise: true
         }],
-        legend: {
-          type: 'scroll',
-          orient: "vertical",
-          height: 250,
-          left: '60%',
-          top: 'middle',
-          textStyle: {
-            color: "white"
-          }
-        },
+        /*  legend: {
+           type: 'scroll',
+           orient: "vertical",
+           height: 250,
+           left: '60%',
+           top: 'middle',
+           textStyle: {
+             color: "white"
+           }
+         }, */
         tooltip: {
           trigger: 'item',
           formatter: function (params) {
@@ -247,14 +253,14 @@ export default {
 
 <style lang='scss' scoped>
 .chat-wrapper-w {
-  width: 60%;
+  width: 100%;
   height: 100%;
   background: rgb(48, 48, 48);
   display: flex;
-  float: left;
 }
 .chart-wrapper {
   width: 50%;
+
   height: 100%;
   background: rgb(48, 48, 48);
   .echarts {

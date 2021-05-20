@@ -80,8 +80,8 @@ export default {
         grid: {
           top: 0,
           left: 0,
-          right: 10,
-          bottom: 20
+          right: 0,
+          bottom: 2
         }
       }
     }

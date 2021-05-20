@@ -98,7 +98,7 @@ export default {
     color: gray;
   }
   .sales-view-title {
-    margin-top: 60px;
+    margin-top: 40px;
     font-size: 18px;
 
     color: white;
