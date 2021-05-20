@@ -150,6 +150,7 @@ export default {
       show7: false,
       percentage: 0,
       percentage2: 0,
+      calcstatus: '计算中',
       result: `
       bk25b34j6b3k4j5b23kb5k34hb5l23jb5h4523jkb542j3b5jh245bk
       j23c79sd8798sd7v98sd7v9s8d7v98sd7v98s7v9s8d7v98sd7sd98v
@@ -270,12 +271,18 @@ export default {
         name: file.name,
         updateTime: new Date(),
         size: (file.size / 1024 / 1024).toFixed(2) + 'MB',
-        calcStatus: '计算中',
-        //!增加计时器
+        calcStatus: '参数计算中',
         blockNumber: '24vw3e4f23frd23rd12d1',
         paramStatus: "本节点计算中"
       }))
+
       this.files.unshift(...newFiles)
+      setTimeout(() => {
+        this.files.forEach((file) => {
+          file.calcStatus = '计算结束'
+          file.paramStatus = '参数已回馈更新'
+        })
+      }, 3000)
       this.showLog()
     }
   },
