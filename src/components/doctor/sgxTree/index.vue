@@ -114,7 +114,7 @@ export default {
       ],
       shareTrees: [
         {
-          no: 'hf23948r',//!修改编号
+          no: 'hf23948r',
           fileNumber: 478210,
           updateTime: new Date(2020, 5, 16)
         },
@@ -282,7 +282,7 @@ export default {
           file.calcStatus = '计算结束'
           file.paramStatus = '参数已回馈更新'
         })
-      }, 3000)
+      }, 10000)
       this.showLog()
     }
   },

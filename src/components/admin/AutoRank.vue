@@ -28,49 +28,49 @@ export default {
       {
         no: 2,
         name: '参数上传中',
-        address: "武汉协和医院",
+        address: "北京大学第一医院",
         phone: "157XXXX5790",
         fileNumber: 4812323
       },
       {
         no: 3,
         name: '参数已更新',
-        address: "武汉大学人民医院",
+        address: "北京大学第三医院",
         phone: "157XXXX5790",
         fileNumber: 4812369
       },
       {
         no: 4,
         name: '参数已更新',
-        address: "华西医院",
+        address: "西安交通大学第一附属医院",
         phone: "157XXXX5790",
         fileNumber: 4512323
       },
       {
         no: 5,
         name: '参数已更新',
-        address: "北京大学第一医院",
+        address: "海南人民医院",
         phone: "157XXXX5790",
         fileNumber: 48123541
       },
       {
         no: 6,
         name: '参数已更新',
-        address: "同济医院",
+        address: "武汉同济医院分院",
         phone: "157XXXX5790",
         fileNumber: 4612323
       },
       {
         no: 7,
         name: '参数已更新',
-        address: "中山医院",
+        address: "北京大学第三医院分院",
         phone: "157XXXX5790",
         fileNumber: 4312321
       },
       {
         no: 8,
         name: '参数已更新',
-        address: "华山医院",
+        address: "北京大学第一医院分院",
         phone: "157XXXX5790",
         fileNumber: 4012350
       }

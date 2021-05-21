@@ -28,7 +28,7 @@ export default {
       myChart.setOption(option = {
         title: {
 
-          subtext: 'Example in MetricsGraphics.js',
+          subtext: '聚合参数测试集正确率',
           left: 'center'
         },
         tooltip: {
@@ -48,7 +48,7 @@ export default {
             }
           },
           formatter: function (params) {
-            return params[2].name + '<br />' + ((params[2].value - base) * 100).toFixed(1) + '%';
+            return params[2].name + '<br />' + (((params[2].value) * 25)+10).toFixed(1) + '%';
           }
         },
         grid: {
@@ -74,14 +74,14 @@ export default {
         yAxis: {
           axisLabel: {
             formatter: function (val) {
-              return (val - base) * 100 + '%';
+              return ((val * 25)+10) + '%';
             },
             color: 'gray'
           },
           axisPointer: {
             label: {
               formatter: function (params) {
-                return ((params.value - base) * 100).toFixed(1) + '%';
+                return (((params.value) * 25)).toFixed(1) + '%';
               },
 
             }

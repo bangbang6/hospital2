@@ -65,33 +65,33 @@ const mockData2 = [
     name: "武汉 | 41.5%"
   },
   {
-    legondname: "上海",
+    legondname: "北京",
     value: 97,
     percent: "22.30%",
     itemStyle: {
       color: '#49a7f8'
     },
-    name: "上海 | 22.30%",
+    name: "北京 | 22.30%",
 
   },
   {
-    legondname: "广东",
+    legondname: "西安",
     value: 92,
     percent: "21.15%",
     itemStyle: {
       color: '#9c00ff'
     },
-    name: "广东 | 21.15%"
+    name: "西安 | 21.15%"
 
   },
   {
-    legondname: "北京",
+    legondname: "海南",
     value: 67,
     percent: "15.4%",
     itemStyle: {
       color: '#236fff'
     },
-    name: "北京 | 15.4%"
+    name: "海南 | 15.4%"
 
   },
 ]
