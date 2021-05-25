@@ -125,14 +125,6 @@
           width="120px"
         ></el-table-column>
         <el-table-column
-          prop="sharedCount"
-          label="共享次数"
-          :sortable="true"
-          
-          style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
-          width="150px"
-        ></el-table-column>
-        <el-table-column
           prop="upload_data"
           label="上传日期"
           :sortable="true"

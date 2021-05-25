@@ -166,6 +166,13 @@
           width="120px"
         ></el-table-column>
         <el-table-column
+          prop="sharedCount"
+          label="共享次数"
+          :sortable="true"
+          style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
+          width="150px"
+        ></el-table-column>
+        <el-table-column
           prop="upload_data"
           label="上传日期"
           :sortable="true"
@@ -614,6 +621,7 @@ export default {
             fileSize: `${file.dataSample.dataSize}B`,
             upload_data: file.dataSample.createdTime.slice(0, 10),
             modifiedData: file.dataSample.modifiedTime.slice(0, 10),
+            sharedCount: file.dataSample.sharedCount,
             id: file.dataSample.id,
             authoritySet: this.parserSet(file.authoritySet),
             pushChannelSet: file.pushChannelSet,
@@ -622,6 +630,7 @@ export default {
           }
         })
         this.tableData = this.files
+        console.log("tableData:" , this.tableData)
       } else {
         alert(res.data.message)
       }
