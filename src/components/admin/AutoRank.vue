@@ -8,7 +8,7 @@
         <div class="list-item-name">{{item.name}}</div>
         <!-- <div class="list-item-phone">{{item.phone}}</div> -->
         <div class="list-item-number">{{item.fileNumber}}</div>
-        <div class="list-item-address">{{item.address}}</div>
+        <div class="list-item-address">{{item.department}}</div>
       </div>
     </div>
   </div>
@@ -22,6 +22,7 @@ export default {
         no: 1,
         name: '李医生',
         address: "武汉同济医院",
+        department: '影像科',
         phone: "156XXXX5790",
         fileNumber: 140
       },
@@ -29,6 +30,7 @@ export default {
         no: 2,
         name: '王医生',
         address: "武汉协和医院",
+        department: '影像科',
         phone: "157XXXX5790",
         fileNumber: 112
       },
@@ -36,6 +38,7 @@ export default {
         no: 3,
         name: '胡医生',
         address: "武汉大学人民医院",
+        department: '耳鼻喉科',
         phone: "157XXXX5790",
         fileNumber: 104
       },
@@ -43,6 +46,7 @@ export default {
         no: 4,
         name: '付医生',
         address: "华西医院",
+        department: '影像科',
         phone: "157XXXX5790",
         fileNumber: 94
       },
@@ -50,6 +54,7 @@ export default {
         no: 5,
         name: '刘医生',
         address: "北京大学第一医院",
+        department: '耳鼻喉科',
         phone: "157XXXX5790",
         fileNumber: 86
       },
@@ -57,6 +62,7 @@ export default {
         no: 6,
         name: '赵医生',
         address: "同济医院",
+        department: '影像科',
         phone: "157XXXX5790",
         fileNumber: 82
       },
@@ -64,6 +70,7 @@ export default {
         no: 7,
         name: '赵医生',
         address: "中山医院",
+        department: '影像科',
         phone: "157XXXX5790",
         fileNumber: 76
       },
@@ -71,6 +78,7 @@ export default {
         no: 8,
         name: '赵医生',
         address: "华山医院",
+        department: '耳鼻喉科',
         phone: "157XXXX5790",
         fileNumber: 65
       }

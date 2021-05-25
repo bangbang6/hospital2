@@ -44,3 +44,18 @@ export function getUserExceptMe(sharedDataId){
   )
 
 }
+
+export function getSharedUserOnPush(dataId){
+  return request(
+    {
+      url:'/user/getSharedUserOnPush?dataId='+dataId,
+      method:'GET',
+      // data:{
+      //   dataId:dataId
+      // },
+      headers:{
+        token:getToken('userToken'),
+      },
+    }
+  )
+}

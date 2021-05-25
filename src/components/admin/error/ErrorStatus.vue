@@ -23,8 +23,9 @@
             </template>
           </el-table-column>
           <el-table-column prop="uploader" label="发起者" width="60"></el-table-column>
-          <el-table-column prop="hospital" label="医院" width="80"></el-table-column>
-          <el-table-column prop="channel" label="通道" width="80"></el-table-column>
+          <!-- <el-table-column prop="hospital" label="医院" width="80"></el-table-column> -->
+          <el-table-column prop="department" label="科室" width="80"></el-table-column>
+          <el-table-column prop="channel" label="部门" width="80"></el-table-column>
           <el-table-column prop="action" label="操作" width="60"></el-table-column>
 
           <el-table-column prop="date" label="时间">
@@ -67,21 +68,23 @@ export default {
         title: "病例0X2132",
         uploader: '李医生',
         hospital: '广东人民医院',
-        channel:'channel1',
-        action: 'pull',
+        department: '耳鼻喉科',
+        channel:'部门A',
+        action: '拉取',
         date: new Date(),
         status: '越权操作',
         type: 'danger',
         peer:'peer0.org2.example.com',
-        destChannel:'channel3'
+        destChannel:'部门C'
       },
       {
         id:2,
         title: "病例0X8219",
         uploader: '王医生',
         hospital: '南京鼓楼医院',
-        channel:'channel8',
-        action: 'read',
+        department: '影像科',
+        channel:'部门B',
+        action: '查看',
         date: new Date(),
         status: '数据不一致',
         type: 'warning',
@@ -93,8 +96,9 @@ export default {
         title: "病例0X0123",
         uploader: '张医生',
         hospital: '华西口腔医院',
-        channel:'channel2',
-        action:'modify',
+        department: '影像科',
+        channel:'部门B',
+        action:'修改',
         date: new Date(),
         status: '多次修改',
         type: 'info',
@@ -121,8 +125,9 @@ export default {
         title: "病例0X7632",
         uploader: '陈医生',
         hospital: '吉大第一医院',
-        channel:'channel2',
-        action:'read',
+        department: '耳鼻喉科',
+        channel:'部门B',
+        action:'查看',
         date: new Date(),
         status: '数据不一致',
         type: 'warning',
@@ -134,26 +139,28 @@ export default {
         title: "病例0X2521",
         uploader: '刘医生',
         hospital: '同济医院',
-        channel:'channel4',
-        action:'push',
+        department: '信息中心',
+        channel:'部门D',
+        action:'共享',
         date: new Date(),
         status: '越权操作',
         type: 'danger',
         peer:'peer0.org8.example.com',
-        destChannel:'channel7'
+        destChannel:'部门G'
       },
       {
         id:6,
         title: "病例0X6321",
         uploader: '杨医生',
         hospital: '齐鲁医院',
-        channel:'channel7',
-        action:'push',
+        department: '信息中心',
+        channel:'部门G',
+        action:'共享',
         date: new Date(),
         status: '越权操作',
         type: 'danger',
         peer:'peer0.org14.example.com',
-        destChannel:'channel4'
+        destChannel:'部门D'
       },
 
       {
@@ -161,8 +168,9 @@ export default {
         title: "病例0X6312",
         uploader: '黄医生',
         hospital: '上海第六医院',
-        channel:'channel5',
-        action:'read',
+        department: '耳鼻喉科',
+        channel:'部门E',
+        action:'查看',
         date: new Date(),
         status: '数据不一致',
         type: 'warning',
@@ -174,8 +182,9 @@ export default {
         title: "病例0X5213",
         uploader: '胡医生',
         hospital: '武汉第一医院',
-        channel:'channel1',
-        action:'action',
+        department: '影像科',
+        channel:'部门A',
+        action:'修改',
         date: new Date(),
         status: '多次修改',
         type: 'info',

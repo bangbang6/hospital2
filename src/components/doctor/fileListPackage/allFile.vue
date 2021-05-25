@@ -24,7 +24,7 @@
           class="input-with-select"
           v-model="input"
           :fetch-suggestions="querySearch"
-          placeholder="请输入您要查找的文件名"
+          placeholder="请输入您要查找的文件名11"
           @select="handleSelect"
         >
           <el-select placeholder="文件类型" v-model="select" slot="prepend">
@@ -225,9 +225,10 @@ export default {
       }
     },
     parserSet (set) {
-      set.push(4)
-      const contents = ['预览', '修改', '删除', '溯源', '追踪']
-      const icons = ['view', 'edit', 'circle-close', 'attract', 'download']
+      set.push(5)
+      // const contents = ['预览', '修改', '删除', '溯源', '追踪']
+      const contents = ['预览', '修改', '删除', '下载','溯源','追踪']
+      const icons = ['view', 'edit', 'circle-close', 'download','attract', 'download']
       return set.map((item) => ({
         id: item,
         content: contents[item - 1],

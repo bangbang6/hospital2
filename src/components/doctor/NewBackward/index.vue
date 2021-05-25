@@ -129,6 +129,8 @@ export default {
       opMap.set("read", "查看")
       opMap.set("modify", "修改")
       opMap.set("download", "下载")
+      opMap.set("push", "共享")
+      opMap.set("pull", "拉取")
       return {
         fileName: record.fileName.split('/').slice(-1)[0],
         user: userMap.get(record.record.user),

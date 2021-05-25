@@ -76,6 +76,45 @@
                 class="item"
                 effect="light"
                 placement="bottom-start"
+                style="margin-right: 5px;width:210px"
+                content="push"
+                v-if="scope.row.pushChannelSet"
+              >
+                <el-popover
+                  placement="right"
+                  width="280"
+                  trigger="manual"
+                  v-model="channelsVisible[pagesize * (currentPage - 1)+scope.$index]"
+                  style="margin-right: 5px;width:210px"
+                >
+                  <div
+                    class="close"
+                    style="float:right;color:gray;fontSize:14px;margin-right:10px; cursor: pointer;"
+                    @click="close(scope.$index)"
+                  >
+                    <i class="el-icon-close"></i>
+                  </div>
+                  <el-table :data="pushUsers" size="mini" style="width:200px">
+                    <el-table-column width="120" property="userName" label="用户"></el-table-column>
+
+                    <el-table-column property="address" label="操作" width="80">
+                      <template slot-scope="scope2">
+                        <el-button size="mini" @click="pushFile(scope.$index,scope2.$index)">确定</el-button>
+                      </template>
+                    </el-table-column>
+                  </el-table>
+                  <el-link
+                    icon="el-icon-top-right"
+                    style="font-size: 18px;color: #409EFF"
+                    @click="handleClick(scope.$index,6)"
+                    slot="reference"
+                  ></el-link>
+                </el-popover>
+              </el-tooltip>
+              <!-- <el-tooltip
+                class="item"
+                effect="light"
+                placement="bottom-start"
                 style="margin-right: 5px"
                 content="分享"
               >
@@ -96,9 +135,9 @@
                     <template slot="empty">
                       <div class="no-friends">所有用户都有权限啦</div>
                     </template>
-                    <el-table-column width="100" property="userName" label="用户"></el-table-column>
+                    <el-table-column width="100" property="userName" label="用户"></el-table-column> -->
                     <!-- <el-table-column width="100" property="channelName" label="通道"></el-table-column> -->
-                    <el-table-column property="address" label="操作">
+                    <!-- <el-table-column property="address" label="操作">
                       <template slot-scope="scope2">
                         <el-button
                           size="mini"
@@ -114,7 +153,7 @@
                     slot="reference"
                   ></el-link>
                 </el-popover>
-              </el-tooltip>
+              </el-tooltip> --> 
             </div>
           </template>
         </el-table-column>
@@ -134,14 +173,14 @@
           style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
           width="150px"
         ></el-table-column>
-        <el-table-column
+        <!-- <el-table-column
           prop="modifiedData"
           label="更改日期"
           :sortable="true"
           :sort-method="sortByModDate"
           style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
           width="150px"
-        ></el-table-column>
+        ></el-table-column> -->
       </el-table>
       <el-pagination
         class="fy"
@@ -174,13 +213,16 @@
 </template>
 
 <script>
-import { getMyFileList, shareFile } from '@/api/file'
-import { getUserExceptMe } from '@/api/user'
+import { getMyFileList, shareFile, pushData } from '@/api/file'
+import { getSharedUserOnPush } from '@/api/user'
 import { deleteFile, getFile, updateFile, backward ,downloadFile} from '@/api/file'
 import { mapMutations } from 'vuex'
 export default {
   data () {
     return {
+      channelsVisible: [],
+      // pushChannels: [],
+      pushUsers:[],
       loading2: false,
       loading1: false,
       input: '',
@@ -239,9 +281,64 @@ export default {
     }
   },
   methods: {
-    close (index) {
-      this.friendsVisible.splice(index, 1, false)
+    pushFile (index, index2) {
+      console.log(index + ' ' + index2)
+      this.idx = this.pagesize * (this.currentPage - 1) + index
+
+      pushData(this.files[this.idx].id, this.pushUsers[index2].id, this.pushUsers[index2].channelId).then(res => {
+        if (res.data.code === 200) {
+          alert('成功')
+          this.channelsVisible.splice(this.idx, 1, false)
+        } else {
+          alert(res.data.message)
+        }
+      }, reject => {
+        alert(reject)
+      })
     },
+    close () {
+      console.log('this.idx', this.idx);
+      console.log('this.idx', this.channelsVisible);
+      this.channelsVisible.splice(this.idx, 1, false)
+    },
+    pushChannel (index) {
+      //关闭其他propver
+
+      for (let i = 0; i < this.channelsVisible.length; i++) {
+        if (this.channelsVisible[i] !== undefined && this.channelsVisible[i] === true && i !== index) {
+          this.channelsVisible.splice(i, 1, false)
+        }
+      }
+      this.idx = this.pagesize * (this.currentPage - 1) + index
+      this.channelsVisible[this.idx] = true
+
+      console.log('this.idx', this.idx);
+      console.log('this.files', this.files);
+      //!push到人
+      getSharedUserOnPush(this.files[this.idx].id).then(res => {
+        let userMap = new Map();
+        userMap.set("org2_user", "李医生")
+        userMap.set("org3_user", "王医生")
+        userMap.set("org4_user", "张医生")
+        userMap.set("org5_user", "陈医生")
+        if (res.data.code === 200) {
+          this.pushUsers = res.data.data.map(item => {
+            return {
+              channelName: item.channelName,
+              channelId: item.channelId,
+              userName: userMap.get(item.username),
+              id: item.id
+            }
+          })
+          console.log('this.pushUsers', this.pushUsers);
+        } else {
+          alert(res.data.message)
+        }
+      }, reject => { alert(reject.message) })
+    },
+    // close (index) {
+    //   this.friendsVisible.splice(index, 1, false)
+    // },
     //index 是好友列表的index
     //index2 是文件的index
     shareFileConfirm (index, index2) {
@@ -259,8 +356,6 @@ export default {
     },
 
     handleClick (index, authorId) {
-
-
       if (authorId === 1) {
         this.loading1 = true;
         this.seeFile(index)
@@ -277,9 +372,7 @@ export default {
       } else if (authorId === 5) {
         this.backwordFile(index)
       } else if (authorId === 6) {
-
-
-        this.shareFile(index)
+        this.pushChannel(index)
       }
     },
     shareFile (index) {
@@ -309,8 +402,9 @@ export default {
     },
     parserSet (set) {
       set.push(5)
-      const contents = ['预览', '修改', '删除', '下载','溯源', '分享', '追踪']
-      const icons = ['view', 'edit', 'circle-close', 'download','attract', 'share']
+      set.push(6)
+      const contents = ['预览', '修改', '删除', '下载','溯源']
+      const icons = ['view', 'edit', 'circle-close', 'download','attract']
       return set.map((item) => ({
         id: item,
         content: contents[item - 1],
@@ -522,6 +616,7 @@ export default {
             modifiedData: file.dataSample.modifiedTime.slice(0, 10),
             id: file.dataSample.id,
             authoritySet: this.parserSet(file.authoritySet),
+            pushChannelSet: file.pushChannelSet,
             // channelName: file.channelName
             channelName: file.channelName === "channel1" ? "部门A" : "部门B"
           }

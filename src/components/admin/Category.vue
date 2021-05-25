@@ -56,42 +56,32 @@ const mockData = [
 ]
 const mockData2 = [
   {
-    legondname: "武汉",
-    value: 204,
+    legondname: "主院区",
+    value: 415,
     percent: "41.5%",
     itemStyle: {
       color: '#74fbf5'
     },
-    name: "武汉 | 41.5%"
+    name: "主院区 | 41.5%"
   },
   {
-    legondname: "上海",
-    value: 97,
-    percent: "22.30%",
+    legondname: "光谷院区",
+    value: 335,
+    percent: "33.5%",
     itemStyle: {
       color: '#49a7f8'
     },
-    name: "上海 | 22.30%",
+    name: "光谷院区 | 33.5%",
 
   },
   {
-    legondname: "广东",
-    value: 92,
-    percent: "21.15%",
+    legondname: "中法新城院区",
+    value: 250,
+    percent: "25.0%",
     itemStyle: {
       color: '#9c00ff'
     },
-    name: "广东 | 21.15%"
-
-  },
-  {
-    legondname: "北京",
-    value: 67,
-    percent: "15.4%",
-    itemStyle: {
-      color: '#236fff'
-    },
-    name: "北京 | 15.4%"
+    name: "中法新城院区 | 25.0%"
 
   },
 ]
@@ -184,7 +174,7 @@ export default {
           left: 20,
           top: 20
         }, */ {
-            text: "地区排行",
+            text: "医院排行",
 
             x: "34.5%",
             y: "42.5%",

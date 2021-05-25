@@ -210,12 +210,13 @@ export function getYuneiFiles(){
     }
   })
 }
-export function pushData(dataId,channelId){
+export function pushData(dataId,userId, channelId){
   return request({
     url:'/data/pushData',
     method:'post',
     data:{
       dataId,
+      userId,
       channelId
     },
     headers:{

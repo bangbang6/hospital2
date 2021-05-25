@@ -19,6 +19,7 @@
             <el-checkbox label="预览"></el-checkbox>
             <el-checkbox label="修改"></el-checkbox>
             <el-checkbox label="删除"></el-checkbox>
+            <el-checkbox label="下载"></el-checkbox>
             <!--  <el-checkbox label="溯源"></el-checkbox>
             <el-checkbox label="追踪"></el-checkbox>-->
           </el-checkbox-group>
@@ -35,6 +36,7 @@ const dataMap = {
   "预览": 1,
   "修改": 2,
   "删除": 3,
+  "下载": 4,
   /* "溯源": 4,
   "追踪": 5, */
 }
@@ -116,7 +118,7 @@ export default {
 
     },
     parseLabel (set) {
-      const contents = ['预览', '修改', '删除'/* , '溯源', '追踪' */]
+      const contents = ['预览', '修改', '删除','下载'/* , '溯源', '追踪' */]
       return set.map(item => {
         return contents[item - 1]
       })

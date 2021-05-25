@@ -20,8 +20,8 @@ export default {
         key: "723508a3369754233a578f36a4d3cf24",
         amap: {
           zoom: 18,
-          center: [114.259652,30.579893],
-          mapStyle: 'amap://styles/70cca3ae74038446da3e27b05ed7435a',
+          center: [114.260579,30.5791],
+          mapStyle: 'amap://styles/1ac56c62d5b7ad640b1943dc8c3e61ab',
           animateEnable: true
         },
 
@@ -44,11 +44,11 @@ export default {
       },
       {
         name: '影像科',
-        value: [114.260701,30.579595, 12300]
+        value: [114.26225,30.57949, 12300]
       },
       {
         name: '耳鼻喉科',
-        value: [114.260502,30.579152, 14300]
+        value: [114.260754,30.57952, 14300]
       },
     ]
     this.series = [{

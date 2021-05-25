@@ -48,7 +48,7 @@
         ></el-table-column>
         <el-table-column
           prop="channelName"
-          label="文件所在通道"
+          label="文件所在部门"
           style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
         ></el-table-column>
         <el-table-column
@@ -74,7 +74,7 @@
                   @click="handleClick(scope.$index,item.id)"
                 ></el-link>
               </el-tooltip>
-              <el-tooltip
+              <!-- <el-tooltip
                 class="item"
                 effect="light"
                 placement="bottom-start"
@@ -108,11 +108,11 @@
                   <el-link
                     icon="el-icon-top-right"
                     style="font-size: 18px;color: #409EFF"
-                    @click="handleClick(scope.$index,5)"
+                    @click="handleClick(scope.$index,6)"
                     slot="reference"
                   ></el-link>
                 </el-popover>
-              </el-tooltip>
+              </el-tooltip> -->
             </div>
           </template>
         </el-table-column>
@@ -125,6 +125,14 @@
           width="120px"
         ></el-table-column>
         <el-table-column
+          prop="sharedCount"
+          label="共享次数"
+          :sortable="true"
+          
+          style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
+          width="150px"
+        ></el-table-column>
+        <el-table-column
           prop="upload_data"
           label="上传日期"
           :sortable="true"
@@ -132,14 +140,14 @@
           style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
           width="150px"
         ></el-table-column>
-        <el-table-column
+        <!-- <el-table-column
           prop="modifiedData"
           label="更改日期"
           :sortable="true"
           :sort-method="sortByModDate"
           style="box-sizing: border-box;text-overflow: ellipsis;vertical-align: middle;position: relative;text-align: left;"
           width="150px"
-        ></el-table-column>
+        ></el-table-column> -->
       </el-table>
       <el-pagination
         class="fy"
@@ -259,8 +267,9 @@
 
 <script>
 import { getYujianFiles, getYuneiFiles, pushData, pullData } from '@/api/file'
-import { deleteFile, getFile, updateFile } from '@/api/file'
+import { deleteFile, getFile, updateFile, downloadFile } from '@/api/file'
 import { getUserExceptMe } from '@/api/user'
+import { mapMutations } from 'vuex'
 export default {
   data () {
     return {
@@ -372,11 +381,16 @@ export default {
       console.log('this.yuneiFiles', this.yuneiFiles);
       //!push到人
       getUserExceptMe(this.yuneiFiles[this.idx].id).then(res => {
+        let userMap = new Map();
+        userMap.set("org2_user", "李医生")
+        userMap.set("org3_user", "王医生")
+        userMap.set("org4_user", "张医生")
+        userMap.set("org5_user", "陈医生")
         if (res.data.code === 200) {
           this.pushChannels = res.data.data.map(item => {
             return {
               channelName: item.channelName,
-              userName: item.user.username,
+              userName: userMap.get(item.user.username),
               id: item.user.id
             }
           })
@@ -397,10 +411,11 @@ export default {
           this.yuneiFiles = res.data.data.map(file => ({
 
             fileName: file.dataName,
-            channelName: file.channelName,
+            channelName: file.channelName === 'channel1' ? '部门A' : '部门B',
             fileSize: `${file.dataSize}B`,
             upload_data: file.createdTime.slice(0, 10),
             modifiedData: file.modifiedTime.slice(0, 10),
+            sharedCount: file.sharedCount,
             id: file.id,
             authoritySet: this.parserSet(file.dataAuthoritySet),
             pushChannelSet: file.pushChannelSet,
@@ -424,8 +439,10 @@ export default {
             fileSize: `${file.dataSize}B`,
             upload_data: file.createdTime.slice(0, 10),
             modifiedData: file.modifiedTime.slice(0, 10),
+            // sharedCount: file.sharedCount === null ? '-' : file.sharedCount,
+            sharedCount: file.sharedCount,
             id: file.id,
-            channelName: file.channelName,
+            channelName: file.channelName === 'channel1' ? '部门A' : '部门B',
             channelId: file.channelId,
             hospitalName: file.hospitalName
 
@@ -458,18 +475,21 @@ export default {
         this.loading1 = true;
         this.deleteRow(index)
       } else if (authorId === 4) {
-        this.backwordFile(index)
+        this.downloadData(index)
+        
       } else if (authorId === 5) {
 
-
+        this.backwordFile(index)
+        // this.pushChannel(index)
+      }else if(authorId === 6){
         this.pushChannel(index)
       }
     },
     parserSet (set) {
 
-      set.push(4, 6)
-      const contents = ['预览', '修改', '删除', '溯源', '追踪']
-      const icons = ['view', 'edit', 'circle-close', 'attract', 'download']
+      set.push(5)
+      const contents = ['预览', '修改', '删除', '下载', '溯源']
+      const icons = ['view', 'edit', 'circle-close','download', 'attract']
       return set.map((item) => ({
         id: item,
         content: contents[item - 1],
@@ -502,6 +522,11 @@ export default {
       this.$alert('这是第' + index + '行文件的下载结果', '文件下载', {
         confirmButtonText: '确定'
       })
+    },
+    downloadData(index){
+      let idx = this.pagesize * (this.currentPage - 1) + index
+      downloadFile(this.files[idx].id)
+
     },
     changeFile (index) {
       this.idx = this.pagesize * (this.currentPage[this.tabIndex] - 1) + index
@@ -679,6 +704,7 @@ export default {
       }
       return 0;
     },
+    ...mapMutations(['setDataId'])
   },
   mounted () {
 

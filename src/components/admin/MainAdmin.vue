@@ -49,7 +49,8 @@ export default {
   },
   computed: {
     userInfo () {
-      return `${localStorage.getItem('adminName')}/${localStorage.getItem('adminHospital')}`
+      // return `${localStorage.getItem('adminName')}/${localStorage.getItem('adminHospital')}`
+      return `${localStorage.getItem('adminName')}`
     }
   },
   methods: {

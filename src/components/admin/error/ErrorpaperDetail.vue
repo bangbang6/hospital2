@@ -13,11 +13,11 @@
             <span class="value">{{uploader}}</span>
           </div>
           <div class="line">
-            <span class="key">发起者所在医院</span>
-            <span class="value">{{hospital}}</span>
+            <span class="key">发起者所在科室</span>
+            <span class="value">{{department}}</span>
           </div>
           <div class="line">
-            <span class="key">发起者所在通道</span>
+            <span class="key">发起者所在部门</span>
             <span class="value">{{uploaderChannel}}</span>
           </div>
           <div class="line">
@@ -112,6 +112,7 @@ export default {
       title: '',
       uploader: '',
       hospital: '',
+      department:'',
       uploaderChannel: '',
       fileId: '',
       fileChannel: '',
@@ -170,7 +171,8 @@ export default {
         this.title = newV.title
         this.uploader = newV.uploader
         this.hospital = newV.hospital
-        this.uploaderChannel = 'channel1'
+        this.department = newV.department
+        this.uploaderChannel = newV.channel
         this.date = newV.date
         this.fileId = '0x0023104123'
         this.status = newV.status
@@ -178,7 +180,7 @@ export default {
         this.type = newV.type
         this.fileChannel = newV.channel,
         this.peer = newV.peer,
-        this.destChannel = newV.destChannel !== null ?newV.destChannel : 'channel1'
+        this.destChannel = newV.destChannel !== null ?newV.destChannel : '部门A'
         this.originData = newV.originData
         this.chainData = newV.chainData
         this.updateHistorys = newV.updateHistorys

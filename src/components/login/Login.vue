@@ -61,6 +61,16 @@ export default {
       // 为表单绑定验证功能
       this.$refs[formName].validate((valid) => {
         if (valid) {
+          let userMap = new Map();
+          userMap.set("org2_user", "李医生")
+          userMap.set("org3_user", "王医生")
+          userMap.set("org4_user", "张医生")
+          userMap.set("org5_user", "陈医生")
+          userMap.set("org1_admin", "管理员A")
+          userMap.set("org2_admin", "管理员B")
+          userMap.set("org3_admin", "管理员C")
+          userMap.set("org4_admin", "管理员D")
+          userMap.set("org5_admin", "管理员E")
           //普通用户登录
           if (this.radio1 === '1') {
             login(this.form.username, this.form.password).then(res => {
@@ -68,11 +78,12 @@ export default {
 
 
               if (res.data.code === 200) {
+                
                 const userData = res.data.data
                 console.log('userData', userData);
                 setToken('userToken', userData.token)
                 localStorage.setItem('userHospital', userData.hospitalName)
-                localStorage.setItem('userName', userData.user.username)
+                localStorage.setItem('userName', userMap.get(userData.user.username))
 
                 // 调用elementUI的加载层
                 const loading = this.$loading({
@@ -100,7 +111,7 @@ export default {
                 console.log('userData', userData);
                 setToken('adminToken', userData.token)
                 localStorage.setItem('adminHospital', userData.hospitalName)
-                localStorage.setItem('adminName', userData.user.username)
+                localStorage.setItem('adminName', userMap.get(userData.user.username))
 
                 // 调用elementUI的加载层
                 const loading = this.$loading({

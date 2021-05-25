@@ -5,7 +5,8 @@
       <div class="list-item gray">
         <div class="status" :style="{padding: '0 3px'}">状态</div>
         <div class="paper-title">发起者</div>
-        <div class="author">医院</div>
+        <!-- <div class="author">医院</div> -->
+        <div class="author">科室</div>
         <div class="type">文件</div>
         <div class="date">时间</div>
       </div>
@@ -24,7 +25,7 @@
           >{{paper.status}}</el-tag>
         </div>
         <div class="paper-title overflow">{{paper.uploader}}</div>
-        <div class="author overflow" :style="{width:'240px'}">{{paper.hospital}}</div>
+        <div class="author overflow" :style="{width:'240px'}">{{paper.department}}</div>
         <div class="type overflow">{{paper.title}}</div>
         <div class="date overflow">{{formatDate(paper.date)}}</div>
       </div>
@@ -59,7 +60,8 @@ export default {
       {
         title: "病例0X2132",
         uploader: '李医生',
-        hospital: '广东人民医院',
+        hospital: '同济医院',
+        department: '耳鼻喉科',
         date: new Date(),
         status: '越权操作',
         type: 'danger',
@@ -67,7 +69,8 @@ export default {
       {
         title: "病例0X8219",
         uploader: '王医生',
-        hospital: '南京鼓楼医院',
+        hospital: '同济医院',
+        department: '影像科',
         date: new Date(),
         status: '数据不一致',
         type: 'warning',
@@ -75,7 +78,8 @@ export default {
       {
         title: "病例0X0123",
         uploader: '张医生',
-        hospital: '华西口腔医院',
+        hospital: '同济医院',
+        department: '影像科',
         date: new Date(),
         status: '多次修改',
         type: 'info',
@@ -83,7 +87,8 @@ export default {
       {
         title: "病例0X7632",
         uploader: '陈医生',
-        hospital: '吉大第一医院',
+        hospital: '同济医院',
+        department: '耳鼻喉科',
         date: new Date(),
         status: '数据不一致',
         type: 'warning',
@@ -92,6 +97,7 @@ export default {
         title: "病例0X2521",
         uploader: '刘医生',
         hospital: '同济医院',
+        department: '信息中心',
         date: new Date(),
         status: '越权操作',
         type: 'danger',
@@ -99,7 +105,8 @@ export default {
       {
         title: "病例0X6321",
         uploader: '杨医生',
-        hospital: '齐鲁医院',
+        hospital: '同济医院',
+        department: '信息中心',
         date: new Date(),
         status: '越权操作',
         type: 'danger',
@@ -110,7 +117,8 @@ export default {
       {
         title: "病例0X6312",
         uploader: '黄医生',
-        hospital: '上海第六医院',
+        hospital: '同济医院',
+        department: '耳鼻喉科',
         date: new Date(),
         status: '数据不一致',
         type: 'warning',
@@ -121,7 +129,8 @@ export default {
       {
         title: "病例0X5213",
         uploader: '胡医生',
-        hospital: '武汉第一医院',
+        hospital: '同济医院',
+        department: '影像科',
         date: new Date(),
         status: '多次修改',
         type: 'info',
