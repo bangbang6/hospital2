@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const request = axios.create({
-  baseURL:"http://211.69.198.53:8070",//服务器地址 不要改啦！！！！！！
+  baseURL:"http://211.69.198.53:8070",
   timeout:100000
 })
 request.interceptors.response.use(

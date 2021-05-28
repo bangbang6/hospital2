@@ -81,21 +81,21 @@ export default {
       //!修改数据
       historys: [
         {
-          date: new Date('December 18, 1995 03:24:00'),
-          size: '512MB',
-          grade: 12
+          date: new Date('June 20, 2021 08:23:78'),
+          size: '3292MB',
+          grade: 3801
         },
         {
-          date: new Date('December 18, 1995 03:24:00'),
-          size: '512MB',
+          date: new Date('March  20, 2021 18:24:00'),
+          size: '2312MB',
 
-          grade: 12
+          grade: 31232
         },
         {
-          date: new Date('December 18, 1995 03:24:00'),
-          size: '512MB',
+          date: new Date('January 29, 2021 08:24:00'),
+          size: '2141MB',
 
-          grade: 12
+          grade: 29430
         },
       ],
       trees: [
