@@ -29,6 +29,7 @@
 
         <div class="user">
           <div class="channelName">
+            <el-button type="primary" size="mini" @click="$router.push('/sgxCenter')">中心节点情况</el-button>
             <el-button type="primary" size="mini">贡献度:4539分</el-button>
             <el-button type="primary" size="mini">个人中心</el-button>
 
@@ -122,7 +123,6 @@ export default {
 .doctor {
   width: 100%;
   background-color: rgb(240, 242, 245);
-  height: 100%;
 }
 .header {
   width: 100%;

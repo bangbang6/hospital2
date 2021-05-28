@@ -2,7 +2,15 @@
   <div class="sgx-center">
     <div class="head">
       <div :style="{fontWeight:'bold'}">联合计算中心-数据中心节点</div>
-      <el-button type="primary" size="mini" @click="$router.push('/admin/dashboard')">中心节点详情</el-button>
+      <div class="btn-wrapper">
+        <el-button
+          type="primary"
+          size="mini"
+          @click="$router.back()"
+          :style="{marginRight:'10px'}"
+        >返回</el-button>
+        <el-button type="primary" size="mini" @click="$router.push('/admin/dashboard')">中心节点详情</el-button>
+      </div>
     </div>
 
     <el-card class="tree-list">
@@ -26,7 +34,10 @@
             <div class="update-param overflow">{{formateDate(tree.paramTime)}}</div>
             <div class="close overflow">{{tree.close}}</div>
             <div class="blockNumber overflow">{{tree.blockNumber}}</div>
-            <div class="grade overflow">{{tree.grade}}</div>
+            <div class="grade overflow">
+              {{tree.grade}}
+              <span class="detail" @click="dialogVisible=true">详情</span>
+            </div>
           </div>
         </div>
       </div>
@@ -44,6 +55,21 @@
         </div>
       </div>
     </el-card>
+    <el-dialog title="贡献度计算历史 (数据类型*数据大小)" :visible.sync="dialogVisible">
+      <el-table :data="historys">
+        <el-table-column
+          property="date"
+          label="时间"
+          width="200"
+          :formatter="(row)=>formateDate2(row.date)"
+        ></el-table-column>
+        <el-table-column property="size" label="数据大小"></el-table-column>
+        <el-table-column property="grade" label="贡献度"></el-table-column>
+      </el-table>
+      <div slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
  
@@ -51,6 +77,27 @@
 export default {
   data () {
     return {
+      dialogVisible: false,
+      //!修改数据
+      historys: [
+        {
+          date: new Date('December 18, 1995 03:24:00'),
+          size: '512MB',
+          grade: 12
+        },
+        {
+          date: new Date('December 18, 1995 03:24:00'),
+          size: '512MB',
+
+          grade: 12
+        },
+        {
+          date: new Date('December 18, 1995 03:24:00'),
+          size: '512MB',
+
+          grade: 12
+        },
+      ],
       trees: [
         {
           no: 'm92c23c',
@@ -161,6 +208,9 @@ rwhbliUBEWQ3UHFNHQO;uhgqo	iNQLEIUH	2`,
       let index = new Date(date).toLocaleString().indexOf('午')
       return str.slice(0, index - 1)
     },
+    formateDate2 (date) {
+      return date.toLocaleString('en-GB', { timeZone: 'UTC' })
+    },
     showLog () {
       let index = 2
       this.show1 = true
@@ -173,12 +223,11 @@ rwhbliUBEWQ3UHFNHQO;uhgqo	iNQLEIUH	2`,
         }
 
 
-
         ele.scrollTo(0, ele.scrollHeight)
         if (index === 3) {
           let timer2 = setInterval(() => {
             this.percentage += 2
-            if (this.percentage === 100) {
+            if (this.percentage >= 100) {
               this[`show4`] = true
               this[`time4`] = new Date()
               /* ele.scrollTop = ele.scrollHeight */
@@ -195,7 +244,7 @@ rwhbliUBEWQ3UHFNHQO;uhgqo	iNQLEIUH	2`,
           let timer2 = setInterval(() => {
             this.percentage2 += 2
 
-            if (this.percentage2 === 100) {
+            if (this.percentage2 >= 100) {
 
               /*  ele.scrollTop = ele.scrollHeight */
               ele.scrollTo(0, ele.scrollHeight)
@@ -266,6 +315,14 @@ rwhbliUBEWQ3UHFNHQO;uhgqo	iNQLEIUH	2`,
           padding: 5px 5px;
           text-align: center;
           font-size: 12px;
+          .detail {
+            font-size: 12px;
+            color: rgb(64, 158, 255);
+            margin-left: 5px;
+            cursor: pointer;
+            transform: scale(0.9);
+            display: inline-block;
+          }
         }
         .overflow {
           overflow: hidden;

@@ -9,6 +9,7 @@ import VCharts from 'v-charts'
 Vue.component('v-chart', VueECharts)
 Vue.use(ElementUI);
 Vue.use(VCharts)
+
 import store from '@/store/index'
 import './permision'
 

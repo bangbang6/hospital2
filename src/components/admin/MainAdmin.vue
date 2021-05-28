@@ -17,7 +17,7 @@
                   <!-- <el-dropdown-item icon="el-icon-user" command="jumpToYunei">域内设置</el-dropdown-item>
 
                   <el-dropdown-item icon="el-icon-folder-opened" command="jumpToYujian">域间设置</el-dropdown-item>-->
-                  <el-dropdown-item icon="el-icon-folder-opened" command="jumpToSgxCenter">sgx中心节点</el-dropdown-item>
+                  <el-dropdown-item icon="el-icon-folder-opened" command="jumpToDataSummary">数据汇集</el-dropdown-item>
                   <el-dropdown-item icon="el-icon-warning-outline" command="jumpToYujin">异常预警</el-dropdown-item>
                   <el-dropdown-item icon="el-icon-turn-off" command="loginout">退出登录</el-dropdown-item>
                 </el-dropdown-menu>
@@ -66,8 +66,8 @@ export default {
       if (command === 'jumpToRequest') {
         this.$router.push('/admin/userRequest')
       }
-      if (command === 'jumpToSgxCenter') {
-        this.$router.push('/admin/sgxCenter')
+      if (command === 'jumpToDataSummary') {
+        this.$router.push('/admin/dataSummary')
       }
       if (command === 'jumpToAuth') {
         this.$router.push('/admin/authorize')

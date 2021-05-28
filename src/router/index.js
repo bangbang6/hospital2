@@ -25,6 +25,7 @@ import SgxLearn from '../components/doctor/SgxLearn/index.vue'
 import UserRequest from '../components/admin/UserRequest'
 import MainAdmin from '../components/admin/MainAdmin'
 import SgxCenter from '../components/admin/SgxCenter'
+import DataSummary from '../components/admin/DataSummary'
 import allFile from '../components/doctor/fileListPackage/allFileTab'
 import sgxTree from '../components/doctor/sgxTree'
 
@@ -114,9 +115,15 @@ export default new Router({
         
       },
       {
-        path: '/admin/sgxCenter',
+        path: '/sgxCenter',
         name: 'sgxCenter',
         component: SgxCenter,
+        
+      },
+      {
+        path: '/admin/dataSummary',
+        name: 'dataSummary',
+        component: DataSummary,
         
       },
       {
@@ -130,6 +137,8 @@ export default new Router({
             component: AdminAuthorize,
             
           },
+         
+          
          
           {
             path: '/admin/errorStatus',
