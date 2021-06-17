@@ -3,7 +3,7 @@
     <el-table :data="tableData" border style="width: 100%" class="table" size="mini">
       <el-table-column prop="userName" label="用户名" width="160"></el-table-column>
       <el-table-column prop="dataName" label="文件名" width="300"></el-table-column>
-      <el-table-column prop="hospitalName" label="医院名" width="300"></el-table-column>
+      <el-table-column prop="hospitalName" label="部门" width="300"></el-table-column>
       <el-table-column prop="channelName" label="通道" width="160"></el-table-column>
 
       <el-table-column prop="authorSet" label="权限设置">
@@ -134,7 +134,8 @@ export default {
           fileId: item.dataId,
           dataName: item.dataName.split('/').slice(-1)[0],
           channelName: item.channelName,
-          hospitalName: item.hospitalName,
+          // hospitalName: item.hospitalName,
+          hospitalName: '部门A',
           dataAuthoritySet: this.parseLabel(item.channelAuthoritySet)
         }
 

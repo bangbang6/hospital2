@@ -33,7 +33,7 @@
             </el-select>
           </template>
         </el-table-column>
-        <el-table-column label="文件所属医院" prop="hospital">
+        <el-table-column label="文件所属部门" prop="hospital">
           <!-- 显示的是name但是我们修改整行的channelId -->
           <template slot-scope="scope">
             <div v-if="scope.row.hospital.status|| scope.row.isList">{{scope.row.hospital.label}}</div>
