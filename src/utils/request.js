@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 const request = axios.create({
-  baseURL:"http://2qo2220292.imwork.net:45056/",
-  // baseURL:"http://211.69.198.53:8070",
+  // baseURL:"http://2qo2220292.imwork.net:45056/",
+  baseURL:"http://211.69.197.138:8070",
   timeout:100000
 })
 request.interceptors.response.use(

@@ -24,6 +24,17 @@ module.exports = {
    * In most cases please use '/' !!!
    * Detail: https://cli.vuejs.org/config/#publicpath
    */
+
+   devServer: { // 环境配置
+    host: '0.0.0.0',
+    public:'http://211.69.197.138:8081',
+    port: 8080,
+    https: false,
+    hotOnly: false,
+    disableHostCheck:true,
+    open: false // 配置自动启动浏览器
+
+  },
   publicPath: './',
   outputDir: 'dist',
   
@@ -32,6 +43,8 @@ module.exports = {
   lintOnSave: false,
   productionSourceMap: true,
   configureWebpack: {
+
+    
     // provide the app's title in webpack's name field, so that
     // it can be accessed in index.html to inject the correct title.
     // name: name,
